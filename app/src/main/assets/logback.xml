@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <!-- Propagates changes made to the level of any logback-classic logger onto jul.
+     Such propagation eliminates the performance impact of disabled log statements.
+     Instances of LogRecord will be sent to logback (via SLF4J) only for enabled log statements.
+     This makes it reasonable for real-world applications to use the jul-to-slf4j bridge. -->
+    <contextListener class="ch.qos.logback.classic.jul.LevelChangePropagator" />
+
+    <!-- Create a logcat appender, that logs only specific statements -->
+    <!-- Note: the logger's name is referred to in the code as well! -->
+    <appender name="LOGCAT" class="ch.qos.logback.classic.android.LogcatAppender">
+        <!-- Don't show trace and debug on logcat -->
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <!-- Note that this level is overwritten programmatically in the Application class
+                 onCreate(). The default value is defined in preference
+                 "preferences_default_log_level_file" -->
+            <level>INFO</level>
+        </filter>
+        <tagEncoder>
+            <pattern>%logger{12}</pattern>
+        </tagEncoder>
+        <encoder>
+            <pattern>%msg</pattern>
+        </encoder>
+    </appender>
+
+    <root level="DEBUG">
+        <appender-ref ref="LOGCAT" />
+    </root>
+</configuration>
