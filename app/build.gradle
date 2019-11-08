@@ -7,8 +7,8 @@ android {
         applicationId "de.tvdarmsheim.zeitnehmerwasserball"
         minSdkVersion 19
         targetSdkVersion 28
-        versionCode 6
-        versionName "0.6"
+        versionCode 7
+        versionName "0.7"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -30,5 +30,5 @@ dependencies {
     implementation files('src/main/java/log/logback-android.jar')
     implementation files('src/main/java/log/slf4j-api-1.7.28.jar')
     implementation files('src/main/java/log/slf4j-api-1.7.28-sources.jar')
-    implementation files('src/main/java/OpenIGTLink4J_v_0.6.3_src.jar')
+    implementation files('src/main/java/OpenIGTLink4J_v_0.6.4_src.jar')
 }
