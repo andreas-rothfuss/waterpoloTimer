@@ -62,7 +62,7 @@ public class Settings extends AppCompatActivity implements ParameterDialogIntege
         ParameterDialogInteger dialog = new ParameterDialogInteger(WaterpoloTimerSettings.NUMBER_OF_PERIODS);
         dialog.show(getSupportFragmentManager(), "");
     }
-    public void onTimeperPeriodClicked(View view){
+    public void onTimePerPeriodClicked(View view){
         ParameterDialogInteger dialog = new ParameterDialogInteger(WaterpoloTimerSettings.PERIOD_DURATION);
         dialog.show(getSupportFragmentManager(), "");
     }

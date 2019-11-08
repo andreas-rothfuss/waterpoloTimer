@@ -55,7 +55,7 @@ public class WaterpoloClock extends AppCompatActivity{
 
         WaterpoloTimerSettings.updateAllFromSettings(getApplicationContext());
 
-        resetAll(findViewById(R.id.mainTime));
+        resetAll();
 
         layoutEditMinutes = findViewById(R.id.layoutEditMinutes);
         layoutEditSeconds = findViewById(R.id.layoutEditSeconds);
@@ -193,10 +193,37 @@ public class WaterpoloClock extends AppCompatActivity{
     public void onClickTimeoutGuest(View view){
         alertDialogTimeoutGuest();
     }
+
+    //TODO: RESET ALL bitte mit bestätigung oder dort weg und in die Setting.
     public void resetAll(View view){
+        alertDialogResetAll();
+    }
+    void resetAll(){
         if (waterpoloTimer != null)
             waterpoloTimer.dispose();
         waterpoloTimer = new WaterpoloTimer(this);
+    }
+
+    private void alertDialogResetAll() {
+        AlertDialog.Builder dialog=new AlertDialog.Builder(this);
+        dialog.setMessage("Do you want reset all timers?");
+        dialog.setTitle("Reset all");
+        dialog.setPositiveButton("YES",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog,
+                                        int which) {
+                        resetAll();
+                        Toast.makeText(getApplicationContext(),"Reset all done",Toast.LENGTH_LONG).show();
+                    }
+                });
+        dialog.setNegativeButton("No",new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Toast.makeText(getApplicationContext(),"Reset all declined",Toast.LENGTH_LONG).show();
+            }
+        });
+        AlertDialog alertDialog=dialog.create();
+        alertDialog.show();
     }
     public void editTime(View view){
         timeIsEditable = !timeIsEditable;
@@ -250,19 +277,24 @@ public class WaterpoloClock extends AppCompatActivity{
         waterpoloTimer.goalsHome++;
     }
     public void onClickToreHomeMinus(View view){
-        waterpoloTimer.goalsHome--;
+        if (waterpoloTimer.goalsHome > 0)
+            waterpoloTimer.goalsHome--;
     }
     public void onClickToreGuestPlus(View view){
         waterpoloTimer.goalsGuest++;
     }
     public void onClickToreGuestMinus(View view){
-        waterpoloTimer.goalsGuest--;
+        if (waterpoloTimer.goalsGuest > 0)
+            waterpoloTimer.goalsGuest--;
     }
+
 
     public void openSettings(View view){
         Intent intent = new Intent(WaterpoloClock.this, Settings.class);
         startActivity(intent);
     }
+
+    //TODO: Zwecks Platz. Mach die BOARDS auf ein Button und dann als nächste alle Boards zur Auswahl. Ist ja nur für die Anzeige eimalig.
     public void openMainTime(View view){
         Intent intent = new Intent(WaterpoloClock.this, MainTimeBoard.class);
         startActivity(intent);

@@ -53,14 +53,18 @@ public class WaterpoloTimer {
             server = new WaterpoloclockServer(this);
         } catch (IOException e) {
             log.warn("Caught an IOException", e);
+        }catch (RuntimeException e) {
+            log.warn("Server not started. " + e.getMessage(), e);
         }
     }
 
 
     void dispose(){
-        server.stop();
-        server = null;
-    };
+        if (server != null) {
+            server.stop();
+            server = null;
+        }
+    }
 
     private void setTimersToStartOfPeriod(int i){
         lastTimerUpdateTime = System.currentTimeMillis();
