@@ -62,23 +62,6 @@
                     android:focusable="true" />
 
                 <Button
-                    android:id="@+id/edit2"
-                    style="@style/Widget.AppCompat.Button"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="2"
-                    android:background="@android:color/background_dark"
-                    android:clickable="true"
-                    android:onClick="resetAll"
-                    android:text="@string/reset_all"
-                    android:textColor="@color/colorPrimaryDark"
-                    app:autoSizeMaxTextSize="200sp"
-                    app:autoSizeMinTextSize="12sp"
-                    app:autoSizeStepGranularity="2sp"
-                    app:autoSizeTextType="uniform"
-                    android:focusable="true" />
-
-                <Button
                     android:id="@+id/settings"
                     style="@style/Widget.AppCompat.Button.Borderless"
                     android:layout_width="match_parent"
@@ -91,6 +74,14 @@
                     app:autoSizeMinTextSize="12sp"
                     app:autoSizeStepGranularity="2sp"
                     app:autoSizeTextType="uniform" />
+
+                <TextView
+                    android:id="@+id/textViewFiller2"
+                    style="@style/Widget.AppCompat.Button.Borderless"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="2"
+                    android:textColor="@color/colorPrimaryDark" />
 
             </LinearLayout>
 
@@ -590,28 +581,25 @@
                 android:layout_weight="3"
                 android:orientation="vertical">
 
-                <Button
-                    android:id="@+id/shotclock4"
+                <TextView
+                    android:id="@+id/textViewFiller1"
                     style="@style/Widget.AppCompat.Button.Borderless"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="1"
-                    android:onClick="openMainTime"
-                    android:text="@string/main_time"
-                    android:textColor="@color/colorPrimaryDark"
-                    app:autoSizeMaxTextSize="200sp"
-                    app:autoSizeMinTextSize="12sp"
-                    app:autoSizeStepGranularity="2sp"
-                    app:autoSizeTextType="uniform" />
+                    android:textColor="@color/colorPrimaryDark" />
 
                 <Button
-                    android:id="@+id/shotclock"
-                    style="@style/Widget.AppCompat.Button.Borderless"
+                    android:id="@+id/edit2"
+                    style="@style/Widget.AppCompat.Button"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="1"
-                    android:onClick="openShotclock"
-                    android:text="@string/shotclock"
+                    android:background="@android:color/background_dark"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:onClick="resetAll"
+                    android:text="@string/reset_all"
                     android:textColor="@color/colorPrimaryDark"
                     app:autoSizeMaxTextSize="200sp"
                     app:autoSizeMinTextSize="12sp"
@@ -657,28 +645,22 @@
                 android:layout_weight="3"
                 android:orientation="vertical">
 
-                <Button
-                    android:id="@+id/button16"
+                <TextView
+                    android:id="@+id/textViewFiller"
                     style="@style/Widget.AppCompat.Button.Borderless"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="1"
-                    android:onClick="openTimeAndScoreBoard"
-                    android:text="@string/mixed_board"
-                    android:textColor="@color/colorPrimaryDark"
-                    app:autoSizeMaxTextSize="200sp"
-                    app:autoSizeMinTextSize="12sp"
-                    app:autoSizeStepGranularity="2sp"
-                    app:autoSizeTextType="uniform" />
+                    android:textColor="@color/colorPrimaryDark"/>
 
                 <Button
-                    android:id="@+id/button2"
+                    android:id="@+id/btnBoards"
                     style="@style/Widget.AppCompat.Button.Borderless"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="1"
-                    android:onClick="openScoreBoard"
-                    android:text="@string/scoreboard"
+                    android:onClick="openBoards"
+                    android:text="Boards"
                     android:textColor="@color/colorPrimaryDark"
                     app:autoSizeMaxTextSize="200sp"
                     app:autoSizeMinTextSize="12sp"

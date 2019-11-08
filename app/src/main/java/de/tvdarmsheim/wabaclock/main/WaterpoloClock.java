@@ -294,21 +294,8 @@ public class WaterpoloClock extends AppCompatActivity{
         startActivity(intent);
     }
 
-    //TODO: Zwecks Platz. Mach die BOARDS auf ein Button und dann als nächste alle Boards zur Auswahl. Ist ja nur für die Anzeige eimalig.
-    public void openMainTime(View view){
-        Intent intent = new Intent(WaterpoloClock.this, MainTimeBoard.class);
-        startActivity(intent);
-    }
-    public void openShotclock(View view){
-        Intent intent = new Intent(WaterpoloClock.this, Shotclock.class);
-        startActivity(intent);
-    }
-    public void openTimeAndScoreBoard(View view){
-        Intent intent = new Intent(WaterpoloClock.this, TimeAndScoreBoard.class);
-        startActivity(intent);
-    }
-    public void openScoreBoard(View view){
-        Intent intent = new Intent(WaterpoloClock.this, Scoreboard.class);
+    public void openBoards(View view){
+        Intent intent = new Intent(this, Boards.class);
         startActivity(intent);
     }
 }
