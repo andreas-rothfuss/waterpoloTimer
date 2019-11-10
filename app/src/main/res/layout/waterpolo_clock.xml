@@ -145,7 +145,7 @@
                             android:id="@+id/editTimeoutsHome"
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
-                            android:layout_weight="1"
+                            android:layout_weight="2"
                             android:background="@android:color/background_dark"
                             android:orientation="vertical">
 
@@ -189,7 +189,7 @@
                             style="@style/Widget.AppCompat.Button.Borderless"
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
-                            android:layout_weight="2"
+                            android:layout_weight="1"
                             android:background="@android:color/background_dark"
                             android:clickable="true"
                             android:focusable="true"
@@ -367,7 +367,7 @@
                             style="@style/Widget.AppCompat.Button.Borderless"
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
-                            android:layout_weight="2"
+                            android:layout_weight="1"
                             android:background="@android:color/background_dark"
                             android:clickable="true"
                             android:focusable="true"
@@ -383,7 +383,7 @@
                             android:id="@+id/editTimeoutsGuest"
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
-                            android:layout_weight="1"
+                            android:layout_weight="2"
                             android:background="@android:color/background_dark"
                             android:orientation="vertical">
 
