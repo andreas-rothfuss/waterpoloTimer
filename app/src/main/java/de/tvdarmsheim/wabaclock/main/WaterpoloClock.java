@@ -1,6 +1,7 @@
 package de.tvdarmsheim.wabaclock.main;
 
 import android.app.AlertDialog;
+import android.app.MediaRouteButton;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.media.MediaPlayer;
@@ -34,9 +35,13 @@ public class WaterpoloClock extends AppCompatActivity implements ParameterDialog
 
     final Handler myHandler = new Handler();
 
+    private View layoutTimeoutsHome;
+    private View layoutTimeoutsGuest;
     private View layoutEditMinutes;
     private View layoutEditSeconds;
     private View layoutEditOffenceTime;
+    private View layoutEditGoalsHome;
+    private View layoutEditGoalsGuest;
 
     private Button btnPeriod;
     private Button btnPeriodPlus;
@@ -66,9 +71,13 @@ public class WaterpoloClock extends AppCompatActivity implements ParameterDialog
 
         resetAll();
 
+        layoutTimeoutsHome = findViewById(R.id.editTimeoutsHome);
+        layoutTimeoutsGuest = findViewById(R.id.editTimeoutsGuest);
         layoutEditMinutes = findViewById(R.id.layoutEditMinutes);
         layoutEditSeconds = findViewById(R.id.layoutEditSeconds);
         layoutEditOffenceTime = findViewById(R.id.layoutEditAngriffzeit);
+        layoutEditGoalsHome = findViewById(R.id.editGoalsHome);
+        layoutEditGoalsGuest = findViewById(R.id.editGoalsGuest);
 
         btnPeriod = findViewById(R.id.viertelOderPause);
         btnPeriodPlus = findViewById(R.id.editPeriodPlus);
@@ -83,9 +92,13 @@ public class WaterpoloClock extends AppCompatActivity implements ParameterDialog
         btnGoalsHome =  findViewById(R.id.toreHeim);
         btnGoalsGuest =  findViewById(R.id.toreGast);
 
+        layoutTimeoutsHome.setVisibility(View.GONE);
+        layoutTimeoutsGuest.setVisibility(View.GONE);
         layoutEditMinutes.setVisibility(View.GONE);
         layoutEditSeconds.setVisibility(View.GONE);
         layoutEditOffenceTime.setVisibility(View.GONE);
+        layoutEditGoalsHome.setVisibility(View.GONE);
+        layoutEditGoalsGuest.setVisibility(View.GONE);
         btnPeriodPlus.setVisibility(View.GONE);
         btnPeriodMinus.setVisibility(View.GONE);
 
@@ -265,9 +278,13 @@ public class WaterpoloClock extends AppCompatActivity implements ParameterDialog
     public void editTime(View view){
         timeIsEditable = !timeIsEditable;
         int viewState = timeIsEditable ? View.VISIBLE : View.GONE;
+        layoutTimeoutsHome.setVisibility(viewState);
+        layoutTimeoutsGuest.setVisibility(viewState);
         layoutEditMinutes.setVisibility(viewState);
         layoutEditSeconds.setVisibility(viewState);
         layoutEditOffenceTime.setVisibility(viewState);
+        layoutEditGoalsHome.setVisibility(viewState);
+        layoutEditGoalsGuest.setVisibility(viewState);
         btnPeriodPlus.setVisibility(viewState);
         btnPeriodMinus.setVisibility(viewState);
     }
@@ -305,9 +322,24 @@ public class WaterpoloClock extends AppCompatActivity implements ParameterDialog
         if (!waterpoloTimer.isTimeout())
             waterpoloTimer.offenceTimeAdd(0, 1);
     }
+
     public void onClickOffenceTimeMinus(View view){
         if (!waterpoloTimer.isTimeout())
             waterpoloTimer.offenceTimeSub(0, 1);
+    }
+    public void onClickTimeoutsHomePlus(View view){
+        waterpoloTimer.timeoutsHome++;
+    }
+    public void onClickTimeoutsHomeMinus(View view){
+        if (waterpoloTimer.timeoutsHome > 0)
+            waterpoloTimer.timeoutsHome--;
+    }
+    public void onClickTimeoutsGuestPlus(View view){
+        waterpoloTimer.timeoutsGuest++;
+    }
+    public void onClickTimeoutsGuestMinus(View view){
+        if (waterpoloTimer.timeoutsGuest > 0)
+            waterpoloTimer.timeoutsGuest--;
     }
 
     public void onClickToreHomePlus(View view){

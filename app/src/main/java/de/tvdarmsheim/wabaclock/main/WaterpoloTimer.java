@@ -252,7 +252,7 @@ public class WaterpoloTimer {
                         periodString = "Halftime";
                     else
                         periodString = "Break between periods " +
-                                (period + 1) + " und " + (period + 2);
+                                (period + 1) + " and " + (period + 2);
                 }
             } else
                 periodString = "End";

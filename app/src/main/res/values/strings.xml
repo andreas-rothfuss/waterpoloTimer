@@ -13,11 +13,11 @@
     <string name="timeout">Timeout(s)</string>
     <string name="_00">00</string>
     <string name="tesOffenceTime">30</string>
-    <string name="reset_30">Reset \n(30)</string>
-    <string name="reset_20">Reset \n(20)</string>
+    <string name="reset_30">Reset (30)</string>
+    <string name="reset_20">Reset (20)</string>
     <string name="reset_all">reset all</string>
     <string name="settings">"settings "</string>
-    <string name="edit_times">edit time</string>
+    <string name="edit_times">edit</string>
     <string name="menu_item_title_nbOfPeriods">Number of periods</string>
     <string name="menu_item_title_time_per_period">Time per period [min]</string>
     <string name="menu_item_title_offence_time_major">Offence time duration [s]</string>
