@@ -25,7 +25,7 @@ public class ParameterDialogString extends AppCompatDialogFragment {
     private EditText editText;
 
     @SuppressLint("ValidFragment")
-    ParameterDialogString(StringSetting setting) {
+    public ParameterDialogString(StringSetting setting) {
        this.setting = setting;
     }
 

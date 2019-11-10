@@ -17,6 +17,7 @@ import msg.OpenIGTMessage;
 abstract class NetworkBoard extends AppCompatActivity {
 
     static final int DATA_UPDATE_PERIOD = 50;
+    static final int SLOW_DATA_UPDATE_PERIOD = 1000;
     static final int GUI_UPDATE_PERIOD = 100;
 
     ClientViewClient client;
@@ -46,6 +47,13 @@ abstract class NetworkBoard extends AppCompatActivity {
                 updateData();
             }
         }, 0, DATA_UPDATE_PERIOD);
+        Timer slowDataUpdateTimer = new Timer();
+        slowDataUpdateTimer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                updateDataSlow();
+            }
+        }, 0, SLOW_DATA_UPDATE_PERIOD);
         Timer guiUpdateTimer = new Timer();
         guiUpdateTimer.schedule(new TimerTask() {
             @Override
@@ -72,6 +80,8 @@ abstract class NetworkBoard extends AppCompatActivity {
     }
 
     protected abstract void updateData();
+
+    protected void updateDataSlow(){};
 
     protected abstract void updateGuiElements();
 

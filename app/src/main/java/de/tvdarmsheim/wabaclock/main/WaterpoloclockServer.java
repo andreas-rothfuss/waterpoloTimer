@@ -2,6 +2,7 @@ package de.tvdarmsheim.wabaclock.main;
 
 import java.io.IOException;
 
+import de.tvdarmsheim.wabaclock.settings.WaterpoloTimerSettings;
 import msg.OIGTL_DataMessage;
 import msg.OIGTL_GetMessage;
 import msg.sensor.GetSensorMessage;
@@ -10,6 +11,8 @@ import msg.sensor.SI_UNIT;
 import msg.sensor.SensorData;
 import msg.sensor.SensorMessage;
 import msg.sensor.Unit;
+import msg.string.GetStringMessage;
+import msg.string.StringMessage;
 import network.stream.OpenIGTLinkStreamingServer;
 
 public class WaterpoloclockServer extends OpenIGTLinkStreamingServer {
@@ -31,6 +34,10 @@ public class WaterpoloclockServer extends OpenIGTLinkStreamingServer {
         if (message instanceof GetSensorMessage) {
             //Log.info("Message received: " + message.toString());
             return onTxSensor(message.getDeviceName());
+        }
+        if (message instanceof GetStringMessage) {
+            //Log.info("Message received: " + message.toString());
+            return onTxString(message.getDeviceName());
         }
         return null;
     }
@@ -56,6 +63,16 @@ public class WaterpoloclockServer extends OpenIGTLinkStreamingServer {
                 sensorData.setArray(new double[]{timer.goalsHome, timer.goalsGuest});
                 return new SensorMessage(deviceName, sensorData);
             }
+        }
+        return null;
+    }
+
+    protected StringMessage onTxString(String deviceName){
+        if (deviceName.equals(WaterpoloTimer.HOME_TEAM_DEVICE_NAME)) {
+            return new StringMessage(deviceName, WaterpoloTimerSettings.HOME_TEAM_NAME.value);
+        }
+        if (deviceName.equals(WaterpoloTimer.GUEST_TEAM_DEVICE_NAME)) {
+            return new StringMessage(deviceName, WaterpoloTimerSettings.GUEST_TEAM_NAME.value);
         }
         return null;
     }

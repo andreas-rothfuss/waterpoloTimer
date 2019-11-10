@@ -24,16 +24,12 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="4"
-                android:background="@drawable/shotclock"
+                android:background="@android:color/background_dark"
                 android:onClick="openShotclock"
+                android:scaleType="centerInside"
                 android:text="@string/shotclock"
-                android:textColor="@color/colorPrimaryDark"/>
-
-            <TextView
-                android:id="@+id/textView3"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1" />
+                android:textColor="@color/colorPrimaryDark"
+                tools:src="@drawable/shotclock" />
 
             <ImageButton
                 android:id="@+id/BtnFullBoard"
@@ -41,19 +37,14 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="4"
-                android:background="@drawable/full_board"
+                android:background="@android:color/background_dark"
                 android:onClick="openFullBoard"
+                android:scaleType="centerInside"
                 android:text="Full Board"
-                android:textColor="@color/colorPrimaryDark" />
+                android:textColor="@color/colorPrimaryDark"
+                tools:src="@drawable/full_board" />
 
         </LinearLayout>
-
-        <TextView
-            android:id="@+id/textView6"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:background="@android:color/background_dark" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -68,16 +59,12 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="4"
-                android:background="@drawable/main_time"
+                android:background="@android:color/background_dark"
                 android:onClick="openMainTime"
+                android:scaleType="centerInside"
                 android:text="@string/main_time"
-                android:textColor="@color/colorPrimaryDark" />
-
-            <TextView
-                android:id="@+id/textView4"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1" />
+                android:textColor="@color/colorPrimaryDark"
+                tools:src="@drawable/main_time" />
 
             <ImageButton
                 android:id="@+id/btnMixedBoard"
@@ -85,19 +72,14 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="4"
-                android:background="@drawable/mixed_board"
+                android:background="@android:color/background_dark"
                 android:onClick="openTimeAndScoreBoard"
+                android:scaleType="centerInside"
+                android:src="@drawable/mixed_board"
                 android:text="@string/mixed_board"
-                android:textColor="@color/colorPrimaryDark"/>
+                android:textColor="@color/colorPrimaryDark" />
 
         </LinearLayout>
-
-        <TextView
-            android:id="@+id/textView7"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:background="@android:color/background_dark" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -112,16 +94,12 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="4"
-                android:background="@drawable/score_board"
+                android:background="@android:color/background_dark"
                 android:onClick="openScoreBoard"
+                android:scaleType="centerInside"
                 android:text="@string/scoreboard"
-                android:textColor="@color/colorPrimaryDark"/>
-
-            <TextView
-                android:id="@+id/textView5"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1" />
+                android:textColor="@color/colorPrimaryDark"
+                tools:src="@drawable/score_board" />
 
             <Button
                 android:id="@+id/btnDone"

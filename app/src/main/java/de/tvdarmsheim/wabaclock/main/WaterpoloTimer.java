@@ -9,9 +9,12 @@ import java.util.concurrent.TimeUnit;
 import de.tvdarmsheim.wabaclock.settings.WaterpoloTimerSettings;
 
 public class WaterpoloTimer {
+
     public static final String SHOTCLOCK_DEVICE_NAME = "Shotclock";
     public static final String MAIN_TIME_DEVICE_NAME = "MainTime";
     public static final String SCOREBOARD_DEVICE_NAME = "Scoreboard";
+    public static final String HOME_TEAM_DEVICE_NAME = "HomeTeam";
+    public static final String GUEST_TEAM_DEVICE_NAME = "GuestTeam";
 
     public static final int TIMER_UPDATE_PERIOD = 50;
 

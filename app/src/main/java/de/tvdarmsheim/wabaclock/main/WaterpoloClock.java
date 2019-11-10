@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.media.MediaPlayer;
+import android.net.Uri;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -17,10 +18,14 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import de.tvdarmsheim.wabaclock.R;
+import de.tvdarmsheim.wabaclock.settings.ParameterDialogString;
 import de.tvdarmsheim.wabaclock.settings.Settings;
+import de.tvdarmsheim.wabaclock.settings.StringSetting;
 import de.tvdarmsheim.wabaclock.settings.WaterpoloTimerSettings;
+import de.tvdarmsheim.zeitnehmerwasserball.PersonalFouls;
 
-public class WaterpoloClock extends AppCompatActivity{
+public class WaterpoloClock extends AppCompatActivity implements ParameterDialogString.DialogListener,
+        PersonalFouls.OnFragmentInteractionListener {
 
     public static final int GUI_UPDATE_PERIOD = 100;
 
@@ -45,6 +50,10 @@ public class WaterpoloClock extends AppCompatActivity{
 
     private Button btnGoalsHome;
     private Button btnGoalsGuest;
+
+    Button btnTeamHome;
+    Button btnTeamGuest;
+
     MediaPlayer notificationSound;
 
     @Override
@@ -80,7 +89,11 @@ public class WaterpoloClock extends AppCompatActivity{
         btnPeriodPlus.setVisibility(View.GONE);
         btnPeriodMinus.setVisibility(View.GONE);
 
-        notificationSound = MediaPlayer.create(this, R.raw.new_button_option_sound);
+        btnTeamHome = findViewById(R.id.teamHome);
+        btnTeamGuest = findViewById(R.id.teamGuest);
+        updateSettingsValueDisplay();
+
+        notificationSound = MediaPlayer.create(this, R.raw.beep_09);
 
         Timer guiUpdateTimer = new Timer();
         guiUpdateTimer.schedule(new TimerTask() {
@@ -225,6 +238,30 @@ public class WaterpoloClock extends AppCompatActivity{
         AlertDialog alertDialog=dialog.create();
         alertDialog.show();
     }
+
+
+    public void onHomeTeamNameClicked(View view){
+        ParameterDialogString dialog = new ParameterDialogString(WaterpoloTimerSettings.HOME_TEAM_NAME);
+        dialog.show(getSupportFragmentManager(), "");
+    }
+
+    public void onGuestTeamNameClicked(View view){
+        ParameterDialogString dialog = new ParameterDialogString(WaterpoloTimerSettings.GUEST_TEAM_NAME);
+        dialog.show(getSupportFragmentManager(), "");
+    }
+
+    @Override
+    public void applyValue(StringSetting setting, String value) {
+        setting.applyValue(WaterpoloTimerSettings.getSharedPreferences(
+                getApplicationContext()), value);
+        updateSettingsValueDisplay();
+    }
+
+    void updateSettingsValueDisplay() {
+        btnTeamHome.setText(WaterpoloTimerSettings.HOME_TEAM_NAME.value);
+        btnTeamGuest.setText(WaterpoloTimerSettings.GUEST_TEAM_NAME.value);
+    }
+
     public void editTime(View view){
         timeIsEditable = !timeIsEditable;
         int viewState = timeIsEditable ? View.VISIBLE : View.GONE;
@@ -298,4 +335,6 @@ public class WaterpoloClock extends AppCompatActivity{
         Intent intent = new Intent(this, Boards.class);
         startActivity(intent);
     }
+
+    public void onFragmentInteraction(Uri uri){}
 }

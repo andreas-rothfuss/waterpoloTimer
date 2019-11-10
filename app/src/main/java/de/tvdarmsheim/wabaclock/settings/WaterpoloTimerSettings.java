@@ -51,7 +51,15 @@ public class WaterpoloTimerSettings {
             "master_ip", "127.0.0.1",
             "Set ip of master unit");
 
-    static SharedPreferences getSharedPreferences(Context context){
+    public static final StringSetting HOME_TEAM_NAME = new StringSetting(
+            "home_team_name", "Home",
+            "Name of the home team");
+
+    public static final StringSetting GUEST_TEAM_NAME = new StringSetting(
+            "guest_team_name", "Guest",
+            "Name of the guest team");
+
+    public static SharedPreferences getSharedPreferences(Context context){
         return context.getSharedPreferences(PREFS_NAME, 0);
     }
 
@@ -68,5 +76,7 @@ public class WaterpoloTimerSettings {
         ENABLE_SOUND.readFromSettings(settings);
         ENABLE_DECIMAL.readFromSettings(settings);
         MASTER_IP.readFromSettings(settings);
+        HOME_TEAM_NAME.readFromSettings(settings);
+        GUEST_TEAM_NAME.readFromSettings(settings);
     }
 }

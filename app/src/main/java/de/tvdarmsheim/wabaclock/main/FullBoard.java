@@ -8,8 +8,15 @@ import java.io.IOException;
 import de.tvdarmsheim.wabaclock.R;
 import de.tvdarmsheim.wabaclock.settings.WaterpoloTimerSettings;
 import msg.sensor.GetSensorMessage;
+import msg.string.GetStringMessage;
 
 public class FullBoard extends NetworkBoard {
+
+    String homeTeam;
+    String guestTeam;
+
+    private Button btnTeamHome;
+    private Button btnTeamGuest;
 
     long time_ms = 0;
     long shotClock = 0;
@@ -24,6 +31,9 @@ public class FullBoard extends NetworkBoard {
     @Override
     protected void defineContentView() {
         setContentView(R.layout.full_board);
+
+        btnTeamHome = findViewById(R.id.btnTeamHome);
+        btnTeamGuest = findViewById(R.id.btnTeamGuest);
 
         mainTime = findViewById(R.id.mainTimeBoard);
         btnShotclock = findViewById(R.id.shotclock_angriffszeit2);
@@ -46,8 +56,17 @@ public class FullBoard extends NetworkBoard {
     }
 
     @Override
+    protected void updateDataSlow() {
+        sendIfConnected(new GetStringMessage(WaterpoloTimer.HOME_TEAM_DEVICE_NAME));
+        sendIfConnected(new GetStringMessage(WaterpoloTimer.GUEST_TEAM_DEVICE_NAME));
+    }
+
+
+    @Override
     protected void updateGuiElements() {
         if (mainTime != null && btnGoalsHome != null && btnGoalsHome != null) {
+            btnTeamHome.setText(homeTeam);
+            btnTeamGuest.setText(guestTeam);
             String timeString;
             if (WaterpoloTimerSettings.ENABLE_DECIMAL.value)
                 timeString  = WaterpoloTimer.getMainTimeString(time_ms);
@@ -63,6 +82,13 @@ public class FullBoard extends NetworkBoard {
             btnGoalsHome.setText(WaterpoloTimer.getGoalsString(goalsHome));
             btnGoalsGuest.setText(WaterpoloTimer.getGoalsString(goalsGuest));
         }
+    }
+
+    void setHomeTeamName(String val){
+        this.homeTeam = val;
+    }
+    void setGuestTeamName(String val){
+        this.guestTeam = val;
     }
 
     void setMainTime(long time_ms){

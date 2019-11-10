@@ -32,4 +32,15 @@ public class ScoreboardClient extends ClientViewClient {
             }
         }
     }
+
+    protected void onRxString(String deviceName, String data){
+        if (data != null){
+            if (deviceName.equals(WaterpoloTimer.HOME_TEAM_DEVICE_NAME)) {
+                activity.setHomeTeamName(data);
+            }
+            if (deviceName.equals(WaterpoloTimer.GUEST_TEAM_DEVICE_NAME)) {
+                activity.setGuestTeamName(data);
+            }
+        }
+    }
 }

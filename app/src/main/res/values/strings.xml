@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Zeitnehmer Wasserball</string>
+    <string name="app_name">Waterpolo Clock</string>
     <string name="displayStringBreak">Pause Viertel</string>
     <string name="and">und</string>
     <string name="displayStringPeriod">Viertel</string>
@@ -9,10 +9,10 @@
     <string name="min">min</string>
     <string name="plus">+</string>
     <string name="minus">-</string>
-    <string name="testMainTime">06:00.0</string>
+    <string name="testMainTime">06:00</string>
     <string name="timeout">Timeout(s)</string>
     <string name="_00">00</string>
-    <string name="tesOffenceTime">30.1</string>
+    <string name="tesOffenceTime">30</string>
     <string name="reset_30">Reset \n(30)</string>
     <string name="reset_20">Reset \n(20)</string>
     <string name="reset_all">reset all</string>
@@ -37,4 +37,7 @@
     <string name="shotclock">"Shotclock "</string>
     <string name="mixed_board">"Mixed Board"</string>
     <string name="scoreboard">"Scoreboard "</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
