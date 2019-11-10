@@ -7,8 +7,8 @@ android {
         applicationId "de.tvdarmsheim.zeitnehmerwasserball"
         minSdkVersion 19
         targetSdkVersion 28
-        versionCode 10
-        versionName "1.0"
+        versionCode 12
+        versionName "1.2"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
