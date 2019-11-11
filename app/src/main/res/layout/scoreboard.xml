@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".main.Scoreboard">
+    tools:context="de.wasserball.wabaclock.main.Scoreboard">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -15,6 +15,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
+            android:minHeight="48dp"
             android:orientation="horizontal">
 
             <Button
@@ -24,7 +25,8 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:background="@android:color/background_dark"
-                android:text="Button"
+                android:text="Home"
+                android:textAlignment="textStart"
                 android:textColor="@android:color/white"
                 app:autoSizeMaxTextSize="400sp"
                 app:autoSizeMinTextSize="12sp"
@@ -38,7 +40,8 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:background="@android:color/background_dark"
-                android:text="Button"
+                android:text="Guest"
+                android:textAlignment="textEnd"
                 android:textColor="@color/blue"
                 app:autoSizeMaxTextSize="400sp"
                 app:autoSizeMinTextSize="12sp"

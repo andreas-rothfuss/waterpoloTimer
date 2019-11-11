@@ -1,8 +1,6 @@
-package de.tvdarmsheim.wabaclock.main;
+package de.wasserball.wabaclock.main;
 
 import android.widget.Button;
-
-import java.io.IOException;
 
 import de.tvdarmsheim.wabaclock.R;
 import msg.sensor.GetSensorMessage;
@@ -10,9 +8,8 @@ import msg.string.GetStringMessage;
 
 public class Scoreboard extends NetworkBoard {
 
-    String homeTeam;
-    String guestTeam;
-
+    String homeTeam = "home";
+    String guestTeam = "guest";
     private Button btnTeamHome;
     private Button btnTeamGuest;
 
@@ -31,13 +28,6 @@ public class Scoreboard extends NetworkBoard {
 
         btnGoalsHome = findViewById(R.id.toreHeimScoreboard);
         btnGoalsGuest = findViewById(R.id.toreGastScoreboard);
-    }
-
-    @Override
-    protected ClientViewClient initClient() throws IOException {
-        ScoreboardClient client = new ScoreboardClient(this);
-        client.start();
-        return client;
     }
 
     @Override

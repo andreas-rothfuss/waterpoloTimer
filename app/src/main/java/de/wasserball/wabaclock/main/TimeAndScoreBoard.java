@@ -1,18 +1,16 @@
-package de.tvdarmsheim.wabaclock.main;
+package de.wasserball.wabaclock.main;
 
 import android.widget.Button;
 
-import java.io.IOException;
-
 import de.tvdarmsheim.wabaclock.R;
-import de.tvdarmsheim.wabaclock.settings.WaterpoloTimerSettings;
+import de.wasserball.wabaclock.settings.WaterpoloTimerSettings;
 import msg.sensor.GetSensorMessage;
 import msg.string.GetStringMessage;
 
 public class TimeAndScoreBoard extends NetworkBoard {
 
-    String homeTeam;
-    String guestTeam;
+    String homeTeam = "home";
+    String guestTeam = "guest";
     long time_ms = 0;
     int goalsHome = 0;
     int goalsGuest = 0;
@@ -32,13 +30,6 @@ public class TimeAndScoreBoard extends NetworkBoard {
         mainTime = findViewById(R.id.mainTimeBoard);
         btnGoalsHome = findViewById(R.id.toreHeimBoard);
         btnGoalsGuest = findViewById(R.id.toreGastBoard);
-    }
-
-    @Override
-    protected ClientViewClient initClient() throws IOException {
-        TimeAndScoreboardClient client = new TimeAndScoreboardClient(this);
-        client.start();
-        return client;
     }
 
     @Override

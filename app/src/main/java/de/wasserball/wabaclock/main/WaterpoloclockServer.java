@@ -1,8 +1,8 @@
-package de.tvdarmsheim.wabaclock.main;
+package de.wasserball.wabaclock.main;
 
 import java.io.IOException;
 
-import de.tvdarmsheim.wabaclock.settings.WaterpoloTimerSettings;
+import de.wasserball.wabaclock.settings.WaterpoloTimerSettings;
 import msg.OIGTL_DataMessage;
 import msg.OIGTL_GetMessage;
 import msg.sensor.GetSensorMessage;

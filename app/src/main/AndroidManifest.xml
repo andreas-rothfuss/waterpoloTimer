@@ -12,32 +12,32 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name="de.tvdarmsheim.wabaclock.settings.Settings"
+            android:name="de.tvdarmsheim.wabaclock.de.wasserball.wabaclock.settings.Settings"
             android:label="@string/title_activity_settings"
             android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
-            android:name="de.tvdarmsheim.wabaclock.main.Boards"
+            android:name="de.tvdarmsheim.wabaclock.de.wasserball.wabaclock.main.Boards"
             android:label="Boards"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name="de.tvdarmsheim.wabaclock.main.FullBoard"
+            android:name="de.tvdarmsheim.wabaclock.de.wasserball.wabaclock.main.FullBoard"
             android:label="Full Board"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name="de.tvdarmsheim.wabaclock.main.TimeAndScoreBoard"
+            android:name="de.tvdarmsheim.wabaclock.de.wasserball.wabaclock.main.TimeAndScoreBoard"
             android:label="@string/title_activity_time_and_score_board"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name="de.tvdarmsheim.wabaclock.main.Scoreboard"
+            android:name="de.tvdarmsheim.wabaclock.de.wasserball.wabaclock.main.Scoreboard"
             android:label="@string/title_activity_scoreboard"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name="de.tvdarmsheim.wabaclock.main.MainTimeBoard"
+            android:name="de.tvdarmsheim.wabaclock.de.wasserball.wabaclock.main.MainTimeBoard"
             android:label="@string/title_activity_scoreboard"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name="de.tvdarmsheim.wabaclock.main.Shotclock" />
+        <activity android:name="de.tvdarmsheim.wabaclock.de.wasserball.wabaclock.main.Shotclock" />
         <activity
-            android:name="de.tvdarmsheim.wabaclock.main.WaterpoloClock"
+            android:name="de.tvdarmsheim.wabaclock.de.wasserball.wabaclock.main.WaterpoloClock"
             android:screenOrientation="landscape">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

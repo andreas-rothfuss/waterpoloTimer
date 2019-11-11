@@ -1,7 +1,6 @@
-package de.tvdarmsheim.wabaclock.main;
+package de.wasserball.wabaclock.main;
 
 import android.app.AlertDialog;
-import android.app.MediaRouteButton;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.media.MediaPlayer;
@@ -19,11 +18,10 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import de.tvdarmsheim.wabaclock.R;
-import de.tvdarmsheim.wabaclock.settings.ParameterDialogString;
-import de.tvdarmsheim.wabaclock.settings.Settings;
-import de.tvdarmsheim.wabaclock.settings.StringSetting;
-import de.tvdarmsheim.wabaclock.settings.WaterpoloTimerSettings;
-import de.tvdarmsheim.zeitnehmerwasserball.PersonalFouls;
+import de.wasserball.wabaclock.settings.ParameterDialogString;
+import de.wasserball.wabaclock.settings.Settings;
+import de.wasserball.wabaclock.settings.StringSetting;
+import de.wasserball.wabaclock.settings.WaterpoloTimerSettings;
 
 public class WaterpoloClock extends AppCompatActivity implements ParameterDialogString.DialogListener,
         PersonalFouls.OnFragmentInteractionListener {
@@ -60,6 +58,14 @@ public class WaterpoloClock extends AppCompatActivity implements ParameterDialog
     Button btnTeamGuest;
 
     MediaPlayer notificationSound;
+    String toastText;
+
+    private int disclamerVersion = 1;
+    private String disclaimerText = "Last updated: November 11, 2019\n" +
+            "The information contained on Waterpolo Timer and Scoreboard mobile app (the \"Service\") is for general information purposes only.\n" +
+            "assumes no responsibility for errors or omissions in the contents on the Service.\n" +
+            "In no event shall be liable for any special, direct, indirect, consequential, or incidental damages or any damages whatsoever, whether in an action of contract, negligence or other tort, arising out of or in connection with the use of the Service or the contents of the Service. reserves the right to make additions, deletions, or modification to the contents on the Service at any time without prior notice. This Disclaimer has been created with the help of Disclaimer Generator.\n" +
+            "does not warrant that the website is free of viruses or other harmful components.";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -123,6 +129,28 @@ public class WaterpoloClock extends AppCompatActivity implements ParameterDialog
                 waterpoloTimer.updateTime();
             }
         }, 0, WaterpoloTimer.TIMER_UPDATE_PERIOD);
+
+        disclaimerDialog();
+
+    }
+
+    private void disclaimerDialog() {
+        if (WaterpoloTimerSettings.DISCLAIMER_DISPLAYED.value < disclamerVersion) {
+            AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+            dialog.setMessage(disclaimerText);
+            dialog.setTitle("Disclaimer");
+            dialog.setPositiveButton("OK",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog,
+                                            int which) {
+                            //Store that the disclaimer has been displayed
+                            WaterpoloTimerSettings.DISCLAIMER_DISPLAYED.applyValue(WaterpoloTimerSettings.getSharedPreferences(
+                                    getApplicationContext()), disclamerVersion);
+                        }
+                    });
+            AlertDialog alertDialog = dialog.create();
+            alertDialog.show();
+        }
     }
 
     @Override
@@ -150,6 +178,11 @@ public class WaterpoloClock extends AppCompatActivity implements ParameterDialog
                 btnTimeoutGuest.setText(Integer.toString(waterpoloTimer.timeoutsGuest));
                 btnGoalsHome.setText(waterpoloTimer.getGoalsHomeString());
                 btnGoalsGuest.setText(waterpoloTimer.getGoalsGuestString());
+
+                if (toastText != null) {
+                    Toast.makeText(getApplicationContext(), toastText, Toast.LENGTH_LONG).show();
+                    toastText = null;
+                }
             }
         };
     }
@@ -204,23 +237,56 @@ public class WaterpoloClock extends AppCompatActivity implements ParameterDialog
         alertDialog.show();
     }
 
+    private void alertDialogAbortTimeout() {
+        AlertDialog.Builder dialog=new AlertDialog.Builder(this);
+        dialog.setMessage("Do you want to abort the running timeout?");
+        dialog.setTitle("Abort Timeout");
+        dialog.setPositiveButton("YES",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog,
+                                        int which) {
+                        waterpoloTimer.stop();
+                        waterpoloTimer.timeout = Long.MIN_VALUE;
+                        Toast.makeText(getApplicationContext(),"timeout aborted",Toast.LENGTH_LONG).show();
+                    }
+                });
+        dialog.setNegativeButton("No",new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Toast.makeText(getApplicationContext(),"timeout abort aborted",Toast.LENGTH_LONG).show();
+            }
+        });
+        AlertDialog alertDialog=dialog.create();
+        alertDialog.show();
+    }
+
+    void sound(String toastText) {
+        if (WaterpoloTimerSettings.ENABLE_SOUND.value)
+            notificationSound.start();
+        this.toastText = toastText;
+    }
+
     public void onClickTime(View view){
         waterpoloTimer.startStop();
     }
     public void onClickReset30(View view){
         waterpoloTimer.resetOffenceTimeMajor();
     }
-    public void onClickReset20(View view){
-        waterpoloTimer.resetOffenceTimeMinor();}
+    public void onClickReset20(View view){ waterpoloTimer.resetOffenceTimeMinor();}
 
     public void onClickTimeoutHome(View view){
-        alertDialogTimeoutHome();
+        if (waterpoloTimer.isTimeout())
+            alertDialogAbortTimeout();
+        else
+            alertDialogTimeoutHome();
     }
     public void onClickTimeoutGuest(View view){
-        alertDialogTimeoutGuest();
+        if (waterpoloTimer.isTimeout())
+            alertDialogAbortTimeout();
+        else
+            alertDialogTimeoutGuest();
     }
 
-    //TODO: RESET ALL bitte mit bestätigung oder dort weg und in die Setting.
     public void resetAll(View view){
         alertDialogResetAll();
     }

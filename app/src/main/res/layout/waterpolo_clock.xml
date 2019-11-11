@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/background_dark"
-    tools:context=".main.WaterpoloClock">
+    tools:context="de.wasserball.wabaclock.main.WaterpoloClock">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -24,6 +24,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
+                android:minHeight="48dp"
                 android:orientation="horizontal">
 
                 <Button
@@ -52,7 +53,8 @@
                     android:focusable="true"
                     android:onClick="onClickPeriodMinus"
                     android:text="@string/minus"
-                    android:textColor="@android:color/holo_red_dark"
+                    android:textColor="@color/cyan"
+                    android:textStyle="bold"
                     app:autoSizeMaxTextSize="200sp"
                     app:autoSizeMinTextSize="12sp"
                     app:autoSizeStepGranularity="2sp"
@@ -67,7 +69,7 @@
                     android:background="@android:color/background_dark"
                     android:text="@string/displayStringPeriod"
                     android:textAlignment="center"
-                    android:textColor="@android:color/holo_red_dark"
+                    android:textColor="@color/cyan"
                     app:autoSizeMaxTextSize="200sp"
                     app:autoSizeMinTextSize="12sp"
                     app:autoSizeStepGranularity="2sp"
@@ -84,7 +86,8 @@
                     android:focusable="true"
                     android:onClick="onClickPeriodPlus"
                     android:text="@string/plus"
-                    android:textColor="@android:color/holo_red_dark"
+                    android:textColor="@color/cyan"
+                    android:textStyle="bold"
                     app:autoSizeMaxTextSize="200sp"
                     app:autoSizeMinTextSize="12sp"
                     app:autoSizeStepGranularity="2sp"
@@ -115,7 +118,7 @@
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
+                    android:layout_weight="2"
                     android:background="@android:color/background_dark"
                     android:orientation="vertical">
 
@@ -127,6 +130,7 @@
                         android:background="@android:color/background_dark"
                         android:clickable="true"
                         android:focusable="true"
+                        android:minHeight="48dp"
                         android:text="@string/timeout"
                         android:textAlignment="center"
                         android:textColor="@android:color/background_light"
@@ -145,7 +149,7 @@
                             android:id="@+id/editTimeoutsHome"
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
-                            android:layout_weight="2"
+                            android:layout_weight="1"
                             android:background="@android:color/background_dark"
                             android:orientation="vertical">
 
@@ -158,6 +162,8 @@
                                 android:background="@android:color/background_dark"
                                 android:clickable="true"
                                 android:focusable="true"
+                                android:minWidth="32dp"
+                                android:minHeight="48dp"
                                 android:onClick="onClickTimeoutsHomePlus"
                                 android:text="@string/plus"
                                 android:textColor="@android:color/white"
@@ -211,6 +217,7 @@
                         android:layout_weight="2"
                         android:background="@android:color/background_dark"
                         android:contentDescription="Settings"
+                        android:minHeight="48dp"
                         android:onClick="openSettings"
                         android:padding="@dimen/fab_margin"
                         android:scaleType="centerInside"
@@ -228,7 +235,7 @@
                     android:id="@+id/layoutEditMinutes"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
+                    android:layout_weight="2"
                     android:background="@android:color/background_dark"
                     android:orientation="vertical"
                     android:visibility="visible">
@@ -274,9 +281,10 @@
                     style="@style/Widget.AppCompat.Button.Borderless"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="6"
+                    android:layout_weight="10"
                     android:background="@android:color/background_dark"
                     android:clickable="true"
+                    android:contentDescription="Main time"
                     android:focusable="true"
                     android:onClick="onClickTime"
                     android:text="@string/testMainTime"
@@ -294,7 +302,7 @@
                     android:id="@+id/layoutEditSeconds"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
+                    android:layout_weight="2"
                     android:background="@android:color/background_dark"
                     android:orientation="vertical"
                     android:visibility="visible">
@@ -338,7 +346,7 @@
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
+                    android:layout_weight="2"
                     android:background="@android:color/background_dark"
                     android:orientation="vertical">
 
@@ -348,6 +356,7 @@
                         android:layout_height="0dp"
                         android:layout_weight="1"
                         android:background="@android:color/background_dark"
+                        android:minHeight="48dp"
                         android:text="@string/timeout"
                         android:textAlignment="center"
                         android:textColor="@color/blue"
@@ -383,7 +392,7 @@
                             android:id="@+id/editTimeoutsGuest"
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
-                            android:layout_weight="2"
+                            android:layout_weight="1"
                             android:background="@android:color/background_dark"
                             android:orientation="vertical">
 
@@ -433,9 +442,10 @@
                         android:background="@android:color/background_dark"
                         android:clickable="true"
                         android:focusable="true"
+                        android:minHeight="48dp"
                         android:onClick="editTime"
                         android:text="@string/edit_times"
-                        android:textColor="@color/colorPrimaryDark"
+                        android:textColor="@color/cyan"
                         app:autoSizeMaxTextSize="200sp"
                         app:autoSizeMinTextSize="12sp"
                         app:autoSizeStepGranularity="2sp"
@@ -502,6 +512,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="4"
                     android:background="@android:color/background_dark"
+                    android:contentDescription="Goals home team"
                     android:onClick="onClickToreHomePlus"
                     android:text="@string/_00"
                     android:textAlignment="textStart"
@@ -527,6 +538,7 @@
                         android:layout_weight="2"
                         android:background="@android:color/background_dark"
                         android:clickable="true"
+                        android:contentDescription="Offence time"
                         android:focusable="true"
                         android:onClick="onClickTime"
                         android:text="@string/tesOffenceTime"
@@ -661,14 +673,6 @@
                     android:layout_weight="3"
                     android:orientation="vertical">
 
-                    <TextView
-                        android:id="@+id/textViewFiller1"
-                        style="@style/Widget.AppCompat.Button.Borderless"
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_weight="1"
-                        android:textColor="@color/colorPrimaryDark" />
-
                     <Button
                         android:id="@+id/edit2"
                         style="@style/Widget.AppCompat.Button"
@@ -680,7 +684,7 @@
                         android:focusable="true"
                         android:onClick="resetAll"
                         android:text="@string/reset_all"
-                        android:textColor="@color/colorPrimaryDark"
+                        android:textColor="@color/cyan"
                         app:autoSizeMaxTextSize="34sp"
                         app:autoSizeMinTextSize="12sp"
                         app:autoSizeStepGranularity="2sp"
@@ -727,14 +731,6 @@
                     android:layout_weight="3"
                     android:orientation="vertical">
 
-                    <TextView
-                        android:id="@+id/textViewFiller"
-                        style="@style/Widget.AppCompat.Button.Borderless"
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_weight="1"
-                        android:textColor="@color/colorPrimaryDark" />
-
                     <Button
                         android:id="@+id/btnBoards"
                         style="@style/Widget.AppCompat.Button.Borderless"
@@ -743,7 +739,7 @@
                         android:layout_weight="1"
                         android:onClick="openBoards"
                         android:text="Boards"
-                        android:textColor="@color/colorPrimaryDark"
+                        android:textColor="@color/cyan"
                         app:autoSizeMaxTextSize="34sp"
                         app:autoSizeMinTextSize="12sp"
                         app:autoSizeStepGranularity="2sp"

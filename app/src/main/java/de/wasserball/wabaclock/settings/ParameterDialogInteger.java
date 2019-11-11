@@ -1,4 +1,4 @@
-package de.tvdarmsheim.wabaclock.settings;
+package de.wasserball.wabaclock.settings;
 
 import android.annotation.SuppressLint;
 import android.app.Dialog;
@@ -9,7 +9,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatDialogFragment;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.EditText;
+import android.widget.NumberPicker;
 
 import de.tvdarmsheim.wabaclock.R;
 
@@ -18,14 +18,14 @@ import de.tvdarmsheim.wabaclock.R;
  */
 
 @SuppressLint("ValidFragment")
-public class ParameterDialogString extends AppCompatDialogFragment {
+public class ParameterDialogInteger extends AppCompatDialogFragment {
 
-    private StringSetting setting;
+    private IntegerSetting setting;
     private DialogListener listener;
-    private EditText editText;
+    private NumberPicker numberSpinner;
 
     @SuppressLint("ValidFragment")
-    public ParameterDialogString(StringSetting setting) {
+    ParameterDialogInteger(IntegerSetting setting) {
        this.setting = setting;
     }
 
@@ -34,7 +34,7 @@ public class ParameterDialogString extends AppCompatDialogFragment {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
         LayoutInflater inflater = getActivity().getLayoutInflater();
-        View view = inflater.inflate(R.layout.dialog_string_edit, null);
+        View view = inflater.inflate(R.layout.dialog_number_picker, null);
 
         builder.setView(view)
                 .setTitle(setting.title)
@@ -47,13 +47,15 @@ public class ParameterDialogString extends AppCompatDialogFragment {
                 .setPositiveButton("ok", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        String value = editText.getText().toString();
+                        int value = numberSpinner.getValue();
                         listener.applyValue(setting, value);
                     }
                 });
 
-        editText = view.findViewById(R.id.master_ip);
-        editText.setText(setting.value);
+        numberSpinner = view.findViewById(R.id.numberSpinner);
+        numberSpinner.setMinValue(setting.min);
+        numberSpinner.setMaxValue(setting.max);
+        numberSpinner.setValue(setting.value);
 
         return builder.create();
     }
@@ -71,6 +73,6 @@ public class ParameterDialogString extends AppCompatDialogFragment {
     }
 
     public interface DialogListener {
-        void applyValue(StringSetting setting, String value);
+        void applyValue(IntegerSetting setting, int value);
     }
 }

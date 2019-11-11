@@ -1,15 +1,15 @@
-package de.tvdarmsheim.wabaclock.settings;
+package de.wasserball.wabaclock.settings;
 
 import android.content.SharedPreferences;
 
-public class StringSetting {
+public class BooleanSetting {
 
     public final String key;
     public final String title;
-    public final String defaultVal;
-    public String value;
+    public final boolean defaultVal;
+    public boolean value;
 
-    public StringSetting(String key, String defaultVal, String title){
+    public BooleanSetting(String key, boolean defaultVal, String title){
         this.key = key;
         this.defaultVal = defaultVal;
         value = defaultVal;
@@ -17,13 +17,13 @@ public class StringSetting {
     }
 
     void readFromSettings(SharedPreferences settings) {
-        value = settings.getString(key, defaultVal);
+        value = settings.getBoolean(key, defaultVal);
     }
 
-    public void applyValue(SharedPreferences settings, String value) {
+    public void applyValue(SharedPreferences settings, boolean value) {
         this.value = value;
         SharedPreferences.Editor editor = settings.edit();
-        editor.putString(key, value);
+        editor.putBoolean(key, value);
         // Apply the edits!
         editor.apply();
     }

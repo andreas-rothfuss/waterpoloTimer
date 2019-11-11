@@ -1,11 +1,9 @@
-package de.tvdarmsheim.wabaclock.main;
+package de.wasserball.wabaclock.main;
 
 import android.widget.Button;
 
-import java.io.IOException;
-
 import de.tvdarmsheim.wabaclock.R;
-import de.tvdarmsheim.wabaclock.settings.WaterpoloTimerSettings;
+import de.wasserball.wabaclock.settings.WaterpoloTimerSettings;
 import msg.sensor.GetSensorMessage;
 
 public class Shotclock extends NetworkBoard {
@@ -19,13 +17,6 @@ public class Shotclock extends NetworkBoard {
         setContentView(R.layout.shotclock);
 
         btnShotclock = findViewById(R.id.shotclock_angriffszeit);
-    }
-
-    @Override
-    protected ClientViewClient initClient() throws IOException {
-        ShotclockClient client = new ShotclockClient(this);
-        client.start();
-        return client;
     }
 
     @Override
@@ -45,7 +36,7 @@ public class Shotclock extends NetworkBoard {
         }
     }
 
-    void setShotclock(long time_ms){
+    void setShotClock(long time_ms){
         shotClock = time_ms;
     }
 }

@@ -1,4 +1,4 @@
-package de.tvdarmsheim.wabaclock.main;
+package de.wasserball.wabaclock.main;
 
 import android.os.Bundle;
 import android.os.Handler;
@@ -35,7 +35,8 @@ abstract class NetworkBoard extends AppCompatActivity {
         defineContentView();
 
         try {
-            client = initClient();
+            client = new ClientViewClient(this) ;
+            client.start();
         } catch (IOException e) {
             Toast.makeText(getApplicationContext(),"No connection to main unit",Toast.LENGTH_LONG).show();
         }
@@ -65,8 +66,6 @@ abstract class NetworkBoard extends AppCompatActivity {
 
     protected abstract void defineContentView();
 
-    protected abstract ClientViewClient initClient() throws IOException;
-
     private void guiUpdate() {
         myHandler.post(guiUpdateRunnable);
     }
@@ -94,4 +93,10 @@ abstract class NetworkBoard extends AppCompatActivity {
             }
         }
     }
+
+    void setHomeTeamName(String val){}
+    void setGuestTeamName(String val){}
+    void setMainTime(long time_ms){}
+    void setShotClock(long time_ms){}
+    void setScore(int home, int guest){}
 }

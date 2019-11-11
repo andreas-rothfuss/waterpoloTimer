@@ -1,11 +1,9 @@
-package de.tvdarmsheim.wabaclock.main;
+package de.wasserball.wabaclock.main;
 
 import android.widget.Button;
 
-import java.io.IOException;
-
 import de.tvdarmsheim.wabaclock.R;
-import de.tvdarmsheim.wabaclock.settings.WaterpoloTimerSettings;
+import de.wasserball.wabaclock.settings.WaterpoloTimerSettings;
 import msg.sensor.GetSensorMessage;
 
 public class MainTimeBoard extends NetworkBoard {
@@ -19,13 +17,6 @@ public class MainTimeBoard extends NetworkBoard {
         setContentView(R.layout.main_time_board);
 
         mainTime = findViewById(R.id.mainTimeBoard);
-    }
-
-    @Override
-    protected ClientViewClient initClient() throws IOException {
-        MainTimeClient client = new MainTimeClient(this);
-        client.start();
-        return client;
     }
 
     @Override

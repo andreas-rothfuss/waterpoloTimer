@@ -1,4 +1,4 @@
-package de.tvdarmsheim.wabaclock.settings;
+package de.wasserball.wabaclock.settings;
 
 import android.content.SharedPreferences;
 

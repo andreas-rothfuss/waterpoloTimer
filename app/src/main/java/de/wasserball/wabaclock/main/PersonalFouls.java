@@ -1,4 +1,4 @@
-package de.tvdarmsheim.zeitnehmerwasserball;
+package de.wasserball.wabaclock.main;
 
 import android.content.Context;
 import android.net.Uri;

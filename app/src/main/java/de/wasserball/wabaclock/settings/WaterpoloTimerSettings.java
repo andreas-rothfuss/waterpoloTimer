@@ -1,4 +1,4 @@
-package de.tvdarmsheim.wabaclock.settings;
+package de.wasserball.wabaclock.settings;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -63,6 +63,10 @@ public class WaterpoloTimerSettings {
         return context.getSharedPreferences(PREFS_NAME, 0);
     }
 
+    public static final IntegerSetting DISCLAIMER_DISPLAYED = new IntegerSetting(
+            "disclaimer_displayed_version", 0, Integer.MAX_VALUE, 0,
+            "Disclaimer version previously displayed");
+
     public static void updateAllFromSettings(Context context) {
         SharedPreferences settings = getSharedPreferences(context);
         NUMBER_OF_PERIODS.readFromSettings(settings);
@@ -78,5 +82,6 @@ public class WaterpoloTimerSettings {
         MASTER_IP.readFromSettings(settings);
         HOME_TEAM_NAME.readFromSettings(settings);
         GUEST_TEAM_NAME.readFromSettings(settings);
+        DISCLAIMER_DISPLAYED.readFromSettings(settings);
     }
 }

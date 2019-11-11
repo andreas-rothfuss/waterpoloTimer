@@ -1,4 +1,4 @@
-package de.tvdarmsheim.wabaclock.settings;
+package de.wasserball.wabaclock.settings;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;

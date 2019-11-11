@@ -1,4 +1,4 @@
-package de.tvdarmsheim.wabaclock.main;
+package de.wasserball.wabaclock.main;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -6,7 +6,7 @@ import org.slf4j.LoggerFactory;
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
-import de.tvdarmsheim.wabaclock.settings.WaterpoloTimerSettings;
+import de.wasserball.wabaclock.settings.WaterpoloTimerSettings;
 
 public class WaterpoloTimer {
 
@@ -108,7 +108,7 @@ public class WaterpoloTimer {
                     if (!isBreak) {
                         timerRunning = false;
                         offenceTime = seconds2ms(WaterpoloTimerSettings.OFFENCE_TIME_DURATION.value);
-                        sound();
+                        activity.sound("Offence-Time is over");
                     } else {
                         offenceTime = 0;
                     }
@@ -122,27 +122,22 @@ public class WaterpoloTimer {
                         period++;
                         setTimersToStartOfPeriod(period);
                     }
-                    sound();
+                    activity.sound("Period or break is over");
                 }
             }else{
                 timeout = timeout - timeDiff;
                 if (timeout <= seconds2ms(WaterpoloTimerSettings.TIMEOUT_END_WARNING.value) +
                         TIMER_UPDATE_PERIOD && timeout > seconds2ms(WaterpoloTimerSettings.TIMEOUT_END_WARNING.value)) {
-                    sound();
+                    activity.sound("Timeout end warning");
                 }
                 if (timeout <= TIMER_UPDATE_PERIOD) {
                     timerRunning = false;
                     timeout = Long.MIN_VALUE;
-                    sound();
+                    activity.sound("Timeout is over");
                 }
             }
         }
         lastTimerUpdateTime = currentTime;
-    }
-
-    private void sound() {
-        if (WaterpoloTimerSettings.ENABLE_SOUND.value)
-            activity.notificationSound.start();
     }
 
     static long minutes2ms(long minutes){
@@ -273,12 +268,22 @@ public class WaterpoloTimer {
         return timeString;
     }
     static String getMainTimeString(long mainTime){
-        return String.format("%02d:%02d.%01d",
-            TimeUnit.MILLISECONDS.toMinutes(mainTime) -
-                    TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(mainTime)),
-            TimeUnit.MILLISECONDS.toSeconds(mainTime) -
-                    TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(mainTime)),
-            mainTime % 1000 / 100);
+        if (mainTime > 600000) {
+            return String.format("%02d:%02d.%01d",
+                    TimeUnit.MILLISECONDS.toMinutes(mainTime) -
+                            TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(mainTime)),
+                    TimeUnit.MILLISECONDS.toSeconds(mainTime) -
+                            TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(mainTime)),
+                    mainTime % 1000 / 100);
+        }
+        else {
+            return String.format("%2d:%02d.%01d",
+                    TimeUnit.MILLISECONDS.toMinutes(mainTime) -
+                            TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(mainTime)),
+                    TimeUnit.MILLISECONDS.toSeconds(mainTime) -
+                            TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(mainTime)),
+                    mainTime % 1000 / 100);
+        }
     }
     public static String getMainTimeStringNoDecimal(long mainTime){
         return String.format("%02d:%02d",
