@@ -2,8 +2,8 @@ package de.wasserball.wabaclock.main;
 
 import android.widget.Button;
 
-import de.tvdarmsheim.wabaclock.R;
-import de.wasserball.wabaclock.settings.WaterpoloTimerSettings;
+import de.wasserball.wabaclock.R;
+import de.wasserball.wabaclock.settings.AppSettings;
 import msg.sensor.GetSensorMessage;
 import msg.string.GetStringMessage;
 
@@ -39,15 +39,15 @@ public class FullBoard extends NetworkBoard {
 
     @Override
     protected void updateData() {
-        sendIfConnected(new GetSensorMessage(WaterpoloTimer.MAIN_TIME_DEVICE_NAME));
-        sendIfConnected(new GetSensorMessage(WaterpoloTimer.SHOTCLOCK_DEVICE_NAME));
-        sendIfConnected(new GetSensorMessage(WaterpoloTimer.SCOREBOARD_DEVICE_NAME));
+        sendIfConnected(new GetSensorMessage(WaterPoloTimer.MAIN_TIME_DEVICE_NAME));
+        sendIfConnected(new GetSensorMessage(WaterPoloTimer.SHOT_CLOCK_DEVICE_NAME));
+        sendIfConnected(new GetSensorMessage(WaterPoloTimer.SCOREBOARD_DEVICE_NAME));
     }
 
     @Override
     protected void updateDataSlow() {
-        sendIfConnected(new GetStringMessage(WaterpoloTimer.HOME_TEAM_DEVICE_NAME));
-        sendIfConnected(new GetStringMessage(WaterpoloTimer.GUEST_TEAM_DEVICE_NAME));
+        sendIfConnected(new GetStringMessage(WaterPoloTimer.HOME_TEAM_DEVICE_NAME));
+        sendIfConnected(new GetStringMessage(WaterPoloTimer.GUEST_TEAM_DEVICE_NAME));
     }
 
 
@@ -57,19 +57,19 @@ public class FullBoard extends NetworkBoard {
             btnTeamHome.setText(homeTeam);
             btnTeamGuest.setText(guestTeam);
             String timeString;
-            if (WaterpoloTimerSettings.ENABLE_DECIMAL.value)
-                timeString  = WaterpoloTimer.getMainTimeString(time_ms);
+            if (AppSettings.ENABLE_DECIMAL.value)
+                timeString  = WaterPoloTimer.getMainTimeString(time_ms);
             else
-                timeString  = WaterpoloTimer.getMainTimeStringNoDecimal(time_ms);
+                timeString  = WaterPoloTimer.getMainTimeStringNoDecimal(time_ms);
             mainTime.setText(timeString);
             String shotClockString;
-            if (WaterpoloTimerSettings.ENABLE_DECIMAL.value)
-                shotClockString  = WaterpoloTimer.getOffenceTimeString(shotClock);
+            if (AppSettings.ENABLE_DECIMAL.value)
+                shotClockString  = WaterPoloTimer.getOffenceTimeString(shotClock);
             else
-                shotClockString  = WaterpoloTimer.getOffenceTimeStringNoDecimal(shotClock);
+                shotClockString  = WaterPoloTimer.getOffenceTimeStringNoDecimal(shotClock);
             btnShotclock.setText(shotClockString);
-            btnGoalsHome.setText(WaterpoloTimer.getGoalsString(goalsHome));
-            btnGoalsGuest.setText(WaterpoloTimer.getGoalsString(goalsGuest));
+            btnGoalsHome.setText(WaterPoloTimer.getGoalsString(goalsHome));
+            btnGoalsGuest.setText(WaterPoloTimer.getGoalsString(goalsGuest));
         }
     }
 

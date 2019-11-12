@@ -2,7 +2,7 @@ package de.wasserball.wabaclock.main;
 
 import java.io.IOException;
 
-import de.wasserball.wabaclock.settings.WaterpoloTimerSettings;
+import de.wasserball.wabaclock.settings.AppSettings;
 import msg.OpenIGTMessage;
 import msg.sensor.SI_EXP;
 import msg.sensor.SI_UNIT;
@@ -17,7 +17,7 @@ public class ClientViewClient extends OpenIGTLinkClient {
     private NetworkBoard activity;
 
     public ClientViewClient(NetworkBoard activity) throws IOException {
-        super(WaterpoloTimerSettings.MASTER_IP.value, WaterpoloclockServer.SERVER_PORT);
+        super(AppSettings.MASTER_IP.value, WaterpoloclockServer.SERVER_PORT);
         this.activity = activity;
     }
 
@@ -44,7 +44,7 @@ public class ClientViewClient extends OpenIGTLinkClient {
     public void onRxSensor(String deviceName, SensorData sensorData) {
         if (sensorData != null){
             double[] data;
-            if (deviceName.equals(WaterpoloTimer.MAIN_TIME_DEVICE_NAME)) {
+            if (deviceName.equals(WaterPoloTimer.MAIN_TIME_DEVICE_NAME)) {
                 long time_ms = 0;
                 data = sensorData.getArray();
                 Unit unit = sensorData.getUnit();
@@ -54,7 +54,7 @@ public class ClientViewClient extends OpenIGTLinkClient {
                     time_ms = Double.valueOf(data[0] * 1000).longValue();
                 activity.setMainTime(time_ms);
             }
-            if (deviceName.equals(WaterpoloTimer.SHOTCLOCK_DEVICE_NAME)) {
+            if (deviceName.equals(WaterPoloTimer.SHOT_CLOCK_DEVICE_NAME)) {
                 long time_ms = 0;
                 data = sensorData.getArray();
                 Unit unit = sensorData.getUnit();
@@ -64,7 +64,7 @@ public class ClientViewClient extends OpenIGTLinkClient {
                     time_ms = Double.valueOf(data[0] * 1000).longValue();
                 activity.setShotClock(time_ms);
             }
-            if (deviceName.equals(WaterpoloTimer.SCOREBOARD_DEVICE_NAME)) {
+            if (deviceName.equals(WaterPoloTimer.SCOREBOARD_DEVICE_NAME)) {
                 int goalsHome = 0;
                 int goalsGuest = 0;
                 data = sensorData.getArray();
@@ -80,10 +80,10 @@ public class ClientViewClient extends OpenIGTLinkClient {
 
     protected void onRxString(String deviceName, String data){
         if (data != null){
-            if (deviceName.equals(WaterpoloTimer.HOME_TEAM_DEVICE_NAME)) {
+            if (deviceName.equals(WaterPoloTimer.HOME_TEAM_DEVICE_NAME)) {
                 activity.setHomeTeamName(data);
             }
-            if (deviceName.equals(WaterpoloTimer.GUEST_TEAM_DEVICE_NAME)) {
+            if (deviceName.equals(WaterPoloTimer.GUEST_TEAM_DEVICE_NAME)) {
                 activity.setGuestTeamName(data);
             }
         }

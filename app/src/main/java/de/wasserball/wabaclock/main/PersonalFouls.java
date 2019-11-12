@@ -8,7 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import de.tvdarmsheim.wabaclock.R;
+import de.wasserball.wabaclock.R;
 
 
 /**

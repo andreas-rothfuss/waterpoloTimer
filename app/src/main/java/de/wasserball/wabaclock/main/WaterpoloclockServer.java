@@ -2,7 +2,7 @@ package de.wasserball.wabaclock.main;
 
 import java.io.IOException;
 
-import de.wasserball.wabaclock.settings.WaterpoloTimerSettings;
+import de.wasserball.wabaclock.settings.AppSettings;
 import msg.OIGTL_DataMessage;
 import msg.OIGTL_GetMessage;
 import msg.sensor.GetSensorMessage;
@@ -18,9 +18,9 @@ import network.stream.OpenIGTLinkStreamingServer;
 public class WaterpoloclockServer extends OpenIGTLinkStreamingServer {
 
     public static final int SERVER_PORT = 30020;
-    WaterpoloTimer timer;
+    WaterPoloTimer timer;
 
-    public WaterpoloclockServer(WaterpoloTimer timer) throws IOException {
+    public WaterpoloclockServer(WaterPoloTimer timer) throws IOException {
         super(SERVER_PORT);
         this.timer = timer;
     }
@@ -46,12 +46,12 @@ public class WaterpoloclockServer extends OpenIGTLinkStreamingServer {
         if (timer != null) {
             SensorData sensorData = new SensorData();
             double[] data;
-            if (deviceName.equals(WaterpoloTimer.SHOTCLOCK_DEVICE_NAME)) {
+            if (deviceName.equals(WaterPoloTimer.SHOT_CLOCK_DEVICE_NAME)) {
                 sensorData.setArray(new double[]{timer.offenceTime});
                 sensorData.setUnit(new Unit(SI_UNIT.BASE_SECOND, SI_EXP.MINUS3));
                 return new SensorMessage(deviceName, sensorData);
             }
-            if (deviceName.equals(WaterpoloTimer.MAIN_TIME_DEVICE_NAME)) {
+            if (deviceName.equals(WaterPoloTimer.MAIN_TIME_DEVICE_NAME)) {
                 if (timer.isTimeout())
                     sensorData.setArray(new double[]{timer.timeout});
                 else
@@ -59,7 +59,7 @@ public class WaterpoloclockServer extends OpenIGTLinkStreamingServer {
                 sensorData.setUnit(new Unit(SI_UNIT.BASE_SECOND, SI_EXP.MINUS3));
                 return new SensorMessage(deviceName, sensorData);
             }
-            if (deviceName.equals(WaterpoloTimer.SCOREBOARD_DEVICE_NAME)) {
+            if (deviceName.equals(WaterPoloTimer.SCOREBOARD_DEVICE_NAME)) {
                 sensorData.setArray(new double[]{timer.goalsHome, timer.goalsGuest});
                 return new SensorMessage(deviceName, sensorData);
             }
@@ -68,11 +68,11 @@ public class WaterpoloclockServer extends OpenIGTLinkStreamingServer {
     }
 
     protected StringMessage onTxString(String deviceName){
-        if (deviceName.equals(WaterpoloTimer.HOME_TEAM_DEVICE_NAME)) {
-            return new StringMessage(deviceName, WaterpoloTimerSettings.HOME_TEAM_NAME.value);
+        if (deviceName.equals(WaterPoloTimer.HOME_TEAM_DEVICE_NAME)) {
+            return new StringMessage(deviceName, AppSettings.HOME_TEAM_NAME.value);
         }
-        if (deviceName.equals(WaterpoloTimer.GUEST_TEAM_DEVICE_NAME)) {
-            return new StringMessage(deviceName, WaterpoloTimerSettings.GUEST_TEAM_NAME.value);
+        if (deviceName.equals(WaterPoloTimer.GUEST_TEAM_DEVICE_NAME)) {
+            return new StringMessage(deviceName, AppSettings.GUEST_TEAM_NAME.value);
         }
         return null;
     }

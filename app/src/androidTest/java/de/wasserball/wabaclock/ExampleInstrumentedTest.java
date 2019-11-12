@@ -1,4 +1,4 @@
-package de.tvdarmsheim.wabaclock;
+package de.wasserball.wabaclock;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

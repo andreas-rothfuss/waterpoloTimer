@@ -2,8 +2,8 @@ package de.wasserball.wabaclock.main;
 
 import android.widget.Button;
 
-import de.tvdarmsheim.wabaclock.R;
-import de.wasserball.wabaclock.settings.WaterpoloTimerSettings;
+import de.wasserball.wabaclock.R;
+import de.wasserball.wabaclock.settings.AppSettings;
 import msg.sensor.GetSensorMessage;
 
 public class Shotclock extends NetworkBoard {
@@ -21,17 +21,17 @@ public class Shotclock extends NetworkBoard {
 
     @Override
     protected void updateData() {
-        sendIfConnected(new GetSensorMessage(WaterpoloTimer.SHOTCLOCK_DEVICE_NAME));
+        sendIfConnected(new GetSensorMessage(WaterPoloTimer.SHOT_CLOCK_DEVICE_NAME));
     }
 
     @Override
     protected void updateGuiElements() {
         if (btnShotclock != null) {
             String timeString;
-            if (WaterpoloTimerSettings.ENABLE_DECIMAL.value)
-                timeString  = WaterpoloTimer.getOffenceTimeString(shotClock);
+            if (AppSettings.ENABLE_DECIMAL.value)
+                timeString  = WaterPoloTimer.getOffenceTimeString(shotClock);
             else
-                timeString  = WaterpoloTimer.getOffenceTimeStringNoDecimal(shotClock);
+                timeString  = WaterPoloTimer.getOffenceTimeStringNoDecimal(shotClock);
             btnShotclock.setText(timeString);
         }
     }

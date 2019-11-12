@@ -17,18 +17,18 @@ import android.widget.Toast;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import de.tvdarmsheim.wabaclock.R;
+import de.wasserball.wabaclock.R;
 import de.wasserball.wabaclock.settings.ParameterDialogString;
-import de.wasserball.wabaclock.settings.Settings;
+import de.wasserball.wabaclock.settings.SettingsView;
 import de.wasserball.wabaclock.settings.StringSetting;
-import de.wasserball.wabaclock.settings.WaterpoloTimerSettings;
+import de.wasserball.wabaclock.settings.AppSettings;
 
 public class WaterpoloClock extends AppCompatActivity implements ParameterDialogString.DialogListener,
         PersonalFouls.OnFragmentInteractionListener {
 
     public static final int GUI_UPDATE_PERIOD = 100;
 
-    WaterpoloTimer waterpoloTimer;
+    WaterPoloTimer waterpoloTimer;
     private boolean timeIsEditable = false;
 
     final Handler myHandler = new Handler();
@@ -60,7 +60,7 @@ public class WaterpoloClock extends AppCompatActivity implements ParameterDialog
     MediaPlayer notificationSound;
     String toastText;
 
-    private int disclamerVersion = 1;
+    private long disclamerVersion = 1;
     private String disclaimerText = "Last updated: November 11, 2019\n" +
             "The information contained on Waterpolo Timer and Scoreboard mobile app (the \"Service\") is for general information purposes only.\n" +
             "assumes no responsibility for errors or omissions in the contents on the Service.\n" +
@@ -73,9 +73,13 @@ public class WaterpoloClock extends AppCompatActivity implements ParameterDialog
 
         setContentView(R.layout.waterpolo_clock);
 
-        WaterpoloTimerSettings.updateAllFromSettings(getApplicationContext());
+        AppSettings.updateAllFromSettings(getApplicationContext());
 
-        resetAll();
+        waterpoloTimer = new WaterPoloTimer(this, AppSettings.PERIOD.value,
+                AppSettings.IS_BREAK.value, AppSettings.MAIN_TIME.value,
+                AppSettings.OFFENCE_TIME.value, AppSettings.TIMEOUT.value,
+                AppSettings.TIMEOUTS_HOME.value, AppSettings.TIMEOUTS_GUEST.value,
+                AppSettings.GOALS_HOME.value, AppSettings.GOALS_GUEST.value);
 
         layoutTimeoutsHome = findViewById(R.id.editTimeoutsHome);
         layoutTimeoutsGuest = findViewById(R.id.editTimeoutsGuest);
@@ -128,14 +132,14 @@ public class WaterpoloClock extends AppCompatActivity implements ParameterDialog
             public void run() {
                 waterpoloTimer.updateTime();
             }
-        }, 0, WaterpoloTimer.TIMER_UPDATE_PERIOD);
+        }, 0, WaterPoloTimer.TIMER_UPDATE_PERIOD);
 
         disclaimerDialog();
 
     }
 
     private void disclaimerDialog() {
-        if (WaterpoloTimerSettings.DISCLAIMER_DISPLAYED.value < disclamerVersion) {
+        if (AppSettings.DISCLAIMER_DISPLAYED.value < disclamerVersion) {
             AlertDialog.Builder dialog = new AlertDialog.Builder(this);
             dialog.setMessage(disclaimerText);
             dialog.setTitle("Disclaimer");
@@ -144,7 +148,7 @@ public class WaterpoloClock extends AppCompatActivity implements ParameterDialog
                         public void onClick(DialogInterface dialog,
                                             int which) {
                             //Store that the disclaimer has been displayed
-                            WaterpoloTimerSettings.DISCLAIMER_DISPLAYED.applyValue(WaterpoloTimerSettings.getSharedPreferences(
+                            AppSettings.DISCLAIMER_DISPLAYED.applyValue(AppSettings.getSharedPreferences(
                                     getApplicationContext()), disclamerVersion);
                         }
                     });
@@ -190,7 +194,7 @@ public class WaterpoloClock extends AppCompatActivity implements ParameterDialog
     private void alertDialogTimeoutHome() {
         AlertDialog.Builder dialog=new AlertDialog.Builder(this);
         dialog.setMessage("Do you want to start a Timeout for the Home team (" +
-                WaterpoloTimerSettings.TIMEOUT_DURATION.value + " seconds)?");
+                AppSettings.TIMEOUT_DURATION.value + " seconds)?");
         dialog.setTitle("Timeout");
         dialog.setPositiveButton("YES",
                 new DialogInterface.OnClickListener() {
@@ -215,7 +219,7 @@ public class WaterpoloClock extends AppCompatActivity implements ParameterDialog
     private void alertDialogTimeoutGuest() {
         AlertDialog.Builder dialog=new AlertDialog.Builder(this);
         dialog.setMessage("Do you want to start a Timeout for the Guest team ("  +
-                WaterpoloTimerSettings.TIMEOUT_DURATION.value + "  seconds)?");
+                AppSettings.TIMEOUT_DURATION.value + "  seconds)?");
         dialog.setTitle("Timeout");
         dialog.setPositiveButton("YES",
                 new DialogInterface.OnClickListener() {
@@ -245,8 +249,8 @@ public class WaterpoloClock extends AppCompatActivity implements ParameterDialog
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog,
                                         int which) {
-                        waterpoloTimer.stop();
                         waterpoloTimer.timeout = Long.MIN_VALUE;
+                        waterpoloTimer.stop();
                         Toast.makeText(getApplicationContext(),"timeout aborted",Toast.LENGTH_LONG).show();
                     }
                 });
@@ -261,7 +265,7 @@ public class WaterpoloClock extends AppCompatActivity implements ParameterDialog
     }
 
     void sound(String toastText) {
-        if (WaterpoloTimerSettings.ENABLE_SOUND.value)
+        if (AppSettings.ENABLE_SOUND.value)
             notificationSound.start();
         this.toastText = toastText;
     }
@@ -293,7 +297,7 @@ public class WaterpoloClock extends AppCompatActivity implements ParameterDialog
     void resetAll(){
         if (waterpoloTimer != null)
             waterpoloTimer.dispose();
-        waterpoloTimer = new WaterpoloTimer(this);
+        waterpoloTimer = new WaterPoloTimer(this);
     }
 
     private void alertDialogResetAll() {
@@ -320,25 +324,25 @@ public class WaterpoloClock extends AppCompatActivity implements ParameterDialog
 
 
     public void onHomeTeamNameClicked(View view){
-        ParameterDialogString dialog = new ParameterDialogString(WaterpoloTimerSettings.HOME_TEAM_NAME);
+        ParameterDialogString dialog = new ParameterDialogString(AppSettings.HOME_TEAM_NAME);
         dialog.show(getSupportFragmentManager(), "");
     }
 
     public void onGuestTeamNameClicked(View view){
-        ParameterDialogString dialog = new ParameterDialogString(WaterpoloTimerSettings.GUEST_TEAM_NAME);
+        ParameterDialogString dialog = new ParameterDialogString(AppSettings.GUEST_TEAM_NAME);
         dialog.show(getSupportFragmentManager(), "");
     }
 
     @Override
     public void applyValue(StringSetting setting, String value) {
-        setting.applyValue(WaterpoloTimerSettings.getSharedPreferences(
+        setting.applyValue(AppSettings.getSharedPreferences(
                 getApplicationContext()), value);
         updateSettingsValueDisplay();
     }
 
     void updateSettingsValueDisplay() {
-        btnTeamHome.setText(WaterpoloTimerSettings.HOME_TEAM_NAME.value);
-        btnTeamGuest.setText(WaterpoloTimerSettings.GUEST_TEAM_NAME.value);
+        btnTeamHome.setText(AppSettings.HOME_TEAM_NAME.value);
+        btnTeamGuest.setText(AppSettings.GUEST_TEAM_NAME.value);
     }
 
     public void editTime(View view){
@@ -425,7 +429,7 @@ public class WaterpoloClock extends AppCompatActivity implements ParameterDialog
 
 
     public void openSettings(View view){
-        Intent intent = new Intent(WaterpoloClock.this, Settings.class);
+        Intent intent = new Intent(WaterpoloClock.this, SettingsView.class);
         startActivity(intent);
     }
 

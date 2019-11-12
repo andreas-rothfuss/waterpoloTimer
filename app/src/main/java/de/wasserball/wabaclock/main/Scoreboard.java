@@ -2,7 +2,7 @@ package de.wasserball.wabaclock.main;
 
 import android.widget.Button;
 
-import de.tvdarmsheim.wabaclock.R;
+import de.wasserball.wabaclock.R;
 import msg.sensor.GetSensorMessage;
 import msg.string.GetStringMessage;
 
@@ -32,13 +32,13 @@ public class Scoreboard extends NetworkBoard {
 
     @Override
     protected void updateData() {
-        sendIfConnected(new GetSensorMessage(WaterpoloTimer.SCOREBOARD_DEVICE_NAME));
+        sendIfConnected(new GetSensorMessage(WaterPoloTimer.SCOREBOARD_DEVICE_NAME));
     }
 
     @Override
     protected void updateDataSlow() {
-        sendIfConnected(new GetStringMessage(WaterpoloTimer.HOME_TEAM_DEVICE_NAME));
-        sendIfConnected(new GetStringMessage(WaterpoloTimer.GUEST_TEAM_DEVICE_NAME));
+        sendIfConnected(new GetStringMessage(WaterPoloTimer.HOME_TEAM_DEVICE_NAME));
+        sendIfConnected(new GetStringMessage(WaterPoloTimer.GUEST_TEAM_DEVICE_NAME));
     }
 
 
@@ -47,8 +47,8 @@ public class Scoreboard extends NetworkBoard {
         if (btnGoalsGuest != null && btnGoalsHome != null) {
             btnTeamHome.setText(homeTeam);
             btnTeamGuest.setText(guestTeam);
-            btnGoalsHome.setText(WaterpoloTimer.getGoalsString(goalsHome));
-            btnGoalsGuest.setText(WaterpoloTimer.getGoalsString(goalsGuest));
+            btnGoalsHome.setText(WaterPoloTimer.getGoalsString(goalsHome));
+            btnGoalsGuest.setText(WaterPoloTimer.getGoalsString(goalsGuest));
         }
     }
 

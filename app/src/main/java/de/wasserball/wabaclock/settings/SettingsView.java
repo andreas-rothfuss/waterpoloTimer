@@ -6,9 +6,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Switch;
 
-import de.tvdarmsheim.wabaclock.R;
+import de.wasserball.wabaclock.R;
 
-public class Settings extends AppCompatActivity implements ParameterDialogInteger.DialogListener,
+public class SettingsView extends AppCompatActivity implements ParameterDialogInteger.DialogListener,
         ParameterDialogString.DialogListener {
 
     Button btnNbOfPeriodsVal;
@@ -27,7 +27,7 @@ public class Settings extends AppCompatActivity implements ParameterDialogIntege
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.settings);
+        setContentView(R.layout.settings_view);
 
         btnNbOfPeriodsVal = findViewById(R.id.textViewNbOfPeriodsValue);
         btnPeriodVal = findViewById(R.id.textViewTimePerPeriodValue);
@@ -45,65 +45,65 @@ public class Settings extends AppCompatActivity implements ParameterDialogIntege
     }
 
     void updateSettingsValueDisplay() {
-        btnNbOfPeriodsVal.setText(Integer.toString(WaterpoloTimerSettings.NUMBER_OF_PERIODS.value));
-        btnPeriodVal.setText(Integer.toString(WaterpoloTimerSettings.PERIOD_DURATION.value));
-        btnHalftimeVal.setText(Integer.toString(WaterpoloTimerSettings.HALF_TIME_DURATION.value));
-        btnBreaktimeVal.setText(Integer.toString(WaterpoloTimerSettings.BREAK_TIME_DURATION.value));
-        btnTimeoutVal.setText(Integer.toString(WaterpoloTimerSettings.TIMEOUT_DURATION.value));
-        btnTimeoutWarningVal.setText(Integer.toString(WaterpoloTimerSettings.TIMEOUT_END_WARNING.value));
-        btnOffenceTimeMajorVal.setText(Integer.toString(WaterpoloTimerSettings.OFFENCE_TIME_DURATION.value));
-        btnOffenceTimeMinorVal.setText(Integer.toString(WaterpoloTimerSettings.OFFENCE_TIME_MINOR_DURATION.value));
-        btnSoundEnabledVal.setChecked(WaterpoloTimerSettings.ENABLE_SOUND.value);
-        btnDecimalEnabledVal.setChecked(WaterpoloTimerSettings.ENABLE_DECIMAL.value);
-        btnMasterIPVal.setText(WaterpoloTimerSettings.MASTER_IP.value);
+        btnNbOfPeriodsVal.setText(Integer.toString(AppSettings.NUMBER_OF_PERIODS.value));
+        btnPeriodVal.setText(Integer.toString(AppSettings.PERIOD_DURATION.value));
+        btnHalftimeVal.setText(Integer.toString(AppSettings.HALF_TIME_DURATION.value));
+        btnBreaktimeVal.setText(Integer.toString(AppSettings.BREAK_TIME_DURATION.value));
+        btnTimeoutVal.setText(Integer.toString(AppSettings.TIMEOUT_DURATION.value));
+        btnTimeoutWarningVal.setText(Integer.toString(AppSettings.TIMEOUT_END_WARNING.value));
+        btnOffenceTimeMajorVal.setText(Integer.toString(AppSettings.OFFENCE_TIME_DURATION.value));
+        btnOffenceTimeMinorVal.setText(Integer.toString(AppSettings.OFFENCE_TIME_MINOR_DURATION.value));
+        btnSoundEnabledVal.setChecked(AppSettings.ENABLE_SOUND.value);
+        btnDecimalEnabledVal.setChecked(AppSettings.ENABLE_DECIMAL.value);
+        btnMasterIPVal.setText(AppSettings.MASTER_IP.value);
     }
 
     public void onNbOfPeriodsClicked(View view){
-        ParameterDialogInteger dialog = new ParameterDialogInteger(WaterpoloTimerSettings.NUMBER_OF_PERIODS);
+        ParameterDialogInteger dialog = new ParameterDialogInteger(AppSettings.NUMBER_OF_PERIODS);
         dialog.show(getSupportFragmentManager(), "");
     }
     public void onTimePerPeriodClicked(View view){
-        ParameterDialogInteger dialog = new ParameterDialogInteger(WaterpoloTimerSettings.PERIOD_DURATION);
+        ParameterDialogInteger dialog = new ParameterDialogInteger(AppSettings.PERIOD_DURATION);
         dialog.show(getSupportFragmentManager(), "");
     }
     public void onHalftimeDurationClicked(View view){
-        ParameterDialogInteger dialog = new ParameterDialogInteger(WaterpoloTimerSettings.HALF_TIME_DURATION);
+        ParameterDialogInteger dialog = new ParameterDialogInteger(AppSettings.HALF_TIME_DURATION);
         dialog.show(getSupportFragmentManager(), "");
     }
     public void onBreakDurationClicked(View view){
-        ParameterDialogInteger dialog = new ParameterDialogInteger(WaterpoloTimerSettings.BREAK_TIME_DURATION);
+        ParameterDialogInteger dialog = new ParameterDialogInteger(AppSettings.BREAK_TIME_DURATION);
         dialog.show(getSupportFragmentManager(), "");
     }
     public void onTimeoutDurationClicked(View view){
-        ParameterDialogInteger dialog = new ParameterDialogInteger(WaterpoloTimerSettings.TIMEOUT_DURATION);
+        ParameterDialogInteger dialog = new ParameterDialogInteger(AppSettings.TIMEOUT_DURATION);
         dialog.show(getSupportFragmentManager(), "");
     }
     public void onWarningPriorToTimeoutEndClicked(View view){
-        ParameterDialogInteger dialog = new ParameterDialogInteger(WaterpoloTimerSettings.TIMEOUT_END_WARNING);
+        ParameterDialogInteger dialog = new ParameterDialogInteger(AppSettings.TIMEOUT_END_WARNING);
         dialog.show(getSupportFragmentManager(), "");
     }
     public void onOffenceTimeDurationClicked(View view){
-        ParameterDialogInteger dialog = new ParameterDialogInteger(WaterpoloTimerSettings.OFFENCE_TIME_DURATION);
+        ParameterDialogInteger dialog = new ParameterDialogInteger(AppSettings.OFFENCE_TIME_DURATION);
         dialog.show(getSupportFragmentManager(), "");
     }
     public void onOffenceTimeMinorDurationClicked(View view){
-        ParameterDialogInteger dialog = new ParameterDialogInteger(WaterpoloTimerSettings.OFFENCE_TIME_MINOR_DURATION);
+        ParameterDialogInteger dialog = new ParameterDialogInteger(AppSettings.OFFENCE_TIME_MINOR_DURATION);
         dialog.show(getSupportFragmentManager(), "");
     }
     public void onEnableSounClicked(View view){
-        BooleanSetting setting = WaterpoloTimerSettings.ENABLE_SOUND;
-        setting.applyValue(WaterpoloTimerSettings.getSharedPreferences(
+        BooleanSetting setting = AppSettings.ENABLE_SOUND;
+        setting.applyValue(AppSettings.getSharedPreferences(
                 getApplicationContext()), !setting.value);
         updateSettingsValueDisplay();
     }
     public void onEnableDecimalClicked(View view){
-        BooleanSetting setting = WaterpoloTimerSettings.ENABLE_DECIMAL;
-        setting.applyValue(WaterpoloTimerSettings.getSharedPreferences(
+        BooleanSetting setting = AppSettings.ENABLE_DECIMAL;
+        setting.applyValue(AppSettings.getSharedPreferences(
                 getApplicationContext()), !setting.value);
         updateSettingsValueDisplay();
     }
     public void onMasterIPClicked(View view){
-        ParameterDialogString dialog = new ParameterDialogString(WaterpoloTimerSettings.MASTER_IP);
+        ParameterDialogString dialog = new ParameterDialogString(AppSettings.MASTER_IP);
         dialog.show(getSupportFragmentManager(), "");
     }
     public void onDoneClicked(View view){
@@ -113,14 +113,14 @@ public class Settings extends AppCompatActivity implements ParameterDialogIntege
 
     @Override
     public void applyValue(IntegerSetting setting, int value) {
-        setting.applyValue(WaterpoloTimerSettings.getSharedPreferences(
+        setting.applyValue(AppSettings.getSharedPreferences(
                 getApplicationContext()), value);
         updateSettingsValueDisplay();
     }
 
     @Override
     public void applyValue(StringSetting setting, String value) {
-        setting.applyValue(WaterpoloTimerSettings.getSharedPreferences(
+        setting.applyValue(AppSettings.getSharedPreferences(
                 getApplicationContext()), value);
         updateSettingsValueDisplay();
     }

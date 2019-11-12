@@ -3,9 +3,31 @@ package de.wasserball.wabaclock.settings;
 import android.content.Context;
 import android.content.SharedPreferences;
 
-public class WaterpoloTimerSettings {
+public class AppSettings {
 
     private static final String PREFS_NAME = "WaterpoloClockSettings";
+
+    public static final IntegerSetting PERIOD = new IntegerSetting(
+            "current_period",0, 10, 0, "");
+    public static final BooleanSetting IS_BREAK = new BooleanSetting(
+            "is_break", false,"");
+
+    public static final LongSetting MAIN_TIME = new LongSetting(
+            "main_time",0, 600000, 360000, "");
+    public static final LongSetting OFFENCE_TIME = new LongSetting(
+            "offence_time",0, 60000, 30000, "");
+    public static final LongSetting TIMEOUT = new LongSetting(
+            "timeout",Long.MIN_VALUE, 120000, Long.MIN_VALUE, "");
+
+    public static final IntegerSetting TIMEOUTS_HOME = new IntegerSetting(
+            "timeouts_home",0, 10, 0, "");
+    public static final IntegerSetting TIMEOUTS_GUEST = new IntegerSetting(
+            "timeouts_guest",0, 10, 0, "");
+
+    public static final IntegerSetting GOALS_HOME = new IntegerSetting(
+            "goals_home",0, 10, 0, "");
+    public static final IntegerSetting GOALS_GUEST = new IntegerSetting(
+            "goals_guest",0, 10, 0, "");
 
     public static final IntegerSetting NUMBER_OF_PERIODS = new IntegerSetting(
             "number_of_periods",1, 10, 4,
@@ -63,12 +85,23 @@ public class WaterpoloTimerSettings {
         return context.getSharedPreferences(PREFS_NAME, 0);
     }
 
-    public static final IntegerSetting DISCLAIMER_DISPLAYED = new IntegerSetting(
-            "disclaimer_displayed_version", 0, Integer.MAX_VALUE, 0,
+    public static final LongSetting DISCLAIMER_DISPLAYED = new LongSetting(
+            "disclaimer_displayed_version", 0, Long.MAX_VALUE, 0,
             "Disclaimer version previously displayed");
 
     public static void updateAllFromSettings(Context context) {
         SharedPreferences settings = getSharedPreferences(context);
+
+        PERIOD.readFromSettings(settings);
+        IS_BREAK.readFromSettings(settings);
+        MAIN_TIME.readFromSettings(settings);
+        OFFENCE_TIME.readFromSettings(settings);
+        TIMEOUT.readFromSettings(settings);
+        TIMEOUTS_HOME.readFromSettings(settings);
+        TIMEOUTS_GUEST.readFromSettings(settings);
+        GOALS_HOME.readFromSettings(settings);
+        GOALS_GUEST.readFromSettings(settings);
+
         NUMBER_OF_PERIODS.readFromSettings(settings);
         PERIOD_DURATION.readFromSettings(settings);
         HALF_TIME_DURATION.readFromSettings(settings);
@@ -80,8 +113,10 @@ public class WaterpoloTimerSettings {
         ENABLE_SOUND.readFromSettings(settings);
         ENABLE_DECIMAL.readFromSettings(settings);
         MASTER_IP.readFromSettings(settings);
+
         HOME_TEAM_NAME.readFromSettings(settings);
         GUEST_TEAM_NAME.readFromSettings(settings);
+
         DISCLAIMER_DISPLAYED.readFromSettings(settings);
     }
 }

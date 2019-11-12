@@ -11,7 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
 
-import de.tvdarmsheim.wabaclock.R;
+import de.wasserball.wabaclock.R;
 
 /**
  * Created by ajr on 03.12.2016.

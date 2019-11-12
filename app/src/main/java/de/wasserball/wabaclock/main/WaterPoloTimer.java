@@ -1,16 +1,18 @@
 package de.wasserball.wabaclock.main;
 
+import android.content.SharedPreferences;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
-import de.wasserball.wabaclock.settings.WaterpoloTimerSettings;
+import de.wasserball.wabaclock.settings.AppSettings;
 
-public class WaterpoloTimer {
+public class WaterPoloTimer {
 
-    public static final String SHOTCLOCK_DEVICE_NAME = "Shotclock";
+    public static final String SHOT_CLOCK_DEVICE_NAME = "ShotClock";
     public static final String MAIN_TIME_DEVICE_NAME = "MainTime";
     public static final String SCOREBOARD_DEVICE_NAME = "Scoreboard";
     public static final String HOME_TEAM_DEVICE_NAME = "HomeTeam";
@@ -39,18 +41,27 @@ public class WaterpoloTimer {
     int goalsHome;
     int goalsGuest;
 
-    Logger log = LoggerFactory.getLogger(WaterpoloTimer.class);
+    Logger log = LoggerFactory.getLogger(WaterPoloTimer.class);
 
-    public WaterpoloTimer(WaterpoloClock activity) {
+    public WaterPoloTimer(WaterpoloClock activity, int period, boolean isBreak, long mainTime,
+                          long offenceTime, long timeout, int timeoutsHome, int timeoutsGuest,
+                          int goalsHome, int goalsGuest) {
         this.activity = activity;
 
-        setTimersToStartOfPeriod(0);
+        lastTimerUpdateTime = System.currentTimeMillis();
+        this.period = (int) period;
 
-        timeoutsHome = 0;
-        timeoutsGuest = 0;
+        this.isBreak = isBreak;
 
-        goalsHome = 0;
-        goalsGuest = 0;
+        this.timeout = timeout;
+        this.mainTime = mainTime;
+        this.offenceTime = offenceTime;
+
+        this.timeoutsHome = (int) timeoutsHome;
+        this.timeoutsGuest = (int) timeoutsGuest;
+
+        this.goalsHome = (int) goalsHome;
+        this.goalsGuest = (int) goalsGuest;
 
         try {
             server = new WaterpoloclockServer(this);
@@ -59,6 +70,11 @@ public class WaterpoloTimer {
         }catch (RuntimeException e) {
             log.warn("Server not started. " + e.getMessage(), e);
         }
+    }
+    public WaterPoloTimer(WaterpoloClock activity) {
+        this(activity, 0, false, 0, 0, 0,
+                0, 0, 0, 0);
+        setTimersToStartOfPeriod(0);
     }
 
 
@@ -74,9 +90,9 @@ public class WaterpoloTimer {
         period = i;
 
         timeout = Long.MIN_VALUE;
-        if (period < WaterpoloTimerSettings.NUMBER_OF_PERIODS.value) {
-            mainTime = minutes2ms(WaterpoloTimerSettings.PERIOD_DURATION.value);
-            offenceTime = seconds2ms(WaterpoloTimerSettings.OFFENCE_TIME_DURATION.value);
+        if (period < AppSettings.NUMBER_OF_PERIODS.value) {
+            mainTime = minutes2ms(AppSettings.PERIOD_DURATION.value);
+            offenceTime = seconds2ms(AppSettings.OFFENCE_TIME_DURATION.value);
         }else{
             mainTime = 0;
             offenceTime = 0;
@@ -85,11 +101,11 @@ public class WaterpoloTimer {
 
     private void setTimersToStartOfBreak(){
         lastTimerUpdateTime = System.currentTimeMillis();
-        if (period < WaterpoloTimerSettings.NUMBER_OF_PERIODS.value - 1){
-            if (period + 1 == WaterpoloTimerSettings.NUMBER_OF_PERIODS.value / 2)
-                mainTime = minutes2ms(WaterpoloTimerSettings.HALF_TIME_DURATION.value);
+        if (period < AppSettings.NUMBER_OF_PERIODS.value - 1){
+            if (period + 1 == AppSettings.NUMBER_OF_PERIODS.value / 2)
+                mainTime = minutes2ms(AppSettings.HALF_TIME_DURATION.value);
             else
-                mainTime = minutes2ms(WaterpoloTimerSettings.BREAK_TIME_DURATION.value);
+                mainTime = minutes2ms(AppSettings.BREAK_TIME_DURATION.value);
         }
         else
             mainTime = 0;
@@ -106,8 +122,8 @@ public class WaterpoloTimer {
 
                 if (offenceTime <= TIMER_UPDATE_PERIOD) {
                     if (!isBreak) {
-                        timerRunning = false;
-                        offenceTime = seconds2ms(WaterpoloTimerSettings.OFFENCE_TIME_DURATION.value);
+                        stop();
+                        offenceTime = seconds2ms(AppSettings.OFFENCE_TIME_DURATION.value);
                         activity.sound("Offence-Time is over");
                     } else {
                         offenceTime = 0;
@@ -118,7 +134,7 @@ public class WaterpoloTimer {
                     if (isBreak) {
                         setTimersToStartOfBreak();
                     } else {
-                        timerRunning = false;
+                        stop();
                         period++;
                         setTimersToStartOfPeriod(period);
                     }
@@ -126,12 +142,12 @@ public class WaterpoloTimer {
                 }
             }else{
                 timeout = timeout - timeDiff;
-                if (timeout <= seconds2ms(WaterpoloTimerSettings.TIMEOUT_END_WARNING.value) +
-                        TIMER_UPDATE_PERIOD && timeout > seconds2ms(WaterpoloTimerSettings.TIMEOUT_END_WARNING.value)) {
+                if (timeout <= seconds2ms(AppSettings.TIMEOUT_END_WARNING.value) +
+                        TIMER_UPDATE_PERIOD && timeout > seconds2ms(AppSettings.TIMEOUT_END_WARNING.value)) {
                     activity.sound("Timeout end warning");
                 }
                 if (timeout <= TIMER_UPDATE_PERIOD) {
-                    timerRunning = false;
+                    stop();
                     timeout = Long.MIN_VALUE;
                     activity.sound("Timeout is over");
                 }
@@ -149,16 +165,39 @@ public class WaterpoloTimer {
     }
 
     void startTimeout(){
-        timeout = seconds2ms(WaterpoloTimerSettings.TIMEOUT_DURATION.value);
+        timeout = seconds2ms(AppSettings.TIMEOUT_DURATION.value);
+        timerRunning = true;
+    }
+
+    void start(){
         timerRunning = true;
     }
 
     void stop(){
         timerRunning = false;
+        storeState();
+    }
+    private void storeState() {
+        AppSettings.PERIOD.applyValue(getSharedPreferences(), period);
+        AppSettings.IS_BREAK.applyValue(getSharedPreferences(), isBreak);
+        AppSettings.MAIN_TIME.applyValue(getSharedPreferences(), mainTime);
+        AppSettings.OFFENCE_TIME.applyValue(getSharedPreferences(), offenceTime);
+        AppSettings.TIMEOUT.applyValue(getSharedPreferences(), timeout);
+        AppSettings.TIMEOUTS_HOME.applyValue(getSharedPreferences(), timeoutsHome);
+        AppSettings.TIMEOUTS_GUEST.applyValue(getSharedPreferences(), timeoutsGuest);
+        AppSettings.GOALS_HOME.applyValue(getSharedPreferences(), goalsHome);
+        AppSettings.GOALS_GUEST.applyValue(getSharedPreferences(), goalsGuest);
+    }
+
+    public SharedPreferences getSharedPreferences(){
+        return AppSettings.getSharedPreferences(activity.getApplicationContext());
     }
 
     void startStop(){
-        timerRunning = !timerRunning;
+        if (timerRunning)
+            stop();
+        else
+            start();
         if (timerRunning) {
             lastTimerUpdateTime = System.currentTimeMillis();
         }
@@ -193,18 +232,18 @@ public class WaterpoloTimer {
     }
 
     protected void resetOffenceTimeMajor(){
-        offenceTime = seconds2ms(WaterpoloTimerSettings.OFFENCE_TIME_DURATION.value);
+        offenceTime = seconds2ms(AppSettings.OFFENCE_TIME_DURATION.value);
     }
     protected void resetOffenceTimeMinor(){
         offenceTime = seconds2ms(
-                WaterpoloTimerSettings.OFFENCE_TIME_MINOR_DURATION.value);
+                AppSettings.OFFENCE_TIME_MINOR_DURATION.value);
     }
 
     void periodPlus(){
         if (timeout == Long.MIN_VALUE){
             timerRunning = false;
             if (isBreak){
-                if (period < WaterpoloTimerSettings.NUMBER_OF_PERIODS.value) {
+                if (period < AppSettings.NUMBER_OF_PERIODS.value) {
                     isBreak = false;
                     period++;
                     setTimersToStartOfPeriod(period);
@@ -238,12 +277,12 @@ public class WaterpoloTimer {
         if (isTimeout())
             periodString = "Timeout";
         else {
-            if (period < WaterpoloTimerSettings.NUMBER_OF_PERIODS.value - 1 ||
-                    (period == WaterpoloTimerSettings.NUMBER_OF_PERIODS.value - 1 && !isBreak)) {
+            if (period < AppSettings.NUMBER_OF_PERIODS.value - 1 ||
+                    (period == AppSettings.NUMBER_OF_PERIODS.value - 1 && !isBreak)) {
                 if (!isBreak)
                     periodString = "Period " + (period + 1);
                 else {
-                    if (period + 1 == WaterpoloTimerSettings.NUMBER_OF_PERIODS.value / 2)
+                    if (period + 1 == AppSettings.NUMBER_OF_PERIODS.value / 2)
                         periodString = "Halftime";
                     else
                         periodString = "Break between periods " +
@@ -261,10 +300,10 @@ public class WaterpoloTimer {
             mainTime = this.timeout;
         }
         String timeString;
-        if (WaterpoloTimerSettings.ENABLE_DECIMAL.value)
-            timeString  = WaterpoloTimer.getMainTimeString(mainTime);
+        if (AppSettings.ENABLE_DECIMAL.value)
+            timeString  = WaterPoloTimer.getMainTimeString(mainTime);
         else
-            timeString  = WaterpoloTimer.getMainTimeStringNoDecimal(mainTime);
+            timeString  = WaterPoloTimer.getMainTimeStringNoDecimal(mainTime);
         return timeString;
     }
     static String getMainTimeString(long mainTime){
@@ -296,10 +335,10 @@ public class WaterpoloTimer {
     String getOffenceTimeString(){
         long offenceTime = this.offenceTime;
         String timeString;
-        if (WaterpoloTimerSettings.ENABLE_DECIMAL.value)
-            timeString  = WaterpoloTimer.getOffenceTimeString(offenceTime);
+        if (AppSettings.ENABLE_DECIMAL.value)
+            timeString  = WaterPoloTimer.getOffenceTimeString(offenceTime);
         else
-            timeString  = WaterpoloTimer.getOffenceTimeStringNoDecimal(offenceTime);
+            timeString  = WaterPoloTimer.getOffenceTimeStringNoDecimal(offenceTime);
         return timeString;
     }
     static String getOffenceTimeString(long offenceTime){
