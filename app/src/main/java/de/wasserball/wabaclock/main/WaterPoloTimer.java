@@ -125,6 +125,7 @@ public class WaterPoloTimer {
                         stop();
                         offenceTime = seconds2ms(AppSettings.OFFENCE_TIME_DURATION.value);
                         activity.sound("Offence-Time is over");
+                        stop();
                     } else {
                         offenceTime = 0;
                     }
@@ -137,6 +138,7 @@ public class WaterPoloTimer {
                         stop();
                         period++;
                         setTimersToStartOfPeriod(period);
+                        stop();
                     }
                     activity.sound("Period or break is over");
                 }
@@ -150,6 +152,7 @@ public class WaterPoloTimer {
                     stop();
                     timeout = Long.MIN_VALUE;
                     activity.sound("Timeout is over");
+                    stop();
                 }
             }
         }
