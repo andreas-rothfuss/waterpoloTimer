@@ -33,14 +33,18 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="2"
-                    android:onClick="onHomeTeamNameClicked"
-                    android:text="Heimmannschaft"
-                    android:textAlignment="viewStart"
+                    android:background="@android:color/background_dark"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:minHeight="48dp"
+                    android:textAlignment="center"
                     android:textColor="@android:color/background_light"
                     app:autoSizeMaxTextSize="200sp"
                     app:autoSizeMinTextSize="12sp"
                     app:autoSizeStepGranularity="2sp"
-                    app:autoSizeTextType="uniform" />
+                    app:autoSizeTextType="uniform"
+                    android:text="Heimmannschaft"
+                    android:onClick="onHomeTeamNameClicked"/>
 
                 <Button
                     android:id="@+id/editPeriodMinus"
@@ -99,14 +103,18 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="2"
-                    android:onClick="onGuestTeamNameClicked"
-                    android:text="Gastmannschaft"
-                    android:textAlignment="viewEnd"
                     android:textColor="@color/blue"
                     app:autoSizeMaxTextSize="200sp"
                     app:autoSizeMinTextSize="12sp"
                     app:autoSizeStepGranularity="2sp"
-                    app:autoSizeTextType="uniform" />
+                    app:autoSizeTextType="uniform"
+                    android:background="@android:color/background_dark"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:minHeight="48dp"
+                    android:onClick="onGuestTeamNameClicked"
+                    android:text="Gastmannschaft"
+                    android:textAlignment="viewEnd"/>
             </LinearLayout>
 
             <LinearLayout
@@ -118,7 +126,7 @@
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="2"
+                    android:layout_weight="3"
                     android:background="@android:color/background_dark"
                     android:orientation="vertical">
 
@@ -346,7 +354,7 @@
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="2"
+                    android:layout_weight="3"
                     android:background="@android:color/background_dark"
                     android:orientation="vertical">
 
