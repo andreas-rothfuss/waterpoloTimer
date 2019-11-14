@@ -328,11 +328,20 @@ public class WaterPoloTimer {
         }
     }
     public static String getMainTimeStringNoDecimal(long mainTime){
-        return String.format("%02d:%02d",
-                TimeUnit.MILLISECONDS.toMinutes(mainTime) -
-                        TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(mainTime)),
-                TimeUnit.MILLISECONDS.toSeconds(mainTime) -
-                        TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(mainTime)));
+        if (mainTime > 600000) {
+            return String.format("%02d:%02d",
+                    TimeUnit.MILLISECONDS.toMinutes(mainTime) -
+                            TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(mainTime)),
+                    TimeUnit.MILLISECONDS.toSeconds(mainTime) -
+                            TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(mainTime)));
+        }
+        else {
+            return String.format("%2d:%02d",
+                    TimeUnit.MILLISECONDS.toMinutes(mainTime) -
+                            TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(mainTime)),
+                    TimeUnit.MILLISECONDS.toSeconds(mainTime) -
+                            TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(mainTime)));
+        }
     }
 
     String getOffenceTimeString(){

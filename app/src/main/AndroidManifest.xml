@@ -6,33 +6,39 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/icon"
+        android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
             android:name="de.wasserball.wabaclock.settings.SettingsView"
+            android:screenOrientation="landscape"
             android:label="@string/title_activity_settings"
             android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
             android:name="de.wasserball.wabaclock.main.Boards"
+            android:screenOrientation="landscape"
             android:label="Boards"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name="de.wasserball.wabaclock.main.FullBoard"
+            android:screenOrientation="landscape"
             android:label="Full Board"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name="de.wasserball.wabaclock.main.TimeAndScoreBoard"
+            android:screenOrientation="landscape"
             android:label="@string/title_activity_time_and_score_board"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name="de.wasserball.wabaclock.main.Scoreboard"
+            android:screenOrientation="landscape"
             android:label="@string/title_activity_scoreboard"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name="de.wasserball.wabaclock.main.MainTimeBoard"
+            android:screenOrientation="landscape"
             android:label="@string/title_activity_scoreboard"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name="de.wasserball.wabaclock.main.Shotclock" />

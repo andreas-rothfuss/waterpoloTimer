@@ -298,6 +298,7 @@ public class WaterpoloClock extends AppCompatActivity implements ParameterDialog
         if (waterpoloTimer != null)
             waterpoloTimer.dispose();
         waterpoloTimer = new WaterPoloTimer(this);
+        waterpoloTimer.stop();
     }
 
     private void alertDialogResetAll() {

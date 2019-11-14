@@ -37,14 +37,14 @@
                     android:clickable="true"
                     android:focusable="true"
                     android:minHeight="48dp"
-                    android:textAlignment="center"
+                    android:onClick="onHomeTeamNameClicked"
+                    android:text="Heimmannschaft"
+                    android:textAlignment="textStart"
                     android:textColor="@android:color/background_light"
                     app:autoSizeMaxTextSize="200sp"
                     app:autoSizeMinTextSize="12sp"
                     app:autoSizeStepGranularity="2sp"
-                    app:autoSizeTextType="uniform"
-                    android:text="Heimmannschaft"
-                    android:onClick="onHomeTeamNameClicked"/>
+                    app:autoSizeTextType="uniform" />
 
                 <Button
                     android:id="@+id/editPeriodMinus"
@@ -103,18 +103,18 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="2"
-                    android:textColor="@color/blue"
-                    app:autoSizeMaxTextSize="200sp"
-                    app:autoSizeMinTextSize="12sp"
-                    app:autoSizeStepGranularity="2sp"
-                    app:autoSizeTextType="uniform"
                     android:background="@android:color/background_dark"
                     android:clickable="true"
                     android:focusable="true"
                     android:minHeight="48dp"
                     android:onClick="onGuestTeamNameClicked"
                     android:text="Gastmannschaft"
-                    android:textAlignment="viewEnd"/>
+                    android:textAlignment="textEnd"
+                    android:textColor="@color/blue"
+                    app:autoSizeMaxTextSize="200sp"
+                    app:autoSizeMinTextSize="12sp"
+                    app:autoSizeStepGranularity="2sp"
+                    app:autoSizeTextType="uniform" />
             </LinearLayout>
 
             <LinearLayout
