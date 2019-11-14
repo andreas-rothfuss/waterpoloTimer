@@ -211,27 +211,40 @@ public class WaterPoloTimer {
     }
 
     void mainTimeAdd(int minutes, int seconds){
-        mainTime = mainTime + minutes2ms(minutes) + seconds2ms(seconds);
+        long mainTime = this.mainTime + minutes2ms(minutes) + seconds2ms(seconds);
+        if (isBreak){
+            if (period + 1 == AppSettings.NUMBER_OF_PERIODS.value / 2)
+                this.mainTime = Math.min(mainTime, minutes2ms(AppSettings.HALF_TIME_DURATION.value));
+            else
+                this.mainTime = Math.min(mainTime, minutes2ms(AppSettings.BREAK_TIME_DURATION.value));
+        }
+        else
+            this.mainTime = Math.min(mainTime, minutes2ms(AppSettings.PERIOD_DURATION.value));
     }
 
     void mainTimeSub(int minutes, int seconds){
-        mainTime = mainTime - minutes2ms(minutes) - seconds2ms(seconds);
+        long mainTime = this.mainTime - minutes2ms(minutes) - seconds2ms(seconds);
+        this.mainTime = Math.max(mainTime, 0);
     }
 
     void offenceTimeAdd(int minutes, int seconds){
-        offenceTime = offenceTime + minutes2ms(minutes) + seconds2ms(seconds);
+        long offenceTime = this.offenceTime + minutes2ms(minutes) + seconds2ms(seconds);
+        this.offenceTime = Math.min(offenceTime, minutes2ms(AppSettings.OFFENCE_TIME_DURATION.value));
     }
 
     void offenceTimeSub(int minutes, int seconds){
-        offenceTime = offenceTime - minutes2ms(minutes) - seconds2ms(seconds);
+        long offenceTime = this.offenceTime - minutes2ms(minutes) - seconds2ms(seconds);
+        this.offenceTime = Math.max(offenceTime, 0);
     }
 
     void timeoutAdd(int minutes, int seconds){
-        timeout = timeout + minutes2ms(minutes) + seconds2ms(seconds);
+        long timeout = this.timeout + minutes2ms(minutes) + seconds2ms(seconds);
+        this.timeout = Math.min(timeout, minutes2ms(AppSettings.TIMEOUT_DURATION.value));
     }
 
     void timeoutSub(int minutes, int seconds){
-        timeout = timeout - minutes2ms(minutes) - seconds2ms(seconds);
+        long timeout = this.timeout - minutes2ms(minutes) - seconds2ms(seconds);
+        this.timeout = Math.max(timeout, 0);
     }
 
     protected void resetOffenceTimeMajor(){
