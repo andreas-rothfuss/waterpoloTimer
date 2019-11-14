@@ -247,6 +247,30 @@ public class WaterPoloTimer {
         this.timeout = Math.max(timeout, 0);
     }
 
+    void goalsHomeIncrement(){
+        goalsHome++;
+        if (!timerRunning){
+            resetOffenceTimeMajor();
+        }
+    }
+
+    void goalsHomeDecrement(){
+        if (goalsHome > 0)
+            goalsHome--;
+    }
+
+    void goalsGuestIncrement(){
+        goalsGuest++;
+        if (!timerRunning){
+            resetOffenceTimeMajor();
+        }
+    }
+
+    void goalsGuestDecrement(){
+        if (goalsGuest > 0)
+            goalsGuest--;
+    }
+
     protected void resetOffenceTimeMajor(){
         offenceTime = seconds2ms(AppSettings.OFFENCE_TIME_DURATION.value);
     }

@@ -413,20 +413,12 @@ public class WaterpoloClock extends AppCompatActivity implements ParameterDialog
             waterpoloTimer.timeoutsGuest--;
     }
 
-    public void onClickToreHomePlus(View view){
-        waterpoloTimer.goalsHome++;
-    }
-    public void onClickToreHomeMinus(View view){
-        if (waterpoloTimer.goalsHome > 0)
-            waterpoloTimer.goalsHome--;
-    }
+    public void onClickToreHomePlus(View view){waterpoloTimer.goalsHomeIncrement();}
+    public void onClickToreHomeMinus(View view){waterpoloTimer.goalsHomeDecrement();}
     public void onClickToreGuestPlus(View view){
-        waterpoloTimer.goalsGuest++;
+        waterpoloTimer.goalsGuestIncrement();
     }
-    public void onClickToreGuestMinus(View view){
-        if (waterpoloTimer.goalsGuest > 0)
-            waterpoloTimer.goalsGuest--;
-    }
+    public void onClickToreGuestMinus(View view){waterpoloTimer.goalsGuestDecrement();}
 
 
     public void openSettings(View view){
