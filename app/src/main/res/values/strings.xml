@@ -26,6 +26,7 @@
     <string name="menu_item_title_half_time">Halftime duration [min]</string>
     <string name="menu_item_title_break_time">Break duration [min]</string>
     <string name="menu_item_sound_enabled">Sound enabled</string>
+    <string name="menu_item_shotclock_reset_enabled">Reset offence time on goal</string>
     <string name="menu_item_decimal_enabled">Decimal seconds enabled</string>
     <string name="menu_item_title_ip">IP for the master unit</string>
     <string name="halftime">Halbzeit</string>

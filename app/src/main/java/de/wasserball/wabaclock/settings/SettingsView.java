@@ -21,6 +21,7 @@ public class SettingsView extends AppCompatActivity implements ParameterDialogIn
     Button btnOffenceTimeMinorVal;
     Switch btnSoundEnabledVal;
     Switch btnDecimalEnabledVal;
+    Switch btnShotclockResetEnabledVal;
     Button btnMasterIPVal;
 
 
@@ -39,6 +40,7 @@ public class SettingsView extends AppCompatActivity implements ParameterDialogIn
         btnOffenceTimeMinorVal = findViewById(R.id.textViewOffennceTimeMinorValue);
         btnDecimalEnabledVal = findViewById(R.id.textViewDecimalEnabledValue);
         btnSoundEnabledVal = findViewById(R.id.textViewSoundEnabledValue);
+        btnShotclockResetEnabledVal = findViewById(R.id.switchShotResetEnabledValue);
         btnMasterIPVal = findViewById(R.id.textViewEditIP);
 
         updateSettingsValueDisplay();
@@ -55,6 +57,7 @@ public class SettingsView extends AppCompatActivity implements ParameterDialogIn
         btnOffenceTimeMinorVal.setText(Integer.toString(AppSettings.OFFENCE_TIME_MINOR_DURATION.value));
         btnSoundEnabledVal.setChecked(AppSettings.ENABLE_SOUND.value);
         btnDecimalEnabledVal.setChecked(AppSettings.ENABLE_DECIMAL.value);
+        btnShotclockResetEnabledVal.setChecked(AppSettings.RESET_SHOTCLOCK_ON_GOAL.value);
         btnMasterIPVal.setText(AppSettings.MASTER_IP.value);
     }
 
@@ -98,6 +101,12 @@ public class SettingsView extends AppCompatActivity implements ParameterDialogIn
     }
     public void onEnableDecimalClicked(View view){
         BooleanSetting setting = AppSettings.ENABLE_DECIMAL;
+        setting.applyValue(AppSettings.getSharedPreferences(
+                getApplicationContext()), !setting.value);
+        updateSettingsValueDisplay();
+    }
+    public void onResetShotClockClicked(View view){
+        BooleanSetting setting = AppSettings.RESET_SHOTCLOCK_ON_GOAL;
         setting.applyValue(AppSettings.getSharedPreferences(
                 getApplicationContext()), !setting.value);
         updateSettingsValueDisplay();

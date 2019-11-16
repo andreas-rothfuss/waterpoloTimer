@@ -354,6 +354,50 @@
             android:orientation="horizontal">
 
             <Button
+                android:id="@+id/switchShotResetEnabled"
+                style="@style/Widget.AppCompat.Button.Borderless"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="4"
+                android:background="@android:color/background_dark"
+                android:onClick="onResetShotClockClicked"
+                android:text="@string/menu_item_shotclock_reset_enabled"
+                android:textAlignment="textStart"
+                android:textColor="@color/cyan"
+                app:autoSizeMaxTextSize="40sp"
+                app:autoSizeMinTextSize="12sp"
+                app:autoSizeStepGranularity="2sp"
+                app:autoSizeTextType="uniform" />
+
+            <Switch
+                android:id="@+id/switchShotResetEnabledValue"
+                style="@style/Widget.AppCompat.Button.Borderless"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@android:color/background_dark"
+                android:contentDescription="@string/menu_item_shotclock_reset_enabled"
+                android:onClick="onResetShotClockClicked"
+                android:textAlignment="gravity"
+                android:textColor="@color/colorPrimaryDark" />
+
+            <TextView
+                style="@style/Widget.AppCompat.Button.Borderless"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="5"
+                android:background="@android:color/background_dark"
+                android:contentDescription="spacer"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <Button
                 android:id="@+id/textViewIP"
                 style="@style/Widget.AppCompat.Button.Borderless"
                 android:layout_width="0dp"

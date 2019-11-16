@@ -249,7 +249,7 @@ public class WaterPoloTimer {
 
     void goalsHomeIncrement(){
         goalsHome++;
-        if (!timerRunning){
+        if (AppSettings.RESET_SHOTCLOCK_ON_GOAL.value){
             resetOffenceTimeMajor();
         }
     }
@@ -261,7 +261,7 @@ public class WaterPoloTimer {
 
     void goalsGuestIncrement(){
         goalsGuest++;
-        if (!timerRunning){
+        if (AppSettings.RESET_SHOTCLOCK_ON_GOAL.value){
             resetOffenceTimeMajor();
         }
     }

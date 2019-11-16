@@ -69,6 +69,10 @@ public class AppSettings {
             "enable_decimal", false,
             "Decimal seconds enabled?");
 
+    public static final BooleanSetting RESET_SHOTCLOCK_ON_GOAL = new BooleanSetting(
+            "reset_shotclock_on_goal", false,
+            "Should the shotclock be reset when a goal is entered?");
+
     public static final StringSetting MASTER_IP = new StringSetting(
             "master_ip", "127.0.0.1",
             "Set ip of master unit");
@@ -112,6 +116,7 @@ public class AppSettings {
         OFFENCE_TIME_MINOR_DURATION.readFromSettings(settings);
         ENABLE_SOUND.readFromSettings(settings);
         ENABLE_DECIMAL.readFromSettings(settings);
+        RESET_SHOTCLOCK_ON_GOAL.readFromSettings(settings);
         MASTER_IP.readFromSettings(settings);
 
         HOME_TEAM_NAME.readFromSettings(settings);
