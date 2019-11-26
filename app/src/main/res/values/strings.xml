@@ -20,8 +20,8 @@
     <string name="edit_times">edit</string>
     <string name="menu_item_title_nbOfPeriods">Number of periods</string>
     <string name="menu_item_title_time_per_period">Time per period [min]</string>
-    <string name="menu_item_title_offence_time_major">Offence time duration [s]</string>
-    <string name="menu_item_title_offence_time_minor">Offence time minor duration [s]</string>
+    <string name="menu_item_title_offence_time_major">Shotclock time duration [s]</string>
+    <string name="menu_item_title_offence_time_minor">Shotclock time minor duration [s]</string>
     <string name="menu_item_title_timeout_time">Time per timeout [s]</string>
     <string name="menu_item_title_half_time">Halftime duration [min]</string>
     <string name="menu_item_title_break_time">Break duration [min]</string>

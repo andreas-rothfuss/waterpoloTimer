@@ -118,7 +118,8 @@ public class WaterPoloTimer {
             long timeDiff = currentTime - lastTimerUpdateTime;
             if (timeout == Long.MIN_VALUE) {
                 mainTime = mainTime - timeDiff;
-                offenceTime = offenceTime - timeDiff;
+                if (!isBreak)
+                    offenceTime = offenceTime - timeDiff;
 
                 if (offenceTime <= TIMER_UPDATE_PERIOD) {
                     if (!isBreak) {
