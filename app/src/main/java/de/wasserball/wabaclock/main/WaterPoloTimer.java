@@ -198,8 +198,12 @@ public class WaterPoloTimer {
     }
 
     void startStop(){
-        if (timerRunning)
+        if (timerRunning){
+            if ((isBreak || isTimeout()) && !AppSettings.STOP_BREAK_AND_TIMEOUT.value){
+                return;
+            }
             stop();
+        }
         else
             start();
         if (timerRunning) {
@@ -230,7 +234,7 @@ public class WaterPoloTimer {
 
     void offenceTimeAdd(int minutes, int seconds){
         long offenceTime = this.offenceTime + minutes2ms(minutes) + seconds2ms(seconds);
-        this.offenceTime = Math.min(offenceTime, minutes2ms(AppSettings.OFFENCE_TIME_DURATION.value));
+        this.offenceTime = Math.min(offenceTime, seconds2ms(AppSettings.OFFENCE_TIME_DURATION.value));
     }
 
     void offenceTimeSub(int minutes, int seconds){
@@ -240,7 +244,7 @@ public class WaterPoloTimer {
 
     void timeoutAdd(int minutes, int seconds){
         long timeout = this.timeout + minutes2ms(minutes) + seconds2ms(seconds);
-        this.timeout = Math.min(timeout, minutes2ms(AppSettings.TIMEOUT_DURATION.value));
+        this.timeout = Math.min(timeout, seconds2ms(AppSettings.TIMEOUT_DURATION.value));
     }
 
     void timeoutSub(int minutes, int seconds){

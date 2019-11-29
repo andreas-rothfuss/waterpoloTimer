@@ -22,6 +22,7 @@ public class SettingsView extends AppCompatActivity implements ParameterDialogIn
     Switch btnSoundEnabledVal;
     Switch btnDecimalEnabledVal;
     Switch btnShotclockResetEnabledVal;
+    Switch btnPauseDuringBreakVal;
     Button btnMasterIPVal;
 
 
@@ -41,6 +42,7 @@ public class SettingsView extends AppCompatActivity implements ParameterDialogIn
         btnDecimalEnabledVal = findViewById(R.id.textViewDecimalEnabledValue);
         btnSoundEnabledVal = findViewById(R.id.textViewSoundEnabledValue);
         btnShotclockResetEnabledVal = findViewById(R.id.switchShotResetEnabledValue);
+        btnPauseDuringBreakVal = findViewById(R.id.switchPauseDuringBreakValue);
         btnMasterIPVal = findViewById(R.id.textViewEditIP);
 
         updateSettingsValueDisplay();
@@ -58,6 +60,7 @@ public class SettingsView extends AppCompatActivity implements ParameterDialogIn
         btnSoundEnabledVal.setChecked(AppSettings.ENABLE_SOUND.value);
         btnDecimalEnabledVal.setChecked(AppSettings.ENABLE_DECIMAL.value);
         btnShotclockResetEnabledVal.setChecked(AppSettings.RESET_SHOTCLOCK_ON_GOAL.value);
+        btnPauseDuringBreakVal.setChecked(AppSettings.STOP_BREAK_AND_TIMEOUT.value);
         btnMasterIPVal.setText(AppSettings.MASTER_IP.value);
     }
 
@@ -107,6 +110,12 @@ public class SettingsView extends AppCompatActivity implements ParameterDialogIn
     }
     public void onResetShotClockClicked(View view){
         BooleanSetting setting = AppSettings.RESET_SHOTCLOCK_ON_GOAL;
+        setting.applyValue(AppSettings.getSharedPreferences(
+                getApplicationContext()), !setting.value);
+        updateSettingsValueDisplay();
+    }
+    public void onEnablePauseDuringBreakClicked(View view){
+        BooleanSetting setting = AppSettings.STOP_BREAK_AND_TIMEOUT;
         setting.applyValue(AppSettings.getSharedPreferences(
                 getApplicationContext()), !setting.value);
         updateSettingsValueDisplay();

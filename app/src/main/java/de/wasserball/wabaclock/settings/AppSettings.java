@@ -73,6 +73,10 @@ public class AppSettings {
             "reset_shotclock_on_goal", false,
             "Should the shotclock be reset when a goal is entered?");
 
+    public static final BooleanSetting STOP_BREAK_AND_TIMEOUT = new BooleanSetting(
+            "stop_break_and_timeout", false,
+            "Should the user be enable to pause the timer during breaks and timeouts?");
+
     public static final StringSetting MASTER_IP = new StringSetting(
             "master_ip", "127.0.0.1",
             "Set ip of master unit");
@@ -117,6 +121,7 @@ public class AppSettings {
         ENABLE_SOUND.readFromSettings(settings);
         ENABLE_DECIMAL.readFromSettings(settings);
         RESET_SHOTCLOCK_ON_GOAL.readFromSettings(settings);
+        STOP_BREAK_AND_TIMEOUT.readFromSettings(settings);
         MASTER_IP.readFromSettings(settings);
 
         HOME_TEAM_NAME.readFromSettings(settings);

@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.Toast;
 
@@ -72,6 +73,8 @@ public class WaterpoloClock extends AppCompatActivity implements ParameterDialog
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.waterpolo_clock);
+
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
         AppSettings.updateAllFromSettings(getApplicationContext());
 
@@ -281,14 +284,18 @@ public class WaterpoloClock extends AppCompatActivity implements ParameterDialog
     public void onClickTimeoutHome(View view){
         if (waterpoloTimer.isTimeout())
             alertDialogAbortTimeout();
-        else
-            alertDialogTimeoutHome();
+        else{
+            if (!waterpoloTimer.isBreak)
+                alertDialogTimeoutHome();
+        }
     }
     public void onClickTimeoutGuest(View view){
         if (waterpoloTimer.isTimeout())
             alertDialogAbortTimeout();
-        else
-            alertDialogTimeoutGuest();
+        else{
+            if (!waterpoloTimer.isBreak)
+                alertDialogTimeoutGuest();
+        }
     }
 
     public void resetAll(View view){
