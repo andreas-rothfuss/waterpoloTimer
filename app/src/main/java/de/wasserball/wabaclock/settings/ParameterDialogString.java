@@ -50,6 +50,12 @@ public class ParameterDialogString extends AppCompatDialogFragment {
                         String value = editText.getText().toString();
                         listener.applyValue(setting, value);
                     }
+                })
+                .setNeutralButton("reset", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        listener.applyValue(setting, "127.0.0.1");
+                    }
                 });
 
         editText = view.findViewById(R.id.master_ip);

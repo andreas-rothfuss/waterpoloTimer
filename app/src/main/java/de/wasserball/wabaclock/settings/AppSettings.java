@@ -77,6 +77,8 @@ public class AppSettings {
             "stop_break_and_timeout", false,
             "Should the user be enable to pause the timer during breaks and timeouts?");
 
+    //TODO: Add an option to have independent main and offence times
+
     public static final StringSetting MASTER_IP = new StringSetting(
             "master_ip", "127.0.0.1",
             "Set ip of master unit");

@@ -128,7 +128,6 @@ public class SettingsView extends AppCompatActivity implements ParameterDialogIn
         finish();
     }
 
-
     @Override
     public void applyValue(IntegerSetting setting, int value) {
         setting.applyValue(AppSettings.getSharedPreferences(

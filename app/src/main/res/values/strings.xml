@@ -38,7 +38,4 @@
     <string name="shotclock">"Shotclock "</string>
     <string name="mixed_board">"Mixed Board"</string>
     <string name="scoreboard">"Scoreboard "</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
