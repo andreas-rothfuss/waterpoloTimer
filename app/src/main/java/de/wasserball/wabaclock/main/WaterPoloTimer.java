@@ -25,15 +25,17 @@ public class WaterPoloTimer {
     private final WaterpoloClock activity;
 
     private boolean timerRunning = false;
+    private boolean offenseTimerRunning = false;
 
     int period;
     boolean isBreak = false;
 
-    long timeout;
-    long mainTime;
-    long offenceTime;
+    CountdownTimer timeout;
+    CountdownTimer mainTime;
+    CountdownTimer offenceTime;
 
     long lastTimerUpdateTime;
+    long lastOffenseTimerUpdateTime;
 
     int timeoutsHome;
     int timeoutsGuest;
@@ -53,15 +55,15 @@ public class WaterPoloTimer {
 
         this.isBreak = isBreak;
 
-        this.timeout = timeout;
-        this.mainTime = mainTime;
-        this.offenceTime = offenceTime;
+        this.timeout = null;
+        this.mainTime = new CountdownTimer(mainTime);
+        this.offenceTime = new CountdownTimer(offenceTime);
 
-        this.timeoutsHome = (int) timeoutsHome;
-        this.timeoutsGuest = (int) timeoutsGuest;
+        this.timeoutsHome = timeoutsHome;
+        this.timeoutsGuest = timeoutsGuest;
 
-        this.goalsHome = (int) goalsHome;
-        this.goalsGuest = (int) goalsGuest;
+        this.goalsHome = goalsHome;
+        this.goalsGuest = goalsGuest;
 
         try {
             server = new WaterpoloclockServer(this);
@@ -85,79 +87,89 @@ public class WaterPoloTimer {
         }
     }
 
+    private void setLastTimerUpdateTimes(long currentTime) {
+        if (timeout != null)
+            timeout.setLastTimerUpdateTime(currentTime);
+        if (mainTime != null)
+            mainTime.setLastTimerUpdateTime(currentTime);
+        if (offenceTime != null)
+            offenceTime.setLastTimerUpdateTime(currentTime);
+    }
+
     private void setTimersToStartOfPeriod(int i){
-        lastTimerUpdateTime = System.currentTimeMillis();
+        setLastTimerUpdateTimes(System.currentTimeMillis());
         period = i;
 
-        timeout = Long.MIN_VALUE;
+        timeout = null;
         if (period < AppSettings.NUMBER_OF_PERIODS.value) {
-            mainTime = minutes2ms(AppSettings.PERIOD_DURATION.value);
-            offenceTime = seconds2ms(AppSettings.OFFENCE_TIME_DURATION.value);
+            mainTime = new CountdownTimer(minutes2ms(AppSettings.PERIOD_DURATION.value));
+            offenceTime = new CountdownTimer(seconds2ms(AppSettings.OFFENCE_TIME_DURATION.value));
         }else{
-            mainTime = 0;
-            offenceTime = 0;
+            mainTime = null;
+            offenceTime = null;
         }
     }
 
     private void setTimersToStartOfBreak(){
-        lastTimerUpdateTime = System.currentTimeMillis();
+        setLastTimerUpdateTimes(System.currentTimeMillis());
         if (period < AppSettings.NUMBER_OF_PERIODS.value - 1){
             if (period + 1 == AppSettings.NUMBER_OF_PERIODS.value / 2)
-                mainTime = minutes2ms(AppSettings.HALF_TIME_DURATION.value);
+                mainTime = new CountdownTimer(minutes2ms(AppSettings.HALF_TIME_DURATION.value));
             else
-                mainTime = minutes2ms(AppSettings.BREAK_TIME_DURATION.value);
+                mainTime = new CountdownTimer(minutes2ms(AppSettings.BREAK_TIME_DURATION.value));
         }
         else
-            mainTime = 0;
-        offenceTime = 0;
+            mainTime = null;
+        offenceTime = null;
     }
 
     void updateTime() {
         long currentTime = System.currentTimeMillis();
-        if (timerRunning) {
-            long timeDiff = currentTime - lastTimerUpdateTime;
-            if (timeout == Long.MIN_VALUE) {
-                mainTime = mainTime - timeDiff;
-                if (!isBreak)
-                    offenceTime = offenceTime - timeDiff;
+        if (timeout == null) {
+            if (!isBreak)
+                if (offenceTime != null)
+                    offenceTime.update(currentTime);
+            if (offenceTime != null)
+                mainTime.update(currentTime);
 
-                if (offenceTime <= TIMER_UPDATE_PERIOD) {
-                    if (!isBreak) {
-                        stop();
-                        offenceTime = seconds2ms(AppSettings.OFFENCE_TIME_DURATION.value);
-                        activity.sound("Offence-Time is over");
-                        stop();
-                    } else {
-                        offenceTime = 0;
-                    }
-                }
-                if (mainTime <= 0) {
-                    isBreak = !isBreak;
-                    if (isBreak) {
-                        setTimersToStartOfBreak();
-                    } else {
-                        stop();
-                        period++;
-                        setTimersToStartOfPeriod(period);
-                        stop();
-                    }
-                    activity.sound("Period or break is over");
-                }
-            }else{
-                timeout = timeout - timeDiff;
-                if (timeout <= seconds2ms(AppSettings.TIMEOUT_END_WARNING.value) +
-                        TIMER_UPDATE_PERIOD && timeout > seconds2ms(AppSettings.TIMEOUT_END_WARNING.value)) {
-                    activity.sound("Timeout end warning");
-                }
-                if (timeout <= TIMER_UPDATE_PERIOD) {
+            if (offenceTime == null || offenceTime.getTime() <= TIMER_UPDATE_PERIOD) {
+                if (!isBreak) {
                     stop();
-                    timeout = Long.MIN_VALUE;
-                    activity.sound("Timeout is over");
+                    offenceTime = new CountdownTimer(seconds2ms(AppSettings.OFFENCE_TIME_DURATION.value));
+                    activity.sound("Offence-Time is over");
                     stop();
+                } else {
+                    offenceTime = null;
                 }
             }
+            if (mainTime == null || mainTime.getTime() <= 0) {
+                isBreak = !isBreak;
+                if (isBreak) {
+                    setTimersToStartOfBreak();
+                } else {
+                    stop();
+                    period++;
+                    setTimersToStartOfPeriod(period);
+                    stop();
+                }
+                activity.sound("Period or break is over");
+            }
+        }else{
+            timeout.update(currentTime);
+            long timeoutTime = timeout.getTime();
+            if (timeoutTime <= seconds2ms(AppSettings.TIMEOUT_END_WARNING.value) +
+                    TIMER_UPDATE_PERIOD && timeoutTime > seconds2ms(AppSettings.TIMEOUT_END_WARNING.value)) {
+                activity.sound("Timeout end warning");
+            }
+            if (timeoutTime <= TIMER_UPDATE_PERIOD) {
+                stop();
+                timeout = null;
+                activity.sound("Timeout is over");
+                stop();
+            }
         }
-        lastTimerUpdateTime = currentTime;
+
+        setLastTimerUpdateTimes(currentTime);
     }
 
     static long minutes2ms(long minutes){
@@ -169,24 +181,28 @@ public class WaterPoloTimer {
     }
 
     void startTimeout(){
-        timeout = seconds2ms(AppSettings.TIMEOUT_DURATION.value);
-        timerRunning = true;
+        timeout = new CountdownTimer(seconds2ms(AppSettings.TIMEOUT_DURATION.value));
+        timeout.start();
+        if (mainTime != null) mainTime.stop();
+        if (offenceTime != null) offenceTime.stop();
     }
 
     void start(){
-        timerRunning = true;
+        if (mainTime != null) mainTime.start();
+        if (offenceTime != null) offenceTime.start();
     }
 
     void stop(){
-        timerRunning = false;
+        if (mainTime != null) mainTime.stop();
+        if (offenceTime != null) offenceTime.stop();
         storeState();
     }
     private void storeState() {
         AppSettings.PERIOD.applyValue(getSharedPreferences(), period);
         AppSettings.IS_BREAK.applyValue(getSharedPreferences(), isBreak);
-        AppSettings.MAIN_TIME.applyValue(getSharedPreferences(), mainTime);
-        AppSettings.OFFENCE_TIME.applyValue(getSharedPreferences(), offenceTime);
-        AppSettings.TIMEOUT.applyValue(getSharedPreferences(), timeout);
+        AppSettings.MAIN_TIME.applyValue(getSharedPreferences(), mainTime != null ? mainTime.getTime() : 0);
+        AppSettings.OFFENCE_TIME.applyValue(getSharedPreferences(), offenceTime != null ? offenceTime.getTime() : 0);
+        AppSettings.TIMEOUT.applyValue(getSharedPreferences(), timeout != null ? timeout.getTime() : 0);
         AppSettings.TIMEOUTS_HOME.applyValue(getSharedPreferences(), timeoutsHome);
         AppSettings.TIMEOUTS_GUEST.applyValue(getSharedPreferences(), timeoutsGuest);
         AppSettings.GOALS_HOME.applyValue(getSharedPreferences(), goalsHome);
@@ -212,44 +228,42 @@ public class WaterPoloTimer {
     }
 
     boolean isTimeout(){
-        return timeout != Long.MIN_VALUE;
+        return timeout != null;
     }
 
     void mainTimeAdd(int minutes, int seconds){
-        long mainTime = this.mainTime + minutes2ms(minutes) + seconds2ms(seconds);
-        if (isBreak){
-            if (period + 1 == AppSettings.NUMBER_OF_PERIODS.value / 2)
-                this.mainTime = Math.min(mainTime, minutes2ms(AppSettings.HALF_TIME_DURATION.value));
-            else
-                this.mainTime = Math.min(mainTime, minutes2ms(AppSettings.BREAK_TIME_DURATION.value));
+        if (mainTime != null) {
+            long maxTimerVal;
+            if (isBreak) {
+                if (period + 1 == AppSettings.NUMBER_OF_PERIODS.value / 2)
+                    maxTimerVal = minutes2ms(AppSettings.HALF_TIME_DURATION.value);
+                else
+                    maxTimerVal = minutes2ms(AppSettings.BREAK_TIME_DURATION.value);
+            } else
+                maxTimerVal = minutes2ms(AppSettings.PERIOD_DURATION.value);
+
+            mainTime.add(minutes, seconds, maxTimerVal);
         }
-        else
-            this.mainTime = Math.min(mainTime, minutes2ms(AppSettings.PERIOD_DURATION.value));
     }
 
     void mainTimeSub(int minutes, int seconds){
-        long mainTime = this.mainTime - minutes2ms(minutes) - seconds2ms(seconds);
-        this.mainTime = Math.max(mainTime, 0);
+        if (mainTime != null) mainTime.sub(minutes, seconds);
     }
 
     void offenceTimeAdd(int minutes, int seconds){
-        long offenceTime = this.offenceTime + minutes2ms(minutes) + seconds2ms(seconds);
-        this.offenceTime = Math.min(offenceTime, seconds2ms(AppSettings.OFFENCE_TIME_DURATION.value));
+        if (offenceTime != null) offenceTime.add(minutes, seconds, seconds2ms(AppSettings.OFFENCE_TIME_DURATION.value));
     }
 
     void offenceTimeSub(int minutes, int seconds){
-        long offenceTime = this.offenceTime - minutes2ms(minutes) - seconds2ms(seconds);
-        this.offenceTime = Math.max(offenceTime, 0);
+        if (offenceTime != null) offenceTime.sub(minutes, seconds);
     }
 
     void timeoutAdd(int minutes, int seconds){
-        long timeout = this.timeout + minutes2ms(minutes) + seconds2ms(seconds);
-        this.timeout = Math.min(timeout, seconds2ms(AppSettings.TIMEOUT_DURATION.value));
+        if (timeout != null) timeout.add(minutes, seconds, seconds2ms(AppSettings.TIMEOUT_DURATION.value));
     }
 
     void timeoutSub(int minutes, int seconds){
-        long timeout = this.timeout - minutes2ms(minutes) - seconds2ms(seconds);
-        this.timeout = Math.max(timeout, 0);
+        if (timeout != null) timeout.sub(minutes, seconds);
     }
 
     void goalsHomeIncrement(){
@@ -277,16 +291,17 @@ public class WaterPoloTimer {
     }
 
     protected void resetOffenceTimeMajor(){
-        offenceTime = seconds2ms(AppSettings.OFFENCE_TIME_DURATION.value);
+        offenceTime = new CountdownTimer(
+                seconds2ms(AppSettings.OFFENCE_TIME_DURATION.value), offenceTime);
     }
     protected void resetOffenceTimeMinor(){
-        offenceTime = seconds2ms(
-                AppSettings.OFFENCE_TIME_MINOR_DURATION.value);
+        offenceTime = new CountdownTimer(
+                seconds2ms(AppSettings.OFFENCE_TIME_MINOR_DURATION.value), offenceTime);
     }
 
     void periodPlus(){
-        if (timeout == Long.MIN_VALUE){
-            timerRunning = false;
+        if (!isTimeout()){
+            stop();
             if (isBreak){
                 if (period < AppSettings.NUMBER_OF_PERIODS.value) {
                     isBreak = false;
@@ -301,8 +316,8 @@ public class WaterPoloTimer {
         }
     }
     void periodMinus(){
-        if (timeout == Long.MIN_VALUE){
-            timerRunning = false;
+        if (!isTimeout()){
+            stop();
             if (isBreak){
                 isBreak = false;
                 setTimersToStartOfPeriod(period);
@@ -340,15 +355,16 @@ public class WaterPoloTimer {
     }
 
     String getMainTimeString() {
-        long mainTime = this.mainTime;
-        if (isTimeout()) {
-            mainTime = this.timeout;
-        }
+        long time = 0;
+        if (timeout != null)
+            time = this.timeout.getTime();
+        else
+            if (mainTime != null) time = mainTime.getTime();
         String timeString;
         if (AppSettings.ENABLE_DECIMAL.value)
-            timeString  = WaterPoloTimer.getMainTimeString(mainTime);
+            timeString  = WaterPoloTimer.getMainTimeString(time);
         else
-            timeString  = WaterPoloTimer.getMainTimeStringNoDecimal(mainTime);
+            timeString  = WaterPoloTimer.getMainTimeStringNoDecimal(time);
         return timeString;
     }
     static String getMainTimeString(long mainTime){
@@ -387,12 +403,13 @@ public class WaterPoloTimer {
     }
 
     String getOffenceTimeString(){
-        long offenceTime = this.offenceTime;
+        long time =  0;
+        if (offenceTime != null) time = offenceTime.getTime();
         String timeString;
         if (AppSettings.ENABLE_DECIMAL.value)
-            timeString  = WaterPoloTimer.getOffenceTimeString(offenceTime);
+            timeString  = WaterPoloTimer.getOffenceTimeString(time);
         else
-            timeString  = WaterPoloTimer.getOffenceTimeStringNoDecimal(offenceTime);
+            timeString  = WaterPoloTimer.getOffenceTimeStringNoDecimal(time);
         return timeString;
     }
     static String getOffenceTimeString(long offenceTime){

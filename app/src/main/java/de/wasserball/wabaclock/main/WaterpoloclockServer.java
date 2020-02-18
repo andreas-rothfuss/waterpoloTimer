@@ -47,15 +47,15 @@ public class WaterpoloclockServer extends OpenIGTLinkStreamingServer {
             SensorData sensorData = new SensorData();
             double[] data;
             if (deviceName.equals(WaterPoloTimer.SHOT_CLOCK_DEVICE_NAME)) {
-                sensorData.setArray(new double[]{timer.offenceTime});
+                sensorData.setArray(new double[]{timer.offenceTime.getTime()});
                 sensorData.setUnit(new Unit(SI_UNIT.BASE_SECOND, SI_EXP.MINUS3));
                 return new SensorMessage(deviceName, sensorData);
             }
             if (deviceName.equals(WaterPoloTimer.MAIN_TIME_DEVICE_NAME)) {
                 if (timer.isTimeout())
-                    sensorData.setArray(new double[]{timer.timeout});
+                    sensorData.setArray(new double[]{timer.timeout.getTime()});
                 else
-                    sensorData.setArray(new double[]{timer.mainTime});
+                    sensorData.setArray(new double[]{timer.mainTime.getTime()});
                 sensorData.setUnit(new Unit(SI_UNIT.BASE_SECOND, SI_EXP.MINUS3));
                 return new SensorMessage(deviceName, sensorData);
             }

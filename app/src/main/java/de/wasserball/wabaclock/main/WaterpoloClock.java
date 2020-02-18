@@ -63,7 +63,7 @@ public class WaterpoloClock extends AppCompatActivity implements ParameterDialog
 
     private long disclamerVersion = 1;
     private String disclaimerText = "Last updated: November 11, 2019\n" +
-            "The information contained on Waterpolo Timer and Scoreboard mobile app (the \"Service\") is for general information purposes only.\n" +
+            "The information contained on Waterpolo CountdownTimer and Scoreboard mobile app (the \"Service\") is for general information purposes only.\n" +
             "assumes no responsibility for errors or omissions in the contents on the Service.\n" +
             "In no event shall be liable for any special, direct, indirect, consequential, or incidental damages or any damages whatsoever, whether in an action of contract, negligence or other tort, arising out of or in connection with the use of the Service or the contents of the Service. reserves the right to make additions, deletions, or modification to the contents on the Service at any time without prior notice. This Disclaimer has been created with the help of Disclaimer Generator.\n" +
             "does not warrant that the website is free of viruses or other harmful components.";
@@ -252,7 +252,7 @@ public class WaterpoloClock extends AppCompatActivity implements ParameterDialog
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog,
                                         int which) {
-                        waterpoloTimer.timeout = Long.MIN_VALUE;
+                        waterpoloTimer.timeout = null;
                         waterpoloTimer.stop();
                         Toast.makeText(getApplicationContext(),"timeout aborted",Toast.LENGTH_LONG).show();
                     }
