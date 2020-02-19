@@ -8,6 +8,7 @@
     tools:context="de.wasserball.wabaclock.main.FullBoard">
 
     <LinearLayout
+        android:id="@+id/fullBoardLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">

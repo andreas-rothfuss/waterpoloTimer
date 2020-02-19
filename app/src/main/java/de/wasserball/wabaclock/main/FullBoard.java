@@ -35,6 +35,8 @@ public class FullBoard extends NetworkBoard {
         btnShotclock = findViewById(R.id.shotclock_angriffszeit2);
         btnGoalsHome = findViewById(R.id.toreHeimBoard);
         btnGoalsGuest = findViewById(R.id.toreGastBoard);
+
+        overlayForNavigationBar = findViewById(R.id.fullBoardLayout);
     }
 
     @Override

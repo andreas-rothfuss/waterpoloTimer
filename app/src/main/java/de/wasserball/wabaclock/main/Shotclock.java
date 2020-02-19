@@ -17,6 +17,8 @@ public class Shotclock extends NetworkBoard {
         setContentView(R.layout.shotclock);
 
         btnShotclock = findViewById(R.id.shotclock_angriffszeit);
+
+        overlayForNavigationBar = findViewById(R.id.shotclock_angriffszeit);
     }
 
     @Override

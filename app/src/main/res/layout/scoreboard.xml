@@ -8,6 +8,7 @@
     tools:context="de.wasserball.wabaclock.main.Scoreboard">
 
     <LinearLayout
+        android:id="@+id/scoreBoardLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
@@ -87,7 +88,7 @@
                 android:text="@string/_00"
                 android:textAlignment="textEnd"
                 android:textAppearance="@style/TextAppearance.AppCompat.Display4"
-                android:textColor="@color/blue"
+                android:textColor="#4778FF"
                 android:textStyle="bold"
                 app:autoSizeMaxTextSize="400sp"
                 app:autoSizeMinTextSize="12sp"

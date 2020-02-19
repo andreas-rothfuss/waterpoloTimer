@@ -30,6 +30,8 @@ public class TimeAndScoreBoard extends NetworkBoard {
         mainTime = findViewById(R.id.mainTimeBoard);
         btnGoalsHome = findViewById(R.id.toreHeimBoard);
         btnGoalsGuest = findViewById(R.id.toreGastBoard);
+
+        overlayForNavigationBar = findViewById(R.id.timeAndScoreBoardLayout);
     }
 
     @Override

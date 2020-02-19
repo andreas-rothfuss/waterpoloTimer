@@ -42,6 +42,8 @@ public class WaterpoloClock extends AppCompatActivity implements ParameterDialog
     private View layoutEditGoalsHome;
     private View layoutEditGoalsGuest;
 
+    View overlayForNavigationBar;
+
     private Button btnPeriod;
     private Button btnPeriodPlus;
     private Button btnPeriodMinus;
@@ -75,6 +77,9 @@ public class WaterpoloClock extends AppCompatActivity implements ParameterDialog
         setContentView(R.layout.waterpolo_clock);
 
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+
+        overlayForNavigationBar = findViewById(R.id.mainLayout);
+        hideNavigationBar();
 
         AppSettings.updateAllFromSettings(getApplicationContext());
 
@@ -139,6 +144,12 @@ public class WaterpoloClock extends AppCompatActivity implements ParameterDialog
 
         disclaimerDialog();
 
+    }
+
+    private void hideNavigationBar() {
+        overlayForNavigationBar.setSystemUiVisibility(View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
+                | View.SYSTEM_UI_FLAG_FULLSCREEN);
     }
 
     private void disclaimerDialog() {
@@ -275,11 +286,16 @@ public class WaterpoloClock extends AppCompatActivity implements ParameterDialog
 
     public void onClickTime(View view){
         waterpoloTimer.startStop();
+        hideNavigationBar();
     }
     public void onClickReset30(View view){
         waterpoloTimer.resetOffenceTimeMajor();
+        hideNavigationBar();
     }
-    public void onClickReset20(View view){ waterpoloTimer.resetOffenceTimeMinor();}
+    public void onClickReset20(View view){
+        waterpoloTimer.resetOffenceTimeMinor();
+        hideNavigationBar();
+    }
 
     public void onClickTimeoutHome(View view){
         if (waterpoloTimer.isTimeout())
@@ -288,6 +304,7 @@ public class WaterpoloClock extends AppCompatActivity implements ParameterDialog
             if (!waterpoloTimer.isBreak)
                 alertDialogTimeoutHome();
         }
+        hideNavigationBar();
     }
     public void onClickTimeoutGuest(View view){
         if (waterpoloTimer.isTimeout())
@@ -296,10 +313,12 @@ public class WaterpoloClock extends AppCompatActivity implements ParameterDialog
             if (!waterpoloTimer.isBreak)
                 alertDialogTimeoutGuest();
         }
+        hideNavigationBar();
     }
 
     public void resetAll(View view){
         alertDialogResetAll();
+        hideNavigationBar();
     }
     void resetAll(){
         if (waterpoloTimer != null)
@@ -334,11 +353,13 @@ public class WaterpoloClock extends AppCompatActivity implements ParameterDialog
     public void onHomeTeamNameClicked(View view){
         ParameterDialogString dialog = new ParameterDialogString(AppSettings.HOME_TEAM_NAME);
         dialog.show(getSupportFragmentManager(), "");
+        hideNavigationBar();
     }
 
     public void onGuestTeamNameClicked(View view){
         ParameterDialogString dialog = new ParameterDialogString(AppSettings.GUEST_TEAM_NAME);
         dialog.show(getSupportFragmentManager(), "");
+        hideNavigationBar();
     }
 
     @Override
@@ -368,74 +389,97 @@ public class WaterpoloClock extends AppCompatActivity implements ParameterDialog
     }
     public void onClickPeriodPlus(View view){
         waterpoloTimer.periodPlus();
+        hideNavigationBar();
     }
     public void onClickPeriodMinus(View view){
         waterpoloTimer.periodMinus();
+        hideNavigationBar();
     }
     public void onClickMinutesPlus(View view){
         if (!waterpoloTimer.isTimeout())
             waterpoloTimer.mainTimeAdd(1, 0);
         else
             waterpoloTimer.timeoutAdd(1,0);
+        hideNavigationBar();
     }
     public void onClickMinutesMinus(View view){
         if (!waterpoloTimer.isTimeout())
             waterpoloTimer.mainTimeSub(1, 0);
         else
             waterpoloTimer.timeoutSub(1,0);
+        hideNavigationBar();
     }
     public void onClickSecondsPlus(View view){
         if (!waterpoloTimer.isTimeout())
             waterpoloTimer.mainTimeAdd(0, 1);
         else
             waterpoloTimer.timeoutAdd(0,1);
+        hideNavigationBar();
     }
     public void onClickSecondsMinus(View view){
         if (!waterpoloTimer.isTimeout())
             waterpoloTimer.mainTimeSub(0, 1);
         else
             waterpoloTimer.timeoutSub(0,1);
+        hideNavigationBar();
     }
     public void onClickOffenceTimePlus(View view){
         if (!waterpoloTimer.isTimeout())
             waterpoloTimer.offenceTimeAdd(0, 1);
+        hideNavigationBar();
     }
 
     public void onClickOffenceTimeMinus(View view){
         if (!waterpoloTimer.isTimeout())
             waterpoloTimer.offenceTimeSub(0, 1);
+        hideNavigationBar();
     }
     public void onClickTimeoutsHomePlus(View view){
         waterpoloTimer.timeoutsHome++;
+        hideNavigationBar();
     }
     public void onClickTimeoutsHomeMinus(View view){
         if (waterpoloTimer.timeoutsHome > 0)
             waterpoloTimer.timeoutsHome--;
+        hideNavigationBar();
     }
     public void onClickTimeoutsGuestPlus(View view){
         waterpoloTimer.timeoutsGuest++;
+        hideNavigationBar();
     }
     public void onClickTimeoutsGuestMinus(View view){
         if (waterpoloTimer.timeoutsGuest > 0)
             waterpoloTimer.timeoutsGuest--;
     }
 
-    public void onClickToreHomePlus(View view){waterpoloTimer.goalsHomeIncrement();}
-    public void onClickToreHomeMinus(View view){waterpoloTimer.goalsHomeDecrement();}
+    public void onClickToreHomePlus(View view){
+        waterpoloTimer.goalsHomeIncrement();
+        hideNavigationBar();
+    }
+    public void onClickToreHomeMinus(View view){
+        waterpoloTimer.goalsHomeDecrement();
+        hideNavigationBar();
+    }
     public void onClickToreGuestPlus(View view){
         waterpoloTimer.goalsGuestIncrement();
+        hideNavigationBar();
     }
-    public void onClickToreGuestMinus(View view){waterpoloTimer.goalsGuestDecrement();}
+    public void onClickToreGuestMinus(View view){
+        waterpoloTimer.goalsGuestDecrement();
+        hideNavigationBar();
+    }
 
 
     public void openSettings(View view){
         Intent intent = new Intent(WaterpoloClock.this, SettingsView.class);
         startActivity(intent);
+        hideNavigationBar();
     }
 
     public void openBoards(View view){
         Intent intent = new Intent(this, Boards.class);
         startActivity(intent);
+        hideNavigationBar();
     }
 
     public void onFragmentInteraction(Uri uri){}

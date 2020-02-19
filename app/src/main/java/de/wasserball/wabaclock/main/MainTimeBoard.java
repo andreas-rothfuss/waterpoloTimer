@@ -17,6 +17,8 @@ public class MainTimeBoard extends NetworkBoard {
         setContentView(R.layout.main_time_board);
 
         mainTime = findViewById(R.id.mainTimeBoard);
+
+        overlayForNavigationBar = findViewById(R.id.mainTimeBoard);
     }
 
     @Override

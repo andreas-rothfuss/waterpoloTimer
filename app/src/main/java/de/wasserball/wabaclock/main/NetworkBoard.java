@@ -3,6 +3,7 @@ package de.wasserball.wabaclock.main;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.widget.Toast;
 
 import org.slf4j.Logger;
@@ -12,6 +13,7 @@ import java.io.IOException;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import de.wasserball.wabaclock.R;
 import msg.OpenIGTMessage;
 
 abstract class NetworkBoard extends AppCompatActivity {
@@ -19,6 +21,8 @@ abstract class NetworkBoard extends AppCompatActivity {
     static final int DATA_UPDATE_PERIOD = 50;
     static final int SLOW_DATA_UPDATE_PERIOD = 1000;
     static final int GUI_UPDATE_PERIOD = 100;
+
+    View overlayForNavigationBar;
 
     ClientViewClient client;
 
@@ -33,6 +37,7 @@ abstract class NetworkBoard extends AppCompatActivity {
         log = LoggerFactory.getLogger(this.getClass());
 
         defineContentView();
+        hideNavigationBar();
 
         try {
             client = new ClientViewClient(this) ;
@@ -62,6 +67,12 @@ abstract class NetworkBoard extends AppCompatActivity {
                 guiUpdate();
             }
         }, 0, GUI_UPDATE_PERIOD);
+    }
+
+    private void hideNavigationBar() {
+        overlayForNavigationBar.setSystemUiVisibility(View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
+                | View.SYSTEM_UI_FLAG_FULLSCREEN);
     }
 
     protected abstract void defineContentView();

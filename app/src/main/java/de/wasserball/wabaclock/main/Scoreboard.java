@@ -28,6 +28,8 @@ public class Scoreboard extends NetworkBoard {
 
         btnGoalsHome = findViewById(R.id.toreHeimScoreboard);
         btnGoalsGuest = findViewById(R.id.toreGastScoreboard);
+
+        overlayForNavigationBar = findViewById(R.id.scoreBoardLayout);
     }
 
     @Override
