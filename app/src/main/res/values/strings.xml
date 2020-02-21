@@ -57,4 +57,12 @@
     <string name="spacer_content_description">filler</string>
     <string name="menu_item_done_title">Done</string>
     <string name="shotclock_control_view_title">Shotclock control view</string>
+    <string name="period_minus_content_description">period minus</string>
+    <string name="period_plus_content_description">period plus</string>
+    <string name="title_timeouts_home_content_description">Title timeouts home</string>
+    <string name="timeouts_home_content_description">timeouts home</string>
+    <string name="settings_content_description">Settings</string>
+    <string name="title_timeouts_guest_content_description">Title timeouts guest</string>
+    <string name="timeouts_guest_content_description">timeouts guest</string>
+    <string name="boards_content_description">Boards</string>
 </resources>
