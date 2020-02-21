@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:keepScreenOn="true"
-    tools:context="de.wasserball.wabaclock.main.zn2board">
+    tools:context="de.wasserball.wabaclock.main.ShotclockRemoteControl">
 
     <LinearLayout
         android:id="@+id/layoutZN2"
@@ -19,7 +19,7 @@
             android:layout_height="0dp"
             android:layout_weight="1"
             android:background="@android:color/background_dark"
-            android:text="Shotclock control view for ZN2"
+            android:text="@string/shotclock_control_view_title"
             android:textColor="@android:color/holo_orange_light" />
 
         <Button
@@ -32,7 +32,7 @@
             android:clickable="true"
             android:focusable="true"
             android:onClick="startStopShotclock"
-            android:text="30"
+            android:text="@string/shotclock_default_val"
             android:textAlignment="center"
             android:textColor="@android:color/holo_orange_light"
             android:textStyle="bold"
@@ -44,7 +44,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"
+            android:layout_weight="2"
             android:orientation="horizontal">
 
             <Button

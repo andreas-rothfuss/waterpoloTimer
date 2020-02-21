@@ -40,12 +40,12 @@ public class WaterpoloclockServer extends OpenIGTLinkStreamingServer {
             }
             if (msg.getCommandId() == 2 && msg.getCommandName().equals("RESET_SHOTCLOCK_MAJOR")){
                 log.debug("Start / Stop of shotclock requested");
-                timer.startStop();
+                timer.resetOffenceTimeMajor();
                 return;
             }
             if (msg.getCommandId() == 3 && msg.getCommandName().equals("RESET_SHOTCLOCK_MINOR")){
                 log.debug("Start / Stop of shotclock requested");
-                timer.startStop();
+                timer.resetOffenceTimeMinor();
                 return;
             }
             log.debug("Unknown COMMAND message received" + msg.toString());

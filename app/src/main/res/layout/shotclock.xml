@@ -15,7 +15,6 @@
         android:background="@android:color/background_dark"
         android:clickable="true"
         android:focusable="true"
-        android:onClick="startStopShotclock"
         android:text="30"
         android:textAlignment="center"
         android:textColor="@android:color/holo_orange_light"

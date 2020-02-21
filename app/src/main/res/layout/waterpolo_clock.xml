@@ -301,7 +301,7 @@
                     android:contentDescription="Main time"
                     android:focusable="true"
                     android:onClick="onClickTime"
-                    android:text="@string/testMainTime"
+                    android:text="@string/main_time_default_val"
                     android:textAlignment="center"
                     android:textAllCaps="false"
                     android:textColor="@android:color/holo_red_dark"

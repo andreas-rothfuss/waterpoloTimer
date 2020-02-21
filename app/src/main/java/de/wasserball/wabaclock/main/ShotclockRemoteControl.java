@@ -10,7 +10,7 @@ import de.wasserball.wabaclock.settings.AppSettings;
 import msg.command.CommandMessage;
 import msg.sensor.GetSensorMessage;
 
-public class zn2board extends NetworkBoard {
+public class ShotclockRemoteControl extends NetworkBoard {
 
     long shotClock = 0;
 
@@ -18,11 +18,9 @@ public class zn2board extends NetworkBoard {
 
     @Override
     protected void defineContentView() {
-        setContentView(R.layout.zn2board);
+        setContentView(R.layout.shotclock_remote_control);
 
         btnShotclock = findViewById(R.id.shotclock_zn2);
-
-        overlayForNavigationBar = findViewById(R.id.layoutZN2);
     }
 
     @Override
@@ -53,7 +51,6 @@ public class zn2board extends NetworkBoard {
                         "START_STOP_SHOTCLOCK", ""));
             }catch (IOException e){}
         }
-        hideNavigationBar();
     }
 
     public void resetShotclockMajor(View view){
@@ -63,7 +60,6 @@ public class zn2board extends NetworkBoard {
                         "RESET_SHOTCLOCK_MAJOR", ""));
             }catch (IOException e){}
         }
-        hideNavigationBar();
     }
 
     public void resetShotclockMinor(View view){
@@ -73,6 +69,5 @@ public class zn2board extends NetworkBoard {
                         "RESET_SHOTCLOCK_MINOR", ""));
             }catch (IOException e){}
         }
-        hideNavigationBar();
     }
 }

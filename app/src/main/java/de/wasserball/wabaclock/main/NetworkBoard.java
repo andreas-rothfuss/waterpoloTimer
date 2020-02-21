@@ -70,9 +70,11 @@ abstract class NetworkBoard extends AppCompatActivity {
     }
 
     protected void hideNavigationBar() {
-        overlayForNavigationBar.setSystemUiVisibility(View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
-                | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
-                | View.SYSTEM_UI_FLAG_FULLSCREEN);
+        if (overlayForNavigationBar != null) {
+            overlayForNavigationBar.setSystemUiVisibility(View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                    | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
+                    | View.SYSTEM_UI_FLAG_FULLSCREEN);
+        }
     }
 
     protected abstract void defineContentView();
