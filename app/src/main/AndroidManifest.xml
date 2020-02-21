@@ -37,6 +37,10 @@
             android:label="@string/title_activity_scoreboard"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
+            android:name="de.wasserball.wabaclock.main.zn2board"
+            android:label="@string/title_activity_scoreboard"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
             android:name="de.wasserball.wabaclock.main.MainTimeBoard"
             android:screenOrientation="landscape"
             android:label="@string/title_activity_scoreboard"

@@ -5,6 +5,8 @@ import java.io.IOException;
 import de.wasserball.wabaclock.settings.AppSettings;
 import msg.OIGTL_DataMessage;
 import msg.OIGTL_GetMessage;
+import msg.OpenIGTMessage;
+import msg.command.CommandMessage;
 import msg.sensor.GetSensorMessage;
 import msg.sensor.SI_EXP;
 import msg.sensor.SI_UNIT;
@@ -23,6 +25,31 @@ public class WaterpoloclockServer extends OpenIGTLinkStreamingServer {
     public WaterpoloclockServer(WaterPoloTimer timer) throws IOException {
         super(SERVER_PORT);
         this.timer = timer;
+    }
+
+    @Override
+    public void messageReceived(OpenIGTMessage message) {
+        log.debug("Data message received");
+
+        if (message instanceof CommandMessage){
+            CommandMessage msg = (CommandMessage)message;
+            if (msg.getCommandId() == 1 && msg.getCommandName().equals("START_STOP_SHOTCLOCK")){
+                log.debug("Start / Stop of shotclock requested");
+                timer.startStop();
+                return;
+            }
+            if (msg.getCommandId() == 2 && msg.getCommandName().equals("RESET_SHOTCLOCK_MAJOR")){
+                log.debug("Start / Stop of shotclock requested");
+                timer.startStop();
+                return;
+            }
+            if (msg.getCommandId() == 3 && msg.getCommandName().equals("RESET_SHOTCLOCK_MINOR")){
+                log.debug("Start / Stop of shotclock requested");
+                timer.startStop();
+                return;
+            }
+            log.debug("Unknown COMMAND message received" + msg.toString());
+        }
     }
 
 

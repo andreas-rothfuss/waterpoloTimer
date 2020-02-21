@@ -463,7 +463,7 @@
                 android:textColor="@color/cyan" />
 
             <Button
-                android:id="@+id/btnDone"
+                android:id="@+id/btn"
                 style="@style/Widget.AppCompat.Button.Borderless"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"

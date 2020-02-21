@@ -51,5 +51,9 @@ public class Boards extends AppCompatActivity {
         Intent intent = new Intent(this, Scoreboard.class);
         startActivity(intent);
     }
+    public void openZN2(View view){
+        Intent intent = new Intent(this, zn2board.class);
+        startActivity(intent);
+    }
 
 }

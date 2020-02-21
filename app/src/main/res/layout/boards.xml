@@ -82,7 +82,7 @@
             android:orientation="horizontal">
 
             <ImageButton
-                android:id="@+id/btnScoreBoard"
+                android:id="@+id/btnScoreboard"
                 style="@style/Widget.AppCompat.Button.Borderless"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
@@ -93,7 +93,44 @@
                 android:src="@drawable/score_board" />
 
             <Button
-                android:id="@+id/btnDone"
+                android:id="@+id/btnZN2"
+                style="@style/Widget.AppCompat.Button.Borderless"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="4"
+                android:onClick="openZN2"
+                android:text="ZN2"
+                android:textAlignment="center"
+                android:textColor="@color/cyan"
+                app:autoSizeMaxTextSize="48sp"
+                app:autoSizeMinTextSize="12sp"
+                app:autoSizeStepGranularity="2sp"
+                app:autoSizeTextType="uniform" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="4"
+            android:background="@android:color/background_dark"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btnSpacer1"
+                style="@style/Widget.AppCompat.Button.Borderless"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="4"
+                android:textAlignment="center"
+                android:textColor="@color/cyan"
+                app:autoSizeMaxTextSize="48sp"
+                app:autoSizeMinTextSize="12sp"
+                app:autoSizeStepGranularity="2sp"
+                app:autoSizeTextType="uniform" />
+
+            <Button
+                android:id="@+id/btn"
                 style="@style/Widget.AppCompat.Button.Borderless"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"

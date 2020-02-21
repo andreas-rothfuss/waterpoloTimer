@@ -43,5 +43,5 @@ dependencies {
     implementation files('src/main/java/log/logback-android.jar')
     implementation files('src/main/java/log/slf4j-api-1.7.28.jar')
     implementation files('src/main/java/log/slf4j-api-1.7.28-sources.jar')
-    implementation files('src/main/java/OpenIGTLink4J_v_0.6.4_src.jar')
+    implementation files('src/androidTest/java/OpenIGTLink4J_v_0.6.5_src.jar')
 }

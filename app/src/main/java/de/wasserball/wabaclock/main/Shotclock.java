@@ -1,9 +1,13 @@
 package de.wasserball.wabaclock.main;
 
+import android.view.View;
 import android.widget.Button;
+
+import java.io.IOException;
 
 import de.wasserball.wabaclock.R;
 import de.wasserball.wabaclock.settings.AppSettings;
+import msg.command.CommandMessage;
 import msg.sensor.GetSensorMessage;
 
 public class Shotclock extends NetworkBoard {
