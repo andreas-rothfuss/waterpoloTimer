@@ -20,26 +20,26 @@
             android:orientation="horizontal">
 
             <ImageButton
-                android:id="@+id/btnShotclock"
-                style="@style/Widget.AppCompat.Button.Borderless"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="4"
-                android:contentDescription="Shotclock"
-                android:onClick="openShotclock"
-                android:scaleType="centerInside"
-                android:src="@drawable/shotclock" />
-
-            <ImageButton
                 android:id="@+id/BtnFullBoard"
                 style="@style/Widget.AppCompat.Button.Borderless"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="4"
-                android:contentDescription="Full board"
+                android:contentDescription="@string/button_full_board_content_description"
                 android:onClick="openFullBoard"
                 android:scaleType="centerInside"
                 android:src="@drawable/full_board" />
+
+            <ImageButton
+                android:id="@+id/btnMixedBoard"
+                style="@style/Widget.AppCompat.Button.Borderless"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="4"
+                android:contentDescription="@string/button_mixed_board_content_description"
+                android:onClick="openTimeAndScoreBoard"
+                android:scaleType="centerInside"
+                android:src="@drawable/mixed_board" />
 
         </LinearLayout>
 
@@ -56,21 +56,21 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="4"
-                android:contentDescription="Main time"
+                android:contentDescription="@string/button_main_time_board_content_description"
                 android:onClick="openMainTime"
                 android:scaleType="centerInside"
                 android:src="@drawable/main_time" />
 
             <ImageButton
-                android:id="@+id/btnMixedBoard"
+                android:id="@+id/btnScoreboard"
                 style="@style/Widget.AppCompat.Button.Borderless"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="4"
-                android:contentDescription="Mixed board"
-                android:onClick="openTimeAndScoreBoard"
+                android:contentDescription="@string/button_scoreboard_content_description"
+                android:onClick="openScoreBoard"
                 android:scaleType="centerInside"
-                android:src="@drawable/mixed_board" />
+                android:src="@drawable/score_board" />
 
         </LinearLayout>
 
@@ -82,24 +82,62 @@
             android:orientation="horizontal">
 
             <ImageButton
-                android:id="@+id/btnScoreBoard"
+                android:id="@+id/btnShotclock"
                 style="@style/Widget.AppCompat.Button.Borderless"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="4"
-                android:contentDescription="Scoreboard"
-                android:onClick="openScoreBoard"
+                android:contentDescription="@string/button_shotclock_board_content_description"
+                android:onClick="openShotclock"
                 android:scaleType="centerInside"
-                android:src="@drawable/score_board" />
+                android:src="@drawable/shotclock" />
 
             <Button
-                android:id="@+id/btnDone"
+                android:id="@+id/btnSpacer1"
+                style="@style/Widget.AppCompat.Button.Borderless"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="4"
+                android:contentDescription="@string/spacer_content_description"
+                android:textAlignment="center"
+                android:textColor="@color/cyan"
+                app:autoSizeMaxTextSize="48sp"
+                app:autoSizeMinTextSize="12sp"
+                app:autoSizeStepGranularity="2sp"
+                app:autoSizeTextType="uniform" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="4"
+            android:background="@android:color/background_dark"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btnZN2"
+                style="@style/Widget.AppCompat.Button.Borderless"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="4"
+                android:onClick="openZN2"
+                android:text="@string/button_shotclock_remote_control_board_content_description"
+                android:textAlignment="center"
+                android:textColor="@android:color/holo_orange_light"
+                app:autoSizeMaxTextSize="48sp"
+                app:autoSizeMinTextSize="12sp"
+                app:autoSizeStepGranularity="2sp"
+                app:autoSizeTextType="uniform" />
+
+            <Button
+                android:id="@+id/btn"
                 style="@style/Widget.AppCompat.Button.Borderless"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="4"
                 android:onClick="onDoneClicked"
-                android:text="Done"
+                android:text="@string/button_done_content_description"
                 android:textAlignment="center"
                 android:textColor="@color/cyan"
                 app:autoSizeMaxTextSize="48sp"

@@ -13,43 +13,6 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:orientation="horizontal">
-
-            <Button
-                android:id="@+id/btnTeamHome"
-                style="@style/Widget.AppCompat.Button.Borderless"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:background="@android:color/background_dark"
-                android:text="Home"
-                android:textAlignment="textStart"
-                android:textColor="@android:color/white"
-                app:autoSizeMaxTextSize="400sp"
-                app:autoSizeMinTextSize="12sp"
-                app:autoSizeStepGranularity="2sp"
-                app:autoSizeTextType="uniform" />
-
-            <Button
-                android:id="@+id/btnTeamGuest"
-                style="@style/Widget.AppCompat.Button.Borderless"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:background="@android:color/background_dark"
-                android:text="Guest"
-                android:textAlignment="textEnd"
-                android:textColor="@color/blue"
-                app:autoSizeMaxTextSize="400sp"
-                app:autoSizeMinTextSize="12sp"
-                app:autoSizeStepGranularity="2sp"
-                app:autoSizeTextType="uniform" />
-        </LinearLayout>
-
         <Button
             android:id="@+id/mainTimeBoard"
             style="@style/Widget.AppCompat.Button.Borderless"
@@ -58,9 +21,9 @@
             android:layout_weight="5"
             android:background="@android:color/background_dark"
             android:clickable="true"
-            android:contentDescription="main time"
+            android:contentDescription="@string/main_time_content_description"
             android:focusable="true"
-            android:text="06:00"
+            android:text="@string/main_time_default_val"
             android:textAlignment="center"
             android:textAllCaps="false"
             android:textAppearance="@style/TextAppearance.AppCompat.Display4"
@@ -80,35 +43,57 @@
             android:background="@android:color/background_dark"
             android:orientation="horizontal">
 
-            <Button
-                android:id="@+id/toreHeimBoard"
-                style="@style/Widget.AppCompat.Button.Borderless"
+            <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="4"
-                android:background="@android:color/background_dark"
-                android:contentDescription="goals home"
-                android:text="@string/_00"
-                android:textAlignment="textStart"
-                android:textAppearance="@style/TextAppearance.AppCompat.Display4"
-                android:textColor="@android:color/background_light"
-                android:textStyle="bold"
-                app:autoSizeMaxTextSize="4000sp"
-                app:autoSizeMinTextSize="12sp"
-                app:autoSizeStepGranularity="2sp"
-                app:autoSizeTextType="uniform" />
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <Button
+                    android:id="@+id/btnTeamHome"
+                    style="@style/Widget.AppCompat.Button.Borderless"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:background="@android:color/background_dark"
+                    android:text="@string/home_team_default_name"
+                    android:textAlignment="textStart"
+                    android:textColor="@android:color/white"
+                    app:autoSizeMaxTextSize="400sp"
+                    app:autoSizeMinTextSize="12sp"
+                    app:autoSizeStepGranularity="2sp"
+                    app:autoSizeTextType="uniform" />
+
+                <Button
+                    android:id="@+id/toreHeimBoard"
+                    style="@style/Widget.AppCompat.Button.Borderless"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="4"
+                    android:background="@android:color/background_dark"
+                    android:contentDescription="@string/goals_home_content_description"
+                    android:text="@string/_00"
+                    android:textAlignment="textStart"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Display4"
+                    android:textColor="@android:color/background_light"
+                    android:textStyle="bold"
+                    app:autoSizeMaxTextSize="4000sp"
+                    app:autoSizeMinTextSize="12sp"
+                    app:autoSizeStepGranularity="2sp"
+                    app:autoSizeTextType="uniform" />
+            </LinearLayout>
 
             <Button
                 android:id="@+id/shotclock_angriffszeit2"
                 style="@style/Widget.AppCompat.Button.Borderless"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="4"
+                android:layout_weight="1"
                 android:background="@android:color/background_dark"
                 android:clickable="true"
-                android:contentDescription="shotclock"
+                android:contentDescription="@string/shotclock_content_description"
                 android:focusable="true"
-                android:text="30"
+                android:text="@string/shotclock_default_val"
                 android:textAlignment="center"
                 android:textColor="@android:color/holo_orange_light"
                 android:textStyle="bold"
@@ -117,23 +102,46 @@
                 app:autoSizeStepGranularity="20sp"
                 app:autoSizeTextType="uniform" />
 
-            <Button
-                android:id="@+id/toreGastBoard"
-                style="@style/Widget.AppCompat.Button.Borderless"
+            <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="4"
-                android:background="@android:color/background_dark"
-                android:contentDescription="golas guest"
-                android:text="@string/_00"
-                android:textAlignment="textEnd"
-                android:textAppearance="@style/TextAppearance.AppCompat.Display4"
-                android:textColor="@color/blue"
-                android:textStyle="bold"
-                app:autoSizeMaxTextSize="4000sp"
-                app:autoSizeMinTextSize="12sp"
-                app:autoSizeStepGranularity="2sp"
-                app:autoSizeTextType="uniform" />
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <Button
+                    android:id="@+id/btnTeamGuest"
+                    style="@style/Widget.AppCompat.Button.Borderless"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:background="@android:color/background_dark"
+                    android:text="@string/guest_team_default_name"
+                    android:textAlignment="textEnd"
+                    android:textColor="@color/blue"
+                    app:autoSizeMaxTextSize="400sp"
+                    app:autoSizeMinTextSize="12sp"
+                    app:autoSizeStepGranularity="2sp"
+                    app:autoSizeTextType="uniform" />
+
+                <Button
+                    android:id="@+id/toreGastBoard"
+                    style="@style/Widget.AppCompat.Button.Borderless"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="4"
+                    android:background="@android:color/background_dark"
+                    android:contentDescription="@string/goals_guest_content_description"
+                    android:text="@string/_00"
+                    android:textAlignment="textEnd"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Display4"
+                    android:textColor="@color/blue"
+                    android:textStyle="bold"
+                    app:autoSizeMaxTextSize="4000sp"
+                    app:autoSizeMinTextSize="12sp"
+                    app:autoSizeStepGranularity="2sp"
+                    app:autoSizeTextType="uniform" />
+            </LinearLayout>
+
         </LinearLayout>
     </LinearLayout>
 

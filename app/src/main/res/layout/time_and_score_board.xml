@@ -13,6 +13,27 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
+        <Button
+            android:id="@+id/mainTimeBoard"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="4"
+            android:background="@android:color/background_dark"
+            android:clickable="true"
+            android:focusable="true"
+            android:text="@string/main_time_default_val"
+            android:textAlignment="center"
+            android:textAllCaps="false"
+            android:textAppearance="@style/TextAppearance.AppCompat.Display4"
+            android:textColor="@android:color/holo_red_dark"
+            android:textSize="112sp"
+            android:textStyle="bold"
+            app:autoSizeMaxTextSize="400sp"
+            app:autoSizeMinTextSize="12sp"
+            app:autoSizeStepGranularity="2sp"
+            app:autoSizeTextType="uniform" />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
@@ -26,7 +47,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:background="@android:color/background_dark"
-                android:text="Home"
+                android:text="@string/home_team_default_name"
                 android:textAlignment="textStart"
                 android:textColor="@android:color/white"
                 app:autoSizeMaxTextSize="400sp"
@@ -41,7 +62,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:background="@android:color/background_dark"
-                android:text="Guest"
+                android:text="@string/guest_team_default_name"
                 android:textAlignment="textEnd"
                 android:textColor="@color/blue"
                 app:autoSizeMaxTextSize="400sp"
@@ -49,27 +70,6 @@
                 app:autoSizeStepGranularity="2sp"
                 app:autoSizeTextType="uniform" />
         </LinearLayout>
-
-        <Button
-            android:id="@+id/mainTimeBoard"
-            style="@style/Widget.AppCompat.Button.Borderless"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="4"
-            android:background="@android:color/background_dark"
-            android:clickable="true"
-            android:focusable="true"
-            android:text="06:00"
-            android:textAlignment="center"
-            android:textAllCaps="false"
-            android:textAppearance="@style/TextAppearance.AppCompat.Display4"
-            android:textColor="@android:color/holo_red_dark"
-            android:textSize="112sp"
-            android:textStyle="bold"
-            app:autoSizeMaxTextSize="400sp"
-            app:autoSizeMinTextSize="12sp"
-            app:autoSizeStepGranularity="2sp"
-            app:autoSizeTextType="uniform" />
 
         <LinearLayout
             android:id="@+id/layoutButtons"
@@ -86,7 +86,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:background="@android:color/background_dark"
-                android:contentDescription="Goals home team"
+                android:contentDescription="@string/goals_home_content_description"
                 android:text="@string/_00"
                 android:textAlignment="textStart"
                 android:textAppearance="@style/TextAppearance.AppCompat.Display4"
@@ -104,7 +104,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:background="@android:color/background_dark"
-                android:contentDescription="Goals guest team"
+                android:contentDescription="@string/goals_guest_content_description"
                 android:text="@string/_00"
                 android:textAlignment="textEnd"
                 android:textAppearance="@style/TextAppearance.AppCompat.Display4"

@@ -54,7 +54,7 @@ public class ParameterDialogString extends AppCompatDialogFragment {
                 .setNeutralButton("reset", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        listener.applyValue(setting, "127.0.0.1");
+                        listener.applyValue(setting, setting.defaultVal);
                     }
                 });
 

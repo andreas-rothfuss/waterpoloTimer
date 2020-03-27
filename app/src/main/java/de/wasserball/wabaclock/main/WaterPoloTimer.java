@@ -20,7 +20,7 @@ public class WaterPoloTimer {
 
     public static final int TIMER_UPDATE_PERIOD = 50;
 
-    WaterpoloclockServer server;
+    WaterpoloClockServer server;
 
     private final WaterpoloClock activity;
 
@@ -64,7 +64,7 @@ public class WaterPoloTimer {
         this.goalsGuest = (int) goalsGuest;
 
         try {
-            server = new WaterpoloclockServer(this);
+            server = new WaterpoloClockServer(this);
         } catch (IOException e) {
             log.warn("Caught an IOException", e);
         }catch (RuntimeException e) {

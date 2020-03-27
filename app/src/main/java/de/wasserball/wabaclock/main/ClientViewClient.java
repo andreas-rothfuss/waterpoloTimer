@@ -17,7 +17,7 @@ public class ClientViewClient extends OpenIGTLinkClient {
     private NetworkBoard activity;
 
     public ClientViewClient(NetworkBoard activity) throws IOException {
-        super(AppSettings.MASTER_IP.value, WaterpoloclockServer.SERVER_PORT, null);
+        super(AppSettings.MASTER_IP.value, WaterpoloClockServer.SERVER_PORT, null);
         this.activity = activity;
     }
 

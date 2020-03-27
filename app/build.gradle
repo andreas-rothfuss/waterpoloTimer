@@ -7,8 +7,8 @@ android {
         applicationId "de.wasserball.wabaclock"
         minSdkVersion 19
         targetSdkVersion 28
-        versionCode 35
-        versionName "1.8.12"
+        versionCode 42
+        versionName "1.9.6"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -43,5 +43,5 @@ dependencies {
     implementation files('src/main/java/log/logback-android.jar')
     implementation files('src/main/java/log/slf4j-api-1.7.28.jar')
     implementation files('src/main/java/log/slf4j-api-1.7.28-sources.jar')
-    implementation files('src/main/java/OpenIGTLink4J_v0.7.1_src.jar')
+    implementation files('src/main/java/OpenIGTLink4J_v0.7.2_src.jar')
 }

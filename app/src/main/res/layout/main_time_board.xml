@@ -22,7 +22,7 @@
             android:background="@android:color/background_dark"
             android:clickable="true"
             android:focusable="true"
-            android:text="06:00"
+            android:text="@string/main_time_default_val"
             android:textAlignment="center"
             android:textAllCaps="false"
             android:textAppearance="@style/TextAppearance.AppCompat.Display4"

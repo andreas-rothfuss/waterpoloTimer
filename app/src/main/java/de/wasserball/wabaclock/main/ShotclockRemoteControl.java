@@ -10,7 +10,7 @@ import de.wasserball.wabaclock.settings.AppSettings;
 import msg.command.CommandMessage;
 import msg.sensor.GetSensorMessage;
 
-public class Shotclock extends NetworkBoard {
+public class ShotclockRemoteControl extends NetworkBoard {
 
     long shotClock = 0;
 
@@ -18,11 +18,9 @@ public class Shotclock extends NetworkBoard {
 
     @Override
     protected void defineContentView() {
-        setContentView(R.layout.shotclock);
+        setContentView(R.layout.shotclock_remote_control);
 
-        btnShotclock = findViewById(R.id.shotclock_angriffszeit);
-
-        overlayForNavigationBar = findViewById(R.id.shotclock_angriffszeit);
+        btnShotclock = findViewById(R.id.shotclock_zn2);
     }
 
     @Override
@@ -44,5 +42,32 @@ public class Shotclock extends NetworkBoard {
 
     void setShotClock(long time_ms){
         shotClock = time_ms;
+    }
+
+    public void startStopShotclock(View view){
+        if (client != null){
+            try{
+                client.sendIfConnected(new CommandMessage("Shotclock", 1,
+                        "START_STOP_SHOTCLOCK", ""));
+            }catch (IOException e){}
+        }
+    }
+
+    public void resetShotclockMajor(View view){
+        if (client != null){
+            try{
+                client.sendIfConnected(new CommandMessage("Shotclock", 2,
+                        "RESET_SHOTCLOCK_MAJOR", ""));
+            }catch (IOException e){}
+        }
+    }
+
+    public void resetShotclockMinor(View view){
+        if (client != null){
+            try{
+                client.sendIfConnected(new CommandMessage("Shotclock", 3,
+                        "RESET_SHOTCLOCK_MINOR", ""));
+            }catch (IOException e){}
+        }
     }
 }
