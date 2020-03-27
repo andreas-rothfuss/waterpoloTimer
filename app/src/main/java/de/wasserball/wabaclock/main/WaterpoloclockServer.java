@@ -21,7 +21,7 @@ public class WaterpoloclockServer extends OpenIGTLinkStreamingServer {
     WaterPoloTimer timer;
 
     public WaterpoloclockServer(WaterPoloTimer timer) throws IOException {
-        super(SERVER_PORT);
+        super(SERVER_PORT, null);
         this.timer = timer;
     }
 
