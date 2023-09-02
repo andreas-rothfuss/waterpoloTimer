@@ -10,7 +10,7 @@ import java.util.concurrent.TimeUnit;
 
 import de.wasserball.wabaclock.settings.AppSettings;
 
-public class WaterPoloTimer {
+public class WaterPoloTimer{
 
     public static final String SHOT_CLOCK_DEVICE_NAME = "ShotClock";
     public static final String MAIN_TIME_DEVICE_NAME = "MainTime";

@@ -2,7 +2,7 @@ package de.wasserball.wabaclock.main;
 
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Toast;
 
@@ -13,7 +13,6 @@ import java.io.IOException;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import de.wasserball.wabaclock.R;
 import msg.OpenIGTMessage;
 
 abstract class NetworkBoard extends AppCompatActivity {
