@@ -40,6 +40,10 @@ public class Boards extends AppCompatActivity {
         Intent intent = new Intent(this, FullBoard.class);
         startActivity(intent);
     }
+    public void openNewFullBoard(View view){
+        Intent intent = new Intent(this, NewFullBoard.class);
+        startActivity(intent);
+    }
     public void openMainTime(View view){
         Intent intent = new Intent(this, MainTimeBoard.class);
         startActivity(intent);

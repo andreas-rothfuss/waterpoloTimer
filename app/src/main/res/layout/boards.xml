@@ -92,19 +92,16 @@
                 android:scaleType="centerInside"
                 android:src="@drawable/shotclock" />
 
-            <Button
-                android:id="@+id/btnSpacer1"
+            <ImageButton
+                android:id="@+id/BtnNewFullBoard"
                 style="@style/Widget.AppCompat.Button.Borderless"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="4"
-                android:contentDescription="@string/spacer_content_description"
-                android:textAlignment="center"
-                android:textColor="@color/cyan"
-                app:autoSizeMaxTextSize="48sp"
-                app:autoSizeMinTextSize="12sp"
-                app:autoSizeStepGranularity="2sp"
-                app:autoSizeTextType="uniform" />
+                android:contentDescription="@string/button_full_board_content_description"
+                android:onClick="openNewFullBoard"
+                android:scaleType="centerInside"
+                android:src="@drawable/full_board" />
 
         </LinearLayout>
 

@@ -10,58 +10,77 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <receiver
+            android:name=".main.NewFullBoard"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/new_full_board_info" />
+        </receiver>
+
         <activity
-            android:name="de.wasserball.wabaclock.main.WaterpoloClock"
-            android:screenOrientation="landscape"
-            android:exported="true">
+            android:name=".main.WaterpoloClock"
+            android:exported="true"
+            android:screenOrientation="landscape">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
-            android:name="de.wasserball.wabaclock.settings.SettingsView"
+            android:name=".settings.SettingsView"
+            android:exported="false"
             android:label="@string/title_activity_settings"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:exported="false">
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
-            android:name="de.wasserball.wabaclock.main.Boards"
+            android:name=".main.Boards"
+            android:exported="false"
             android:label="Boards"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:exported="false"/>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name="de.wasserball.wabaclock.main.FullBoard"
-            android:screenOrientation="landscape"
+            android:name=".main.FullBoard"
+            android:exported="false"
             android:label="Full Board"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:exported="false"/>
+            android:screenOrientation="landscape"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name="de.wasserball.wabaclock.main.TimeAndScoreBoard"
+            android:name=".main.NewFullBoard"
+            android:exported="false"
+            android:label="Full Board"
+            android:screenOrientation="landscape"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".main.TimeAndScoreBoard"
+            android:exported="false"
             android:label="@string/title_activity_time_and_score_board"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:exported="false"/>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name="de.wasserball.wabaclock.main.MainTimeBoard"
-            android:screenOrientation="landscape"
+            android:name=".main.MainTimeBoard"
+            android:exported="false"
             android:label="MainTimeBoard"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:exported="false"/>
-        <activity
-            android:name="de.wasserball.wabaclock.main.Scoreboard"
             android:screenOrientation="landscape"
-            android:label="@string/title_activity_scoreboard"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:exported="false"/>
-        <activity android:name="de.wasserball.wabaclock.main.Shotclock"
-            android:label="Shotclock"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:exported="false"/>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name="de.wasserball.wabaclock.main.ShotclockRemoteControl"
+            android:name=".main.Scoreboard"
+            android:exported="false"
+            android:label="@string/title_activity_scoreboard"
+            android:screenOrientation="landscape"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".main.Shotclock"
+            android:exported="false"
+            android:label="Shotclock"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".main.ShotclockRemoteControl"
+            android:exported="false"
             android:label="RemoteControlBoardZN2"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:exported="false"/>
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>

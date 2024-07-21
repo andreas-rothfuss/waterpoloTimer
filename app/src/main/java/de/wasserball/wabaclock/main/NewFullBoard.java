@@ -7,7 +7,7 @@ import de.wasserball.wabaclock.settings.AppSettings;
 import msg.sensor.GetSensorMessage;
 import msg.string.GetStringMessage;
 
-public class FullBoard extends NetworkBoard {
+public class NewFullBoard extends NetworkBoard {
 
     String homeTeam = "home";
     String guestTeam = "guest";
@@ -26,7 +26,7 @@ public class FullBoard extends NetworkBoard {
 
     @Override
     protected void defineContentView() {
-        setContentView(R.layout.full_board);
+        setContentView(R.layout.new_full_board);
 
         btnTeamHome = findViewById(R.id.btnTeamHome);
         btnTeamGuest = findViewById(R.id.btnTeamGuest);
@@ -36,7 +36,7 @@ public class FullBoard extends NetworkBoard {
         btnGoalsHome = findViewById(R.id.toreHeimBoard);
         btnGoalsGuest = findViewById(R.id.toreGastBoard);
 
-        overlayForNavigationBar = findViewById(R.id.fullBoardLayout);
+        overlayForNavigationBar = findViewById(R.id.newfullBoardLayout);
     }
 
     @Override
