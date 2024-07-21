@@ -347,8 +347,12 @@ public class WaterPoloTimer{
         String timeString;
         if (AppSettings.ENABLE_DECIMAL.value)
             timeString  = WaterPoloTimer.getMainTimeString(mainTime);
-        else
-            timeString  = WaterPoloTimer.getMainTimeStringNoDecimal(mainTime);
+        else {
+            if(AppSettings.ENABLE_DECIMAL_DURING_LAST.value)
+                timeString =  WaterPoloTimer.getMainTimeStringDecimalDuringLast(mainTime);
+            else
+                timeString  = WaterPoloTimer.getMainTimeStringNoDecimal(mainTime);
+        }
         return timeString;
     }
     static String getMainTimeString(long mainTime){
@@ -385,14 +389,42 @@ public class WaterPoloTimer{
                             TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(mainTime)));
         }
     }
+    public static String getMainTimeStringDecimalDuringLast(long mainTime){
+        if (mainTime > 600000) {
+            return String.format("%02d:%02d",
+                    TimeUnit.MILLISECONDS.toMinutes(mainTime) -
+                            TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(mainTime)),
+                    TimeUnit.MILLISECONDS.toSeconds(mainTime) -
+                            TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(mainTime)));
+        }
+        else {
+            if (mainTime > 59999) {
+                return String.format("%2d:%02d",
+                        TimeUnit.MILLISECONDS.toMinutes(mainTime) -
+                                TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(mainTime)),
+                        TimeUnit.MILLISECONDS.toSeconds(mainTime) -
+                                TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(mainTime)));
+            }
+            else {
+                return String.format("%02d.%01d",
+                        TimeUnit.MILLISECONDS.toSeconds(mainTime) -
+                                TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(mainTime)),
+                        mainTime % 1000 / 100);
+            }
+        }
+    }
 
     String getOffenceTimeString(){
         long offenceTime = this.offenceTime;
         String timeString;
         if (AppSettings.ENABLE_DECIMAL.value)
             timeString  = WaterPoloTimer.getOffenceTimeString(offenceTime);
-        else
-            timeString  = WaterPoloTimer.getOffenceTimeStringNoDecimal(offenceTime);
+        else{
+            if(AppSettings.ENABLE_DECIMAL_DURING_LAST.value)
+                timeString =  WaterPoloTimer.getOffenceTimeStringDecimalDuringLast(offenceTime);
+            else
+                timeString  = WaterPoloTimer.getOffenceTimeStringNoDecimal(offenceTime);
+        }
         return timeString;
     }
     static String getOffenceTimeString(long offenceTime){
@@ -423,6 +455,29 @@ public class WaterPoloTimer{
             textOffenceTime= String.format("%02d",
                     TimeUnit.MILLISECONDS.toSeconds(offenceTime) -
                             TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(offenceTime)));
+        return textOffenceTime;
+    }
+    public static String getOffenceTimeStringDecimalDuringLast(long offenceTime){
+        String textOffenceTime;
+        if (offenceTime >= minutes2ms(1))
+            textOffenceTime= String.format("%02d:%02d",
+                    TimeUnit.MILLISECONDS.toMinutes(offenceTime) -
+                            TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(offenceTime)),
+                    TimeUnit.MILLISECONDS.toSeconds(offenceTime) -
+                            TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(offenceTime)));
+        else{
+            if (offenceTime >= seconds2ms(10)) {
+                textOffenceTime= String.format("%02d",
+                        TimeUnit.MILLISECONDS.toSeconds(offenceTime) -
+                                TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(offenceTime)));
+            }
+            else {
+                textOffenceTime= String.format("%2d.%01d",
+                        TimeUnit.MILLISECONDS.toSeconds(offenceTime) -
+                                TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(offenceTime)),
+                        offenceTime % 1000 / 100);
+            }
+        }
         return textOffenceTime;
     }
 

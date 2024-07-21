@@ -33,8 +33,12 @@ public class MainTimeBoard extends NetworkBoard {
             String timeString;
             if (AppSettings.ENABLE_DECIMAL.value)
                 timeString  = WaterPoloTimer.getMainTimeString(time_ms);
-            else
-                timeString  = WaterPoloTimer.getMainTimeStringNoDecimal(time_ms);
+            else{
+                if(AppSettings.ENABLE_DECIMAL_DURING_LAST.value)
+                    timeString =  WaterPoloTimer.getMainTimeStringDecimalDuringLast(time_ms);
+                else
+                    timeString  = WaterPoloTimer.getMainTimeStringNoDecimal(time_ms);
+            }
             mainTime.setText(timeString);
         }
     }

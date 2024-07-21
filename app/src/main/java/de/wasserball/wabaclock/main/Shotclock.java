@@ -36,8 +36,12 @@ public class Shotclock extends NetworkBoard {
             String timeString;
             if (AppSettings.ENABLE_DECIMAL.value)
                 timeString  = WaterPoloTimer.getOffenceTimeString(shotClock);
-            else
-                timeString  = WaterPoloTimer.getOffenceTimeStringNoDecimal(shotClock);
+            else{
+                if(AppSettings.ENABLE_DECIMAL_DURING_LAST.value)
+                    timeString =  WaterPoloTimer.getOffenceTimeStringDecimalDuringLast(shotClock);
+                else
+                    timeString  = WaterPoloTimer.getOffenceTimeStringNoDecimal(shotClock);
+            }
             btnShotclock.setText(timeString);
         }
     }

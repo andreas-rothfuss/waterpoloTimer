@@ -126,6 +126,7 @@ public class AppSettings {
         OFFENCE_TIME_MINOR_DURATION.readFromSettings(settings);
         ENABLE_SOUND.readFromSettings(settings);
         ENABLE_DECIMAL.readFromSettings(settings);
+        ENABLE_DECIMAL_DURING_LAST.readFromSettings(settings);
         RESET_SHOTCLOCK_ON_GOAL.readFromSettings(settings);
         STOP_BREAK_AND_TIMEOUT.readFromSettings(settings);
         MASTER_IP.readFromSettings(settings);

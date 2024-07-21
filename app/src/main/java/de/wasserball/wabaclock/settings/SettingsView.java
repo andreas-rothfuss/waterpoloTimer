@@ -21,6 +21,7 @@ public class SettingsView extends AppCompatActivity implements ParameterDialogIn
     Button btnOffenceTimeMinorVal;
     Switch btnSoundEnabledVal;
     Switch btnDecimalEnabledVal;
+    Switch btnDecimalEnabledDuringLastMinuteVal;
     Switch btnShotclockResetEnabledVal;
     Switch btnPauseDuringBreakVal;
     Button btnMasterIPVal;
@@ -39,7 +40,8 @@ public class SettingsView extends AppCompatActivity implements ParameterDialogIn
         btnTimeoutWarningVal = findViewById(R.id.textViewTimeoutEndWarningValue);
         btnOffenceTimeMajorVal = findViewById(R.id.textViewOffenceTimeMajorValue);
         btnOffenceTimeMinorVal = findViewById(R.id.textViewOffennceTimeMinorValue);
-        btnDecimalEnabledVal = findViewById(R.id.textViewDecimalEnabledValue);
+        btnDecimalEnabledVal = findViewById(R.id.btnViewDecimalEnabledValue);
+        btnDecimalEnabledDuringLastMinuteVal = findViewById(R.id.btnDecimalEnabledDuringLastMinuteValue);
         btnSoundEnabledVal = findViewById(R.id.textViewSoundEnabledValue);
         btnShotclockResetEnabledVal = findViewById(R.id.switchShotResetEnabledValue);
         btnPauseDuringBreakVal = findViewById(R.id.switchPauseDuringBreakValue);
@@ -59,6 +61,7 @@ public class SettingsView extends AppCompatActivity implements ParameterDialogIn
         btnOffenceTimeMinorVal.setText(Integer.toString(AppSettings.OFFENCE_TIME_MINOR_DURATION.value));
         btnSoundEnabledVal.setChecked(AppSettings.ENABLE_SOUND.value);
         btnDecimalEnabledVal.setChecked(AppSettings.ENABLE_DECIMAL.value);
+        btnDecimalEnabledDuringLastMinuteVal.setChecked(AppSettings.ENABLE_DECIMAL_DURING_LAST.value);
         btnShotclockResetEnabledVal.setChecked(AppSettings.RESET_SHOTCLOCK_ON_GOAL.value);
         btnPauseDuringBreakVal.setChecked(AppSettings.STOP_BREAK_AND_TIMEOUT.value);
         btnMasterIPVal.setText(AppSettings.MASTER_IP.value);

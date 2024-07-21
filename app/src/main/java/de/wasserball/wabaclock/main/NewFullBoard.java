@@ -61,14 +61,22 @@ public class NewFullBoard extends NetworkBoard {
             String timeString;
             if (AppSettings.ENABLE_DECIMAL.value)
                 timeString  = WaterPoloTimer.getMainTimeString(time_ms);
-            else
-                timeString  = WaterPoloTimer.getMainTimeStringNoDecimal(time_ms);
+            else{
+                if(AppSettings.ENABLE_DECIMAL_DURING_LAST.value)
+                    timeString =  WaterPoloTimer.getMainTimeStringDecimalDuringLast(time_ms);
+                else
+                    timeString  = WaterPoloTimer.getMainTimeStringNoDecimal(time_ms);
+            }
             mainTime.setText(timeString);
             String shotClockString;
             if (AppSettings.ENABLE_DECIMAL.value)
                 shotClockString  = WaterPoloTimer.getOffenceTimeString(shotClock);
-            else
-                shotClockString  = WaterPoloTimer.getOffenceTimeStringNoDecimal(shotClock);
+            else{
+                if(AppSettings.ENABLE_DECIMAL_DURING_LAST.value)
+                    shotClockString =  WaterPoloTimer.getOffenceTimeStringDecimalDuringLast(shotClock);
+                else
+                    shotClockString  = WaterPoloTimer.getOffenceTimeStringNoDecimal(shotClock);
+            }
             btnShotclock.setText(shotClockString);
             btnGoalsHome.setText(WaterPoloTimer.getGoalsString(goalsHome));
             btnGoalsGuest.setText(WaterPoloTimer.getGoalsString(goalsGuest));
