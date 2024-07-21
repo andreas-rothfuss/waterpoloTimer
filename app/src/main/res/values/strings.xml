@@ -29,6 +29,7 @@
     <string name="menu_item_sound_enabled">Sound enabled</string>
     <string name="menu_item_shotclock_reset_enabled">Reset offence time on goal</string>
     <string name="menu_item_decimal_enabled">Decimal seconds enabled</string>
+    <string name="menu_item_decimal_enabled_during_last">Decimal seconds enabled during last minute</string>
     <string name="menu_item_title_ip">IP for the master unit</string>
     <string name="halftime">Halbzeit</string>
     <string name="title_activity_scoreboard">Scoreboard</string>
@@ -69,4 +70,7 @@
     <string name="timeouts_home_minus">Timeouts home minus</string>
     <string name="set_number_of_periods_content_description">Set number of periods</string>
     <string name="minutes_per_period_content_description">Set minutes per period</string>
+    <string name="appwidget_text">EXAMPLE</string>
+    <string name="add_widget">Add widget</string>
+    <string name="app_widget_description">This is an app widget description</string>
 </resources>
