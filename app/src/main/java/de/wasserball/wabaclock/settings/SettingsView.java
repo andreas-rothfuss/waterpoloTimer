@@ -108,6 +108,12 @@ public class SettingsView extends AppCompatActivity implements ParameterDialogIn
                 getApplicationContext()), !setting.value);
         updateSettingsValueDisplay();
     }
+    public void onEnableDecimalDuringLastClicked(View view){
+        BooleanSetting setting = AppSettings.ENABLE_DECIMAL_DURING_LAST;
+        setting.applyValue(AppSettings.getSharedPreferences(
+                getApplicationContext()), !setting.value);
+        updateSettingsValueDisplay();
+    }
     public void onResetShotClockClicked(View view){
         BooleanSetting setting = AppSettings.RESET_SHOTCLOCK_ON_GOAL;
         setting.applyValue(AppSettings.getSharedPreferences(

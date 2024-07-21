@@ -69,6 +69,10 @@ public class AppSettings {
             "enable_decimal", false,
             "Decimal seconds enabled?");
 
+    public static final BooleanSetting ENABLE_DECIMAL_DURING_LAST = new BooleanSetting(
+            "enable_decimal_during_last", false,
+            "Decimal seconds during last minute enabled?");
+
     public static final BooleanSetting RESET_SHOTCLOCK_ON_GOAL = new BooleanSetting(
             "reset_shotclock_on_goal", false,
             "Should the shotclock be reset when a goal is entered?");
