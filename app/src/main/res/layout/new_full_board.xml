@@ -1,19 +1,144 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    style="@style/Widget.WaterpoloTimer.AppWidget.Container"
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:theme="@style/AppTheme.AppWidgetContainer">
+    android:keepScreenOn="true"
+    tools:context="de.wasserball.wabaclock.main.NewFullBoard">
 
-    <TextView
-        android:id="@+id/appwidget_text"
-        style="@style/Widget.WaterpoloTimer.AppWidget.InnerView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:layout_margin="8dp"
-        android:contentDescription="@string/appwidget_text"
-        android:text="@string/appwidget_text"
-        android:textSize="24sp"
-        android:textStyle="bold|italic" />
-</RelativeLayout>
+    <LinearLayout
+        android:id="@+id/newfullBoardLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/btnTeamHome"
+                style="@style/Widget.AppCompat.Button.Borderless"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="4"
+                android:background="@android:color/background_dark"
+                android:text="@string/home_team_default_name"
+                android:textAlignment="textEnd"
+                android:textColor="@android:color/white"
+                app:autoSizeMaxTextSize="400sp"
+                app:autoSizeMinTextSize="12sp"
+                app:autoSizeStepGranularity="2sp"
+                app:autoSizeTextType="uniform" />
+
+            <Button
+                android:id="@+id/mainTimeBoard"
+                style="@style/Widget.AppCompat.Button.Borderless"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@android:color/background_dark"
+                android:clickable="true"
+                android:contentDescription="@string/main_time_content_description"
+                android:focusable="true"
+                android:text="@string/main_time_default_val"
+                android:textAlignment="center"
+                android:textAllCaps="false"
+                android:textAppearance="@style/TextAppearance.AppCompat.Display4"
+                android:textColor="@android:color/holo_red_dark"
+                android:textSize="112sp"
+                android:textStyle="bold"
+                app:autoSizeMaxTextSize="4000sp"
+                app:autoSizeMinTextSize="12sp"
+                app:autoSizeStepGranularity="2sp"
+                app:autoSizeTextType="uniform" />
+
+            <Button
+                android:id="@+id/btnTeamGuest"
+                style="@style/Widget.AppCompat.Button.Borderless"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="4"
+                android:background="@android:color/background_dark"
+                android:text="@string/guest_team_default_name"
+                android:textAlignment="textEnd"
+                android:textColor="@color/blue"
+                app:autoSizeMaxTextSize="400sp"
+                app:autoSizeMinTextSize="12sp"
+                app:autoSizeStepGranularity="2sp"
+                app:autoSizeTextType="uniform" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/layoutButtons"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:background="@android:color/background_dark"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/toreHeimBoard"
+                style="@style/Widget.AppCompat.Button.Borderless"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="3"
+                android:background="@android:color/background_dark"
+                android:contentDescription="@string/goals_home_content_description"
+                android:text="@string/_00"
+                android:textAlignment="center"
+                android:textAppearance="@style/TextAppearance.AppCompat.Display4"
+                android:textColor="@android:color/background_light"
+                android:textStyle="bold"
+                app:autoSizeMaxTextSize="4000sp"
+                app:autoSizeMinTextSize="12sp"
+                app:autoSizeStepGranularity="2sp"
+                app:autoSizeTextType="uniform" />
+
+            <Button
+                android:id="@+id/shotclock_angriffszeit2"
+                style="@style/Widget.AppCompat.Button.Borderless"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:background="@android:color/background_dark"
+                android:clickable="true"
+                android:contentDescription="@string/shotclock_content_description"
+                android:focusable="true"
+                android:text="@string/shotclock_default_val"
+                android:textAlignment="center"
+                android:textAppearance="?android:attr/textAppearanceButton"
+                android:textColor="@android:color/holo_orange_light"
+                android:textStyle="bold"
+                app:autoSizeMaxTextSize="4000sp"
+                app:autoSizeMinTextSize="12sp"
+                app:autoSizeStepGranularity="20sp"
+                app:autoSizeTextType="uniform" />
+
+            <Button
+                android:id="@+id/toreGastBoard"
+                style="@style/Widget.AppCompat.Button.Borderless"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="3"
+                android:background="@android:color/background_dark"
+                android:contentDescription="@string/goals_guest_content_description"
+                android:elegantTextHeight="false"
+                android:includeFontPadding="true"
+                android:text="@string/_00"
+                android:textAlignment="center"
+                android:textAppearance="@style/TextAppearance.AppCompat.Display4"
+                android:textColor="@color/blue"
+                android:textStyle="bold"
+                app:autoSizeMaxTextSize="4000sp"
+                app:autoSizeMinTextSize="12sp"
+                app:autoSizeStepGranularity="2sp"
+                app:autoSizeTextType="uniform" />
+
+        </LinearLayout>
+    </LinearLayout>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

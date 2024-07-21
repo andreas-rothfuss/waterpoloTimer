@@ -101,7 +101,7 @@
                 android:contentDescription="@string/button_full_board_content_description"
                 android:onClick="openNewFullBoard"
                 android:scaleType="centerInside"
-                android:src="@drawable/full_board" />
+                android:src="@drawable/new_full_board" />
 
         </LinearLayout>
 
