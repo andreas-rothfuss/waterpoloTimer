@@ -293,14 +293,14 @@
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/textViewSoundEnabled"
+                android:id="@+id/textViewExclusionTime"
                 style="@style/Widget.AppCompat.Button.Borderless"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="4"
                 android:background="@android:color/background_dark"
-                android:onClick="onEnableSounClicked"
-                android:text="@string/menu_item_sound_enabled"
+                android:onClick="onExclusionTimeDurationClicked"
+                android:text="@string/menu_item_title_exclusion_time"
                 android:textAlignment="textStart"
                 android:textColor="@color/cyan"
                 app:autoSizeMaxTextSize="40sp"
@@ -308,17 +308,19 @@
                 app:autoSizeStepGranularity="2sp"
                 app:autoSizeTextType="uniform" />
 
-            <Switch
-                android:id="@+id/textViewSoundEnabledValue"
+            <Button
+                android:id="@+id/textViewExclusionTimeValue"
                 style="@style/Widget.AppCompat.Button.Borderless"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:background="@android:color/background_dark"
-                android:contentDescription="@string/menu_item_sound_enabled"
-                android:onClick="onEnableSounClicked"
-                android:textAlignment="gravity"
-                android:textColor="@color/colorPrimaryDark" />
+                android:onClick="onExclusionTimeDurationClicked"
+                android:textColor="@color/cyan"
+                app:autoSizeMaxTextSize="40sp"
+                app:autoSizeMinTextSize="12sp"
+                app:autoSizeStepGranularity="2sp"
+                app:autoSizeTextType="uniform" />
 
             <Button
                 android:id="@+id/textViewDecimalEnabled"
@@ -357,18 +359,32 @@
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/button3"
+                android:id="@+id/textViewSoundEnabled"
+                style="@style/Widget.AppCompat.Button.Borderless"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="4"
-                android:background="@android:color/background_dark" />
+                android:background="@android:color/background_dark"
+                android:onClick="onEnableSounClicked"
+                android:text="@string/menu_item_sound_enabled"
+                android:textAlignment="textStart"
+                android:textColor="@color/cyan"
+                app:autoSizeMaxTextSize="40sp"
+                app:autoSizeMinTextSize="12sp"
+                app:autoSizeStepGranularity="2sp"
+                app:autoSizeTextType="uniform" />
 
-            <Button
-                android:id="@+id/button4"
+            <Switch
+                android:id="@+id/textViewSoundEnabledValue"
+                style="@style/Widget.AppCompat.Button.Borderless"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="@android:color/background_dark" />
+                android:background="@android:color/background_dark"
+                android:contentDescription="@string/menu_item_sound_enabled"
+                android:onClick="onEnableSounClicked"
+                android:textAlignment="gravity"
+                android:textColor="@color/colorPrimaryDark" />
 
             <Button
                 android:id="@+id/textViewDecimalEnabledDuringLastMinute"

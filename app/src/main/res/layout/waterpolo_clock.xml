@@ -49,6 +49,25 @@
                     app:autoSizeTextType="uniform" />
 
                 <Button
+                    android:id="@+id/exclusionTimerHome"
+                    style="@style/Widget.AppCompat.Button.Borderless"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@android:color/background_dark"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:minHeight="48dp"
+                    android:onClick="onExclusionTimeHomeClicked"
+                    android:text="@string/_00"
+                    android:textAlignment="textEnd"
+                    android:textColor="@android:color/background_light"
+                    app:autoSizeMaxTextSize="200sp"
+                    app:autoSizeMinTextSize="12sp"
+                    app:autoSizeStepGranularity="2sp"
+                    app:autoSizeTextType="uniform" />
+
+                <Button
                     android:id="@+id/editPeriodMinus"
                     style="@style/Widget.AppCompat.Button.Borderless"
                     android:layout_width="0dp"
@@ -96,6 +115,26 @@
                     android:text="@string/plus"
                     android:textColor="@color/cyan"
                     android:textStyle="bold"
+                    app:autoSizeMaxTextSize="200sp"
+                    app:autoSizeMinTextSize="12sp"
+                    app:autoSizeStepGranularity="2sp"
+                    app:autoSizeTextType="uniform" />
+
+
+                <Button
+                    android:id="@+id/exclusionTimerGuest"
+                    style="@style/Widget.AppCompat.Button.Borderless"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@android:color/background_dark"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:minHeight="48dp"
+                    android:onClick="onExclusionTimeGuestClicked"
+                    android:text="@string/_00"
+                    android:textAlignment="textStart"
+                    android:textColor="@color/blue"
                     app:autoSizeMaxTextSize="200sp"
                     app:autoSizeMinTextSize="12sp"
                     app:autoSizeStepGranularity="2sp"

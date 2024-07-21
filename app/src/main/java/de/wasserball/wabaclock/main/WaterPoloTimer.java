@@ -32,6 +32,8 @@ public class WaterPoloTimer{
     long timeout;
     long mainTime;
     long offenceTime;
+    long exclusionTimeHome;
+    long exclusionTimeGuest;
 
     long lastTimerUpdateTime;
 
@@ -118,9 +120,19 @@ public class WaterPoloTimer{
             long timeDiff = currentTime - lastTimerUpdateTime;
             if (timeout == Long.MIN_VALUE) {
                 mainTime = mainTime - timeDiff;
-                if (!isBreak)
+                if (!isBreak) {
                     offenceTime = offenceTime - timeDiff;
 
+                    if (exclusionTimeHome > 0)
+                        exclusionTimeHome = exclusionTimeHome - timeDiff;
+                    else
+                        exclusionTimeHome = 0;
+
+                    if (exclusionTimeGuest > 0)
+                        exclusionTimeGuest = exclusionTimeGuest - timeDiff;
+                    else
+                        exclusionTimeGuest = 0;
+                }
                 if (offenceTime <= TIMER_UPDATE_PERIOD) {
                     if (!isBreak) {
                         stop();
@@ -282,6 +294,16 @@ public class WaterPoloTimer{
     protected void resetOffenceTimeMinor(){
         offenceTime = seconds2ms(
                 AppSettings.OFFENCE_TIME_MINOR_DURATION.value);
+    }
+
+    protected void resetExclusionTimeHome(){
+        exclusionTimeHome = seconds2ms(
+                AppSettings.EXCLUSION_TIME_DURATION.value);
+    }
+
+    protected void resetExclusionTimeGuest(){
+        exclusionTimeGuest = seconds2ms(
+                AppSettings.EXCLUSION_TIME_DURATION.value);
     }
 
     void periodPlus(){
@@ -479,6 +501,22 @@ public class WaterPoloTimer{
             }
         }
         return textOffenceTime;
+    }
+
+    String getExclusionTimeHomeString() {
+        long time_ms = this.exclusionTimeHome;
+        String timeString = String.format("%02d",
+                TimeUnit.MILLISECONDS.toSeconds(time_ms) -
+                        TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(time_ms)));
+        return timeString;
+    }
+
+    String getExclusionTimeGuestString() {
+        long time_ms = this.exclusionTimeGuest;
+        String timeString = String.format("%02d",
+                TimeUnit.MILLISECONDS.toSeconds(time_ms) -
+                        TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(time_ms)));
+        return timeString;
     }
 
     String getGoalsHomeString() {

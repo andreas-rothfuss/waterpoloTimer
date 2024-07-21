@@ -53,6 +53,8 @@ public class WaterpoloClock extends AppCompatActivity implements ParameterDialog
 
     private Button btnMainTime;
     private Button btnOffenceTime;
+    private Button btnExclusionTimeHome;
+    private Button btnExclusionTimeGuest;
 
     private Button btnGoalsHome;
     private Button btnGoalsGuest;
@@ -69,6 +71,7 @@ public class WaterpoloClock extends AppCompatActivity implements ParameterDialog
             "assumes no responsibility for errors or omissions in the contents on the Service.\n" +
             "In no event shall be liable for any special, direct, indirect, consequential, or incidental damages or any damages whatsoever, whether in an action of contract, negligence or other tort, arising out of or in connection with the use of the Service or the contents of the Service. reserves the right to make additions, deletions, or modification to the contents on the Service at any time without prior notice. This Disclaimer has been created with the help of Disclaimer Generator.\n" +
             "does not warrant that the website is free of viruses or other harmful components.";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -106,6 +109,8 @@ public class WaterpoloClock extends AppCompatActivity implements ParameterDialog
 
         btnOffenceTime =  findViewById(R.id.angriffzeit);
         btnMainTime =  findViewById(R.id.mainTime);
+        btnExclusionTimeHome =  findViewById(R.id.exclusionTimerHome);
+        btnExclusionTimeGuest =  findViewById(R.id.exclusionTimerGuest);
 
         btnGoalsHome =  findViewById(R.id.toreHeim);
         btnGoalsGuest =  findViewById(R.id.toreGast);
@@ -188,8 +193,17 @@ public class WaterpoloClock extends AppCompatActivity implements ParameterDialog
             public void run() {
 
                 btnOffenceTime.setText(waterpoloTimer.getOffenceTimeString());
-
                 btnMainTime.setText(waterpoloTimer.getMainTimeString());
+                if (AppSettings.EXCLUSION_TIME_DURATION.value == 0){
+                    btnExclusionTimeHome.setVisibility(View.GONE);
+                    btnExclusionTimeGuest.setVisibility(View.GONE);
+                }
+                else {
+                    btnExclusionTimeHome.setVisibility(View.VISIBLE);
+                    btnExclusionTimeHome.setText(waterpoloTimer.getExclusionTimeHomeString());
+                    btnExclusionTimeGuest.setVisibility(View.VISIBLE);
+                    btnExclusionTimeGuest.setText(waterpoloTimer.getExclusionTimeGuestString());
+                }
 
                 btnPeriod.setText(waterpoloTimer.getPeriodString());
 
@@ -360,6 +374,15 @@ public class WaterpoloClock extends AppCompatActivity implements ParameterDialog
     public void onGuestTeamNameClicked(View view){
         ParameterDialogString dialog = new ParameterDialogString(AppSettings.GUEST_TEAM_NAME);
         dialog.show(getSupportFragmentManager(), "");
+        hideNavigationBar();
+    }
+    public void onExclusionTimeHomeClicked(View view){
+        waterpoloTimer.resetExclusionTimeHome();
+        hideNavigationBar();
+    }
+
+    public void onExclusionTimeGuestClicked(View view){
+        waterpoloTimer.resetExclusionTimeGuest();
         hideNavigationBar();
     }
 
