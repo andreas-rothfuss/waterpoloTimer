@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.concurrent.TimeUnit;
 
 import de.wasserball.wabaclock.R;
 import de.wasserball.wabaclock.settings.ParameterDialogString;
@@ -53,8 +54,9 @@ public class WaterpoloClock extends AppCompatActivity implements ParameterDialog
 
     private Button btnMainTime;
     private Button btnOffenceTime;
-    private Button btnExclusionTimeHome;
-    private Button btnExclusionTimeGuest;
+    private Button[][] btnExclusionTime;
+    private Button btnResetMajor;
+    private Button btnResetMinor;
 
     private Button btnGoalsHome;
     private Button btnGoalsGuest;
@@ -62,6 +64,7 @@ public class WaterpoloClock extends AppCompatActivity implements ParameterDialog
     Button btnTeamHome;
     Button btnTeamGuest;
 
+    MediaPlayer trippleBeepSound;
     MediaPlayer notificationSound;
     String toastText;
 
@@ -90,7 +93,8 @@ public class WaterpoloClock extends AppCompatActivity implements ParameterDialog
                 AppSettings.IS_BREAK.value, AppSettings.MAIN_TIME.value,
                 AppSettings.OFFENCE_TIME.value, AppSettings.TIMEOUT.value,
                 AppSettings.TIMEOUTS_HOME.value, AppSettings.TIMEOUTS_GUEST.value,
-                AppSettings.GOALS_HOME.value, AppSettings.GOALS_GUEST.value);
+                AppSettings.GOALS_HOME.value, AppSettings.GOALS_GUEST.value,
+                new long[][] {{-11000, -11000, -11000}, {-11000, -11000, -11000}});
 
         layoutTimeoutsHome = findViewById(R.id.editTimeoutsHome);
         layoutTimeoutsGuest = findViewById(R.id.editTimeoutsGuest);
@@ -109,8 +113,16 @@ public class WaterpoloClock extends AppCompatActivity implements ParameterDialog
 
         btnOffenceTime =  findViewById(R.id.angriffzeit);
         btnMainTime =  findViewById(R.id.mainTime);
-        btnExclusionTimeHome =  findViewById(R.id.exclusionTimerHome);
-        btnExclusionTimeGuest =  findViewById(R.id.exclusionTimerGuest);
+        btnExclusionTime = new Button[2][3];
+        btnExclusionTime[0][0] =  findViewById(R.id.exclusionTimerHome1);
+        btnExclusionTime[0][1] =  findViewById(R.id.exclusionTimerHome2);
+        btnExclusionTime[0][2] =  findViewById(R.id.exclusionTimerHome3);
+        btnExclusionTime[1][0] =  findViewById(R.id.exclusionTimerGuest1);
+        btnExclusionTime[1][1] =  findViewById(R.id.exclusionTimerGuest2);
+        btnExclusionTime[1][2] =  findViewById(R.id.exclusionTimerGuest3);
+
+        btnResetMajor = findViewById(R.id.reset30);
+        btnResetMinor = findViewById(R.id.reset20);
 
         btnGoalsHome =  findViewById(R.id.toreHeim);
         btnGoalsGuest =  findViewById(R.id.toreGast);
@@ -129,6 +141,7 @@ public class WaterpoloClock extends AppCompatActivity implements ParameterDialog
         btnTeamGuest = findViewById(R.id.teamGuest);
         updateSettingsValueDisplay();
 
+        trippleBeepSound = MediaPlayer.create(this, R.raw.beep_beep_beep);
         notificationSound = MediaPlayer.create(this, R.raw.beep_09);
 
         Timer guiUpdateTimer = new Timer();
@@ -195,14 +208,31 @@ public class WaterpoloClock extends AppCompatActivity implements ParameterDialog
                 btnOffenceTime.setText(waterpoloTimer.getOffenceTimeString());
                 btnMainTime.setText(waterpoloTimer.getMainTimeString());
                 if (AppSettings.EXCLUSION_TIME_DURATION.value == 0){
-                    btnExclusionTimeHome.setVisibility(View.GONE);
-                    btnExclusionTimeGuest.setVisibility(View.GONE);
+                    for (int i0 = 0; i0 < btnExclusionTime.length; i0++) {
+                        for (int i1 = 0; i1 < btnExclusionTime[i1].length; i1++)
+                            btnExclusionTime[i0][i1].setVisibility(View.GONE);
+                    }
                 }
                 else {
-                    btnExclusionTimeHome.setVisibility(View.VISIBLE);
-                    btnExclusionTimeHome.setText(waterpoloTimer.getExclusionTimeHomeString());
-                    btnExclusionTimeGuest.setVisibility(View.VISIBLE);
-                    btnExclusionTimeGuest.setText(waterpoloTimer.getExclusionTimeGuestString());
+                    long[][] exclusionTime = new long[btnExclusionTime.length][btnExclusionTime[0].length];
+                    for (int i0 = 0; i0 < btnExclusionTime.length; i0++) {
+                        for (int i1 = 0; i1 < btnExclusionTime[i0].length; i1++){
+                            exclusionTime[i0][i1] = waterpoloTimer.getExclusionTime(i0, i1);
+                            if (exclusionTime[i0][i1] < 0)
+                                btnExclusionTime[i0][i1].setText("00");
+                            else
+                                btnExclusionTime[i0][i1].setText(WaterPoloTimer.getExclusionTimeString(exclusionTime[i0][i1]));
+
+                            if (i1 == 0)
+                                btnExclusionTime[i0][i1].setVisibility(View.VISIBLE);
+                            if (i1 > 0){
+                                if (exclusionTime[i0][i1]< -TimeUnit.SECONDS.toMillis(10) && exclusionTime[i0][i1-1] < 0)
+                                    btnExclusionTime[i0][i1].setVisibility(View.GONE);
+                                else
+                                    btnExclusionTime[i0][i1].setVisibility(View.VISIBLE);
+                            }
+                        }
+                    }
                 }
 
                 btnPeriod.setText(waterpoloTimer.getPeriodString());
@@ -211,6 +241,9 @@ public class WaterpoloClock extends AppCompatActivity implements ParameterDialog
                 btnTimeoutGuest.setText(Integer.toString(waterpoloTimer.timeoutsGuest));
                 btnGoalsHome.setText(waterpoloTimer.getGoalsHomeString());
                 btnGoalsGuest.setText(waterpoloTimer.getGoalsGuestString());
+
+                btnResetMajor.setText(String.format(getString(R.string.reset_placeholder), AppSettings.OFFENCE_TIME_DURATION.value));
+                btnResetMinor.setText(String.format(getString(R.string.reset_placeholder), AppSettings.OFFENCE_TIME_MINOR_DURATION.value));
 
                 if (toastText != null) {
                     Toast.makeText(getApplicationContext(), toastText, Toast.LENGTH_LONG).show();
@@ -293,6 +326,13 @@ public class WaterpoloClock extends AppCompatActivity implements ParameterDialog
         alertDialog.show();
     }
 
+    void trippleBeepSound(String toastText) {
+        if (AppSettings.ENABLE_SOUND.value){
+            trippleBeepSound.start();
+        }
+        this.toastText = toastText;
+    }
+
     void sound(String toastText) {
         if (AppSettings.ENABLE_SOUND.value)
             notificationSound.start();
@@ -303,11 +343,11 @@ public class WaterpoloClock extends AppCompatActivity implements ParameterDialog
         waterpoloTimer.startStop();
         hideNavigationBar();
     }
-    public void onClickReset30(View view){
+    public void onClickResetMajor(View view){
         waterpoloTimer.resetOffenceTimeMajor();
         hideNavigationBar();
     }
-    public void onClickReset20(View view){
+    public void onClickResetMinor(View view){
         waterpoloTimer.resetOffenceTimeMinor();
         hideNavigationBar();
     }
@@ -376,13 +416,29 @@ public class WaterpoloClock extends AppCompatActivity implements ParameterDialog
         dialog.show(getSupportFragmentManager(), "");
         hideNavigationBar();
     }
-    public void onExclusionTimeHomeClicked(View view){
-        waterpoloTimer.resetExclusionTimeHome();
+    public void onExclusionTimeHome1Clicked(View view){
+        waterpoloTimer.resetExclusionTimeHome(0);
+        hideNavigationBar();
+    }
+    public void onExclusionTimeHome2Clicked(View view){
+        waterpoloTimer.resetExclusionTimeHome(1);
+        hideNavigationBar();
+    }
+    public void onExclusionTimeHome3Clicked(View view){
+        waterpoloTimer.resetExclusionTimeHome(2);
         hideNavigationBar();
     }
 
-    public void onExclusionTimeGuestClicked(View view){
-        waterpoloTimer.resetExclusionTimeGuest();
+    public void onExclusionTimeGuest1Clicked(View view){
+        waterpoloTimer.resetExclusionTimeGuest(0);
+        hideNavigationBar();
+    }
+    public void onExclusionTimeGuest2Clicked(View view){
+        waterpoloTimer.resetExclusionTimeGuest(1);
+        hideNavigationBar();
+    }
+    public void onExclusionTimeGuest3Clicked(View view){
+        waterpoloTimer.resetExclusionTimeGuest(2);
         hideNavigationBar();
     }
 

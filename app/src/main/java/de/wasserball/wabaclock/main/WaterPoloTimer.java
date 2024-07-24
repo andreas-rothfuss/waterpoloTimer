@@ -6,6 +6,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
 import de.wasserball.wabaclock.settings.AppSettings;
@@ -32,8 +34,7 @@ public class WaterPoloTimer{
     long timeout;
     long mainTime;
     long offenceTime;
-    long exclusionTimeHome;
-    long exclusionTimeGuest;
+    long[][] exclusionTime;
 
     long lastTimerUpdateTime;
 
@@ -47,7 +48,7 @@ public class WaterPoloTimer{
 
     public WaterPoloTimer(WaterpoloClock activity, int period, boolean isBreak, long mainTime,
                           long offenceTime, long timeout, int timeoutsHome, int timeoutsGuest,
-                          int goalsHome, int goalsGuest) {
+                          int goalsHome, int goalsGuest, long [][] exclusionTime) {
         this.activity = activity;
 
         lastTimerUpdateTime = System.currentTimeMillis();
@@ -58,6 +59,7 @@ public class WaterPoloTimer{
         this.timeout = timeout;
         this.mainTime = mainTime;
         this.offenceTime = offenceTime;
+        this.exclusionTime = exclusionTime;
 
         this.timeoutsHome = (int) timeoutsHome;
         this.timeoutsGuest = (int) timeoutsGuest;
@@ -75,7 +77,8 @@ public class WaterPoloTimer{
     }
     public WaterPoloTimer(WaterpoloClock activity) {
         this(activity, 0, false, 0, 0, 0,
-                0, 0, 0, 0);
+                0, 0, 0, 0,
+                new long[][] {{-11000, -11000, -11000}, {-11000, -11000, -11000}});
         setTimersToStartOfPeriod(0);
     }
 
@@ -123,21 +126,17 @@ public class WaterPoloTimer{
                 if (!isBreak) {
                     offenceTime = offenceTime - timeDiff;
 
-                    if (exclusionTimeHome > 0)
-                        exclusionTimeHome = exclusionTimeHome - timeDiff;
-                    else
-                        exclusionTimeHome = 0;
-
-                    if (exclusionTimeGuest > 0)
-                        exclusionTimeGuest = exclusionTimeGuest - timeDiff;
-                    else
-                        exclusionTimeGuest = 0;
+                    for (int i0 = 0; i0 < exclusionTime.length; i0++) {
+                        for (int i1 = 0; i1 < exclusionTime[i0].length; i1++) {
+                            exclusionTime[i0][i1] = exclusionTime[i0][i1] - timeDiff;
+                        }
+                    }
                 }
                 if (offenceTime <= TIMER_UPDATE_PERIOD) {
                     if (!isBreak) {
                         stop();
                         offenceTime = seconds2ms(AppSettings.OFFENCE_TIME_DURATION.value);
-                        activity.sound("Offence-Time is over");
+                        activity.trippleBeepSound("Offence-Time is over");
                         stop();
                     } else {
                         offenceTime = 0;
@@ -296,13 +295,15 @@ public class WaterPoloTimer{
                 AppSettings.OFFENCE_TIME_MINOR_DURATION.value);
     }
 
-    protected void resetExclusionTimeHome(){
-        exclusionTimeHome = seconds2ms(
-                AppSettings.EXCLUSION_TIME_DURATION.value);
+    protected void resetExclusionTimeHome(int i){
+        resetExclusionTime(0, i);
     }
 
-    protected void resetExclusionTimeGuest(){
-        exclusionTimeGuest = seconds2ms(
+    protected void resetExclusionTimeGuest(int i){
+        resetExclusionTime(1, i);
+    }
+    protected void resetExclusionTime(int i0, int i1){
+        exclusionTime[i0][i1] = seconds2ms(
                 AppSettings.EXCLUSION_TIME_DURATION.value);
     }
 
@@ -378,62 +379,53 @@ public class WaterPoloTimer{
         return timeString;
     }
     static String getMainTimeString(long mainTime){
-        if (mainTime > 600000) {
-            return String.format("%02d:%02d.%01d",
-                    TimeUnit.MILLISECONDS.toMinutes(mainTime) -
-                            TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(mainTime)),
-                    TimeUnit.MILLISECONDS.toSeconds(mainTime) -
-                            TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(mainTime)),
-                    mainTime % 1000 / 100);
-        }
-        else {
-            return String.format("%2d:%02d.%01d",
-                    TimeUnit.MILLISECONDS.toMinutes(mainTime) -
-                            TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(mainTime)),
-                    TimeUnit.MILLISECONDS.toSeconds(mainTime) -
-                            TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(mainTime)),
-                    mainTime % 1000 / 100);
-        }
+        SimpleDateFormat formatter;
+
+        long mainTimeRounded = Math.round(new Double(mainTime).doubleValue() / 100) * 100;
+        if (mainTime < TimeUnit.MINUTES.toMillis(10))
+            formatter = new SimpleDateFormat("m:ss.S");
+        else
+            formatter = new SimpleDateFormat("mm:ss.S");
+
+        Date date = new Date(mainTimeRounded);
+        String timeString = formatter.format(date);
+
+        return timeString;
     }
     public static String getMainTimeStringNoDecimal(long mainTime){
-        if (mainTime > 600000) {
-            return String.format("%02d:%02d",
-                    TimeUnit.MILLISECONDS.toMinutes(mainTime) -
-                            TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(mainTime)),
-                    TimeUnit.MILLISECONDS.toSeconds(mainTime) -
-                            TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(mainTime)));
-        }
-        else {
-            return String.format("%2d:%02d",
-                    TimeUnit.MILLISECONDS.toMinutes(mainTime) -
-                            TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(mainTime)),
-                    TimeUnit.MILLISECONDS.toSeconds(mainTime) -
-                            TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(mainTime)));
-        }
+        SimpleDateFormat formatter;
+
+        long mainTimeRounded = Math.round(new Double(mainTime).doubleValue() / 1000) * 1000;
+        if (mainTime < TimeUnit.MINUTES.toMillis(10))
+            formatter = new SimpleDateFormat("m:ss");
+        else
+            formatter = new SimpleDateFormat("mm:ss");
+
+        Date date = new Date(mainTimeRounded);
+        String timeString = formatter.format(date);
+
+        return timeString;
     }
     public static String getMainTimeStringDecimalDuringLast(long mainTime){
-        if (mainTime > 600000) {
-            return String.format("%02d:%02d",
-                    TimeUnit.MILLISECONDS.toMinutes(mainTime) -
-                            TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(mainTime)),
-                    TimeUnit.MILLISECONDS.toSeconds(mainTime) -
-                            TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(mainTime)));
+        long mainTimeRounded;
+        SimpleDateFormat formatter;
+
+        if (mainTime < TimeUnit.MINUTES.toMillis(1)){
+            mainTimeRounded = Math.round(new Double(mainTime).doubleValue() / 100) * 100;
+            formatter = new SimpleDateFormat("ss.S");
         }
         else {
-            if (mainTime > 59999) {
-                return String.format("%2d:%02d",
-                        TimeUnit.MILLISECONDS.toMinutes(mainTime) -
-                                TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(mainTime)),
-                        TimeUnit.MILLISECONDS.toSeconds(mainTime) -
-                                TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(mainTime)));
-            }
-            else {
-                return String.format("%02d.%01d",
-                        TimeUnit.MILLISECONDS.toSeconds(mainTime) -
-                                TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(mainTime)),
-                        mainTime % 1000 / 100);
-            }
+            mainTimeRounded = Math.round(new Double(mainTime).doubleValue() / 1000) * 1000;
+            if (mainTime < TimeUnit.MINUTES.toMillis(10))
+                formatter = new SimpleDateFormat("m:ss");
+            else
+                formatter = new SimpleDateFormat("mm:ss");
         }
+
+        Date date = new Date(mainTimeRounded);
+        String timeString = formatter.format(date);
+
+        return timeString;
     }
 
     String getOffenceTimeString(){
@@ -449,74 +441,85 @@ public class WaterPoloTimer{
         }
         return timeString;
     }
-    static String getOffenceTimeString(long offenceTime){
-        String textOffenceTime;
-        if (offenceTime > minutes2ms(1))
-            textOffenceTime= String.format("%02d:%02d.%01d",
-                    TimeUnit.MILLISECONDS.toMinutes(offenceTime) -
-                            TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(offenceTime)),
-                    TimeUnit.MILLISECONDS.toSeconds(offenceTime) -
-                            TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(offenceTime)),
-                    offenceTime % 1000 / 100);
-        else
-            textOffenceTime= String.format("%02d.%01d",
-                    TimeUnit.MILLISECONDS.toSeconds(offenceTime) -
-                            TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(offenceTime)),
-                    offenceTime % 1000 / 100);
-        return textOffenceTime;
+    static String getOffenceTimeString(long time){
+        SimpleDateFormat formatter;
+
+        long timeRounded = Math.round(new Double(time).doubleValue() / 100) * 100;
+        if (time < TimeUnit.MINUTES.toMillis(1)){
+            formatter = new SimpleDateFormat("ss.S");
+        }
+        else {
+            if (time < TimeUnit.MINUTES.toMillis(10))
+                formatter = new SimpleDateFormat("m:ss.S");
+            else
+                formatter = new SimpleDateFormat("mm:ss.S");
+        }
+
+        Date date = new Date(timeRounded);
+        String timeString = formatter.format(date);
+
+        return timeString;
     }
-    static String getOffenceTimeStringNoDecimal(long offenceTime){
-        String textOffenceTime;
-        if (offenceTime > minutes2ms(1))
-            textOffenceTime= String.format("%02d:%02d",
-                    TimeUnit.MILLISECONDS.toMinutes(offenceTime) -
-                            TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(offenceTime)),
-                    TimeUnit.MILLISECONDS.toSeconds(offenceTime) -
-                            TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(offenceTime)));
-        else
-            textOffenceTime= String.format("%02d",
-                    TimeUnit.MILLISECONDS.toSeconds(offenceTime) -
-                            TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(offenceTime)));
-        return textOffenceTime;
+    static String getOffenceTimeStringNoDecimal(long time){
+        SimpleDateFormat formatter;
+
+        long timeRounded = Math.round(new Double(time).doubleValue() / 1000) * 1000;
+        if (time < TimeUnit.MINUTES.toMillis(1)){
+            formatter = new SimpleDateFormat("ss");
+        }
+        else {
+            if (time < TimeUnit.MINUTES.toMillis(10))
+                formatter = new SimpleDateFormat("m:ss");
+            else
+                formatter = new SimpleDateFormat("mm:ss");
+        }
+
+        Date date = new Date(timeRounded);
+        String timeString = formatter.format(date);
+
+        return timeString;
     }
-    public static String getOffenceTimeStringDecimalDuringLast(long offenceTime){
-        String textOffenceTime;
-        if (offenceTime >= minutes2ms(1))
-            textOffenceTime= String.format("%02d:%02d",
-                    TimeUnit.MILLISECONDS.toMinutes(offenceTime) -
-                            TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(offenceTime)),
-                    TimeUnit.MILLISECONDS.toSeconds(offenceTime) -
-                            TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(offenceTime)));
-        else{
-            if (offenceTime >= seconds2ms(10)) {
-                textOffenceTime= String.format("%02d",
-                        TimeUnit.MILLISECONDS.toSeconds(offenceTime) -
-                                TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(offenceTime)));
+    public static String getOffenceTimeStringDecimalDuringLast(long time){
+        long timeRounded;
+        SimpleDateFormat formatter;
+
+        if (time < TimeUnit.SECONDS.toMillis(10)){
+            timeRounded = Math.round(new Double(time).doubleValue() / 100) * 100;
+            formatter = new SimpleDateFormat("s.S");
+        }
+        else {
+            timeRounded = Math.round(new Double(time).doubleValue() / 1000) * 1000;
+            if (time < TimeUnit.MINUTES.toMillis(1)){
+                formatter = new SimpleDateFormat("ss");
             }
             else {
-                textOffenceTime= String.format("%2d.%01d",
-                        TimeUnit.MILLISECONDS.toSeconds(offenceTime) -
-                                TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(offenceTime)),
-                        offenceTime % 1000 / 100);
+                if (time < TimeUnit.MINUTES.toMillis(10))
+                    formatter = new SimpleDateFormat("m:ss");
+                else
+                    formatter = new SimpleDateFormat("mm:ss");
             }
         }
-        return textOffenceTime;
-    }
 
-    String getExclusionTimeHomeString() {
-        long time_ms = this.exclusionTimeHome;
-        String timeString = String.format("%02d",
-                TimeUnit.MILLISECONDS.toSeconds(time_ms) -
-                        TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(time_ms)));
+        Date date = new Date(timeRounded);
+        String timeString = formatter.format(date);
+
+        return timeString;
+    }
+    static String getExclusionTimeString(long time){
+        SimpleDateFormat formatter;
+
+        long timeRounded = Math.round(new Double(time).doubleValue() / 1000) * 1000;
+        formatter = new SimpleDateFormat("ss");
+
+        Date date = new Date(timeRounded);
+        String timeString = formatter.format(date);
+
         return timeString;
     }
 
-    String getExclusionTimeGuestString() {
-        long time_ms = this.exclusionTimeGuest;
-        String timeString = String.format("%02d",
-                TimeUnit.MILLISECONDS.toSeconds(time_ms) -
-                        TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(time_ms)));
-        return timeString;
+    long getExclusionTime(int i0, int i1) {
+        long time_ms = this.exclusionTime[i0][i1];
+        return time_ms;
     }
 
     String getGoalsHomeString() {

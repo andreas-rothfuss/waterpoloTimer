@@ -14,8 +14,9 @@
     <string name="timeout">Timeout(s)</string>
     <string name="_00">00</string>
     <string name="tesOffenceTime">30</string>
-    <string name="reset_30">Reset (30)</string>
-    <string name="reset_20">Reset (20)</string>
+    <string name="reset_placeholder">Reset (%1$d)</string>
+    <string name="reset_major">Reset (Major)</string>
+    <string name="reset_minor">Reset (Minor)</string>
     <string name="reset_all">reset all</string>
     <string name="settings">"settings "</string>
     <string name="edit_times">edit</string>
