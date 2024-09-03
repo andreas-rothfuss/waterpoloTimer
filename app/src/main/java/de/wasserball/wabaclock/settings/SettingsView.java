@@ -25,6 +25,7 @@ public class SettingsView extends AppCompatActivity implements ParameterDialogIn
     Switch btnDecimalEnabledDuringLastMinuteVal;
     Switch btnShotclockResetEnabledVal;
     Switch btnPauseDuringBreakVal;
+    Switch btnUseAutodiscovery;
     Button btnMasterIPVal;
 
 
@@ -47,6 +48,7 @@ public class SettingsView extends AppCompatActivity implements ParameterDialogIn
         btnSoundEnabledVal = findViewById(R.id.textViewSoundEnabledValue);
         btnShotclockResetEnabledVal = findViewById(R.id.switchShotResetEnabledValue);
         btnPauseDuringBreakVal = findViewById(R.id.switchPauseDuringBreakValue);
+        btnUseAutodiscovery = findViewById(R.id.switchAutodiscoveryEnabledValue);
         btnMasterIPVal = findViewById(R.id.textViewEditIP);
 
         updateSettingsValueDisplay();
@@ -67,6 +69,7 @@ public class SettingsView extends AppCompatActivity implements ParameterDialogIn
         btnDecimalEnabledDuringLastMinuteVal.setChecked(AppSettings.ENABLE_DECIMAL_DURING_LAST.value);
         btnShotclockResetEnabledVal.setChecked(AppSettings.RESET_SHOTCLOCK_ON_GOAL.value);
         btnPauseDuringBreakVal.setChecked(AppSettings.STOP_BREAK_AND_TIMEOUT.value);
+        btnUseAutodiscovery.setChecked(AppSettings.USE_AUTODISCOVERY.value);
         btnMasterIPVal.setText(AppSettings.MASTER_IP.value);
     }
 
@@ -126,6 +129,12 @@ public class SettingsView extends AppCompatActivity implements ParameterDialogIn
     }
     public void onResetShotClockClicked(View view){
         BooleanSetting setting = AppSettings.RESET_SHOTCLOCK_ON_GOAL;
+        setting.applyValue(AppSettings.getSharedPreferences(
+                getApplicationContext()), !setting.value);
+        updateSettingsValueDisplay();
+    }
+    public void onAutodiscoveryClicked(View view){
+        BooleanSetting setting = AppSettings.USE_AUTODISCOVERY;
         setting.applyValue(AppSettings.getSharedPreferences(
                 getApplicationContext()), !setting.value);
         updateSettingsValueDisplay();

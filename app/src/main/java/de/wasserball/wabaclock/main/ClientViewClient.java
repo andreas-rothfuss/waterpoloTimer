@@ -1,6 +1,7 @@
 package de.wasserball.wabaclock.main;
 
 import java.io.IOException;
+import java.net.InetAddress;
 
 import de.wasserball.wabaclock.settings.AppSettings;
 import msg.OpenIGTMessage;
@@ -10,14 +11,19 @@ import msg.sensor.SensorData;
 import msg.sensor.SensorMessage;
 import msg.sensor.Unit;
 import msg.string.StringMessage;
+import network.AutoDiscoveryOpenIGTLinkClient;
 import network.OpenIGTLinkClient;
 
-public class ClientViewClient extends OpenIGTLinkClient {
+public class ClientViewClient extends AutoDiscoveryOpenIGTLinkClient{
 
     private NetworkBoard activity;
 
     public ClientViewClient(NetworkBoard activity) throws IOException {
-        super(AppSettings.MASTER_IP.value, WaterpoloClockServer.SERVER_PORT, null);
+        this(activity, AppSettings.MASTER_IP.value, WaterpoloClockServer.SERVER_PORT);
+    }
+
+    public ClientViewClient(NetworkBoard activity, String ip, int port) throws IOException {
+        super(ip, port, null);
         this.activity = activity;
     }
 

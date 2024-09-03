@@ -557,6 +557,7 @@ public class WaterpoloClock extends AppCompatActivity implements ParameterDialog
     }
 
     public void openBoards(View view){
+        Boards.waterpoloTimer = waterpoloTimer;
         Intent intent = new Intent(this, Boards.class);
         startActivity(intent);
         hideNavigationBar();

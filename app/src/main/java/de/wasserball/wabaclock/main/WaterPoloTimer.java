@@ -67,13 +67,7 @@ public class WaterPoloTimer{
         this.goalsHome = (int) goalsHome;
         this.goalsGuest = (int) goalsGuest;
 
-        try {
-            server = new WaterpoloClockServer(this);
-        } catch (IOException e) {
-            log.warn("Caught an IOException", e);
-        }catch (RuntimeException e) {
-            log.warn("Server not started. " + e.getMessage(), e);
-        }
+        startServer();
     }
     public WaterPoloTimer(WaterpoloClock activity) {
         this(activity, 0, false, 0, 0, 0,
@@ -82,12 +76,27 @@ public class WaterPoloTimer{
         setTimersToStartOfPeriod(0);
     }
 
+    public void startServer(){
+        if (server == null || !server.isRunning()) {
+            try {
+                server = new WaterpoloClockServer(this);
+            } catch (IOException e) {
+                log.warn("Caught an IOException", e);
+            } catch (RuntimeException e) {
+                log.warn("Server not started. " + e.getMessage(), e);
+            }
+        }
+    }
 
-    void dispose(){
+    public void stopServer(){
         if (server != null) {
             server.stop();
-            server = null;
         }
+    }
+
+    void dispose(){
+        stopServer();
+        server = null;
     }
 
     private void setTimersToStartOfPeriod(int i){

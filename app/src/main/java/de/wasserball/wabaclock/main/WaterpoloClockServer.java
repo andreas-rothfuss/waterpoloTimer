@@ -6,6 +6,7 @@ import de.wasserball.wabaclock.settings.AppSettings;
 import msg.OIGTL_DataMessage;
 import msg.OIGTL_GetMessage;
 import msg.OpenIGTMessage;
+import msg.capability.GetCapabilityMessage;
 import msg.command.CommandMessage;
 import msg.sensor.GetSensorMessage;
 import msg.sensor.SI_EXP;
@@ -106,6 +107,11 @@ public class WaterpoloClockServer extends OpenIGTLinkStreamingServer {
 
     @Override
     public String[] getCapability() {
-        return new String[0];
+        return new String[]{
+            GetCapabilityMessage.DATA_TYPE,
+            GetSensorMessage.DATA_TYPE,
+            GetStringMessage.DATA_TYPE,
+            CommandMessage.DATA_TYPE
+        };
     }
 }

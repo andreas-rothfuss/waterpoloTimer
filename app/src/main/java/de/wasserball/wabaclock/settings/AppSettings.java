@@ -87,6 +87,10 @@ public class AppSettings {
 
     //TODO: Add an option to have independent main and offence times
 
+    public static final BooleanSetting USE_AUTODISCOVERY = new BooleanSetting(
+            "use_autodiscovery", false,
+            "Use autodiscovery feature?");
+
     public static final StringSetting MASTER_IP = new StringSetting(
             "master_ip", "127.0.0.1",
             "Set ip of master unit");
@@ -134,6 +138,7 @@ public class AppSettings {
         ENABLE_DECIMAL_DURING_LAST.readFromSettings(settings);
         RESET_SHOTCLOCK_ON_GOAL.readFromSettings(settings);
         STOP_BREAK_AND_TIMEOUT.readFromSettings(settings);
+        USE_AUTODISCOVERY.readFromSettings(settings);
         MASTER_IP.readFromSettings(settings);
 
         HOME_TEAM_NAME.readFromSettings(settings);

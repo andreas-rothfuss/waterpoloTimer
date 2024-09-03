@@ -13,13 +13,19 @@ import java.io.IOException;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import de.wasserball.wabaclock.settings.AppSettings;
 import msg.OpenIGTMessage;
+import msg.capability.GetCapabilityMessage;
+import network.Client;
+import network.ServerAdress;
 
 abstract class NetworkBoard extends AppCompatActivity {
 
     static final int DATA_UPDATE_PERIOD = 50;
     static final int SLOW_DATA_UPDATE_PERIOD = 1000;
     static final int GUI_UPDATE_PERIOD = 100;
+
+    public static WaterPoloTimer waterpoloTimer;
 
     View overlayForNavigationBar;
 
@@ -39,7 +45,62 @@ abstract class NetworkBoard extends AppCompatActivity {
         hideNavigationBar();
 
         try {
-            client = new ClientViewClient(this) ;
+            ServerAdress host = null;
+
+            if (AppSettings.USE_AUTODISCOVERY.value) {
+                if (waterpoloTimer != null){
+                    waterpoloTimer.dispose();
+                }
+
+                Toast.makeText(getApplicationContext(),
+                        "Server stopped, autodiscovery started", Toast.LENGTH_LONG).show();
+
+                ServerAdress[] matchingIPs = Client.autodiscover(
+                        WaterpoloClockServer.SERVER_PORT,
+                        GetCapabilityMessage.DATA_TYPE);
+
+                for (int i = 0; i < matchingIPs.length; i++) {
+                    /** found a non-loopback address */
+                    if (!matchingIPs[i].isLoopback) {
+                        host = matchingIPs[i];
+                        Toast.makeText(getApplicationContext(),
+                                "Connecting to found remote ip: " +
+                                        host.ip + ":" + host.port,
+                                Toast.LENGTH_LONG).show();
+                        break;
+                    }
+                }
+                if (host == null) {
+                    for (int i = 0; i < matchingIPs.length; i++) {
+                        /** found a loopback address */
+                        host = matchingIPs[i];
+                        Toast.makeText(getApplicationContext(),
+                                "Connecting to localhost ip: " +
+                                        host.ip + ":" + host.port,
+                                Toast.LENGTH_LONG).show();
+                        break;
+                    }
+                }
+            }
+            if (host == null){
+                String ip = AppSettings.MASTER_IP.value;
+                host = new ServerAdress(ip,
+                        WaterpoloClockServer.SERVER_PORT,
+                        ip.equals("127.0.0.1"), false);
+                if (host.isLoopback) {
+                    /** restart server */
+                    Toast.makeText(getApplicationContext(),
+                            "No remote server found, restarting local server", Toast.LENGTH_LONG).show();
+                    waterpoloTimer.startServer();
+                }
+
+                Toast.makeText(getApplicationContext(),
+                        "Connecting to set ip: " +
+                        host.ip + ":" + host.port,
+                        Toast.LENGTH_LONG).show();
+            }
+
+            client = new ClientViewClient(this, host.ip, host.port) ;
             client.start();
         } catch (IOException e) {
             Toast.makeText(getApplicationContext(),"No connection to main unit",Toast.LENGTH_LONG).show();
@@ -104,6 +165,12 @@ abstract class NetworkBoard extends AppCompatActivity {
                 log.warn("Caught an IOException", e);
             }
         }
+    }
+
+    @Override
+    public void finish() {
+        super.finish();
+        waterpoloTimer.startServer();
     }
 
     void setHomeTeamName(String val){}

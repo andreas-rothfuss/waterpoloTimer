@@ -30,9 +30,10 @@
     <string name="menu_item_title_break_time">Break duration [min]</string>
     <string name="menu_item_sound_enabled">Sound enabled</string>
     <string name="menu_item_shotclock_reset_enabled">Reset offence time on goal</string>
+    <string name="menu_item_autodicovery_enabled">Master unit autodiscovery</string>
     <string name="menu_item_decimal_enabled">Decimal seconds enabled</string>
     <string name="menu_item_decimal_enabled_during_last">Decimal seconds enabled during last minute</string>
-    <string name="menu_item_title_ip">IP for the master unit</string>
+    <string name="menu_item_title_ip">Master unit IP</string>
     <string name="halftime">Halbzeit</string>
     <string name="title_activity_scoreboard">Scoreboard</string>
     <string name="title_activity_time_and_score_board">TimeAndScoreBoard</string>

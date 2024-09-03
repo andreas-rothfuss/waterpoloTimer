@@ -9,6 +9,8 @@ import de.wasserball.wabaclock.R;
 
 public class Boards extends AppCompatActivity {
 
+    public static WaterPoloTimer waterpoloTimer;
+
     View overlayForNavigationBar;
 
     @Override
@@ -33,30 +35,37 @@ public class Boards extends AppCompatActivity {
     }
 
     public void openShotclock(View view){
+        NetworkBoard.waterpoloTimer = waterpoloTimer;
         Intent intent = new Intent(this, Shotclock.class);
         startActivity(intent);
     }
     public void openFullBoard(View view){
+        NetworkBoard.waterpoloTimer = waterpoloTimer;
         Intent intent = new Intent(this, FullBoard.class);
         startActivity(intent);
     }
     public void openNewFullBoard(View view){
+        NetworkBoard.waterpoloTimer = waterpoloTimer;
         Intent intent = new Intent(this, NewFullBoard.class);
         startActivity(intent);
     }
     public void openMainTime(View view){
+        NetworkBoard.waterpoloTimer = waterpoloTimer;
         Intent intent = new Intent(this, MainTimeBoard.class);
         startActivity(intent);
     }
     public void openTimeAndScoreBoard(View view){
+        NetworkBoard.waterpoloTimer = waterpoloTimer;
         Intent intent = new Intent(this, TimeAndScoreBoard.class);
         startActivity(intent);
     }
     public void openScoreBoard(View view){
+        NetworkBoard.waterpoloTimer = waterpoloTimer;
         Intent intent = new Intent(this, Scoreboard.class);
         startActivity(intent);
     }
     public void openZN2(View view){
+        NetworkBoard.waterpoloTimer = waterpoloTimer;
         Intent intent = new Intent(this, ShotclockRemoteControl.class);
         startActivity(intent);
     }
