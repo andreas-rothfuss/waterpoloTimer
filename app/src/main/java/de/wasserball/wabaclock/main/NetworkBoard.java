@@ -16,7 +16,9 @@ import java.util.TimerTask;
 import de.wasserball.wabaclock.settings.AppSettings;
 import msg.OpenIGTMessage;
 import msg.capability.GetCapabilityMessage;
+import msg.command.CommandMessage;
 import msg.sensor.GetSensorMessage;
+import msg.string.GetStringMessage;
 import network.Client;
 import network.ServerAdress;
 
@@ -58,7 +60,8 @@ abstract class NetworkBoard extends AppCompatActivity {
 
                 ServerAdress[] matchingIPs = Client.autodiscover(
                         WaterpoloClockServer.SERVER_PORT,
-                        GetCapabilityMessage.DATA_TYPE, GetSensorMessage.DATA_TYPE);
+                        GetCapabilityMessage.DATA_TYPE, GetSensorMessage.DATA_TYPE,
+                        GetStringMessage.DATA_TYPE, CommandMessage.DATA_TYPE);
 
                 for (int i = 0; i < matchingIPs.length; i++) {
                     /** found a non-loopback address */
