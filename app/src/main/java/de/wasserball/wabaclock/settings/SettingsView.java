@@ -19,6 +19,7 @@ public class SettingsView extends AppCompatActivity implements ParameterDialogIn
     Button btnTimeoutWarningVal;
     Button btnOffenceTimeMajorVal;
     Button btnOffenceTimeMinorVal;
+    Switch btnOffenceTimeMinorResetVal;
     Button btnExclusionTimeDuration;
     Switch btnSoundEnabledVal;
     Switch btnDecimalEnabledVal;
@@ -42,6 +43,7 @@ public class SettingsView extends AppCompatActivity implements ParameterDialogIn
         btnTimeoutWarningVal = findViewById(R.id.textViewTimeoutEndWarningValue);
         btnOffenceTimeMajorVal = findViewById(R.id.textViewOffenceTimeMajorValue);
         btnOffenceTimeMinorVal = findViewById(R.id.textViewOffennceTimeMinorValue);
+        btnOffenceTimeMinorResetVal = findViewById(R.id.textViewOffennceTimeMinorResetSettingValue);
         btnExclusionTimeDuration = findViewById(R.id.textViewExclusionTimeValue);
         btnDecimalEnabledVal = findViewById(R.id.btnViewDecimalEnabledValue);
         btnDecimalEnabledDuringLastMinuteVal = findViewById(R.id.btnDecimalEnabledDuringLastMinuteValue);
@@ -63,6 +65,7 @@ public class SettingsView extends AppCompatActivity implements ParameterDialogIn
         btnTimeoutWarningVal.setText(Integer.toString(AppSettings.TIMEOUT_END_WARNING.value));
         btnOffenceTimeMajorVal.setText(Integer.toString(AppSettings.OFFENCE_TIME_DURATION.value));
         btnOffenceTimeMinorVal.setText(Integer.toString(AppSettings.OFFENCE_TIME_MINOR_DURATION.value));
+        btnOffenceTimeMinorResetVal.setChecked(AppSettings.OFFENCE_TIME_MINOR_DURATION_RESET.value);
         btnExclusionTimeDuration.setText(Integer.toString(AppSettings.EXCLUSION_TIME_DURATION.value));
         btnSoundEnabledVal.setChecked(AppSettings.ENABLE_SOUND.value);
         btnDecimalEnabledVal.setChecked(AppSettings.ENABLE_DECIMAL.value);
@@ -104,6 +107,12 @@ public class SettingsView extends AppCompatActivity implements ParameterDialogIn
     public void onOffenceTimeMinorDurationClicked(View view){
         ParameterDialogInteger dialog = new ParameterDialogInteger(AppSettings.OFFENCE_TIME_MINOR_DURATION);
         dialog.show(getSupportFragmentManager(), "");
+    }
+    public void onOffenceTimeMinorDurationResetClicked(View view){
+        BooleanSetting setting = AppSettings.OFFENCE_TIME_MINOR_DURATION_RESET;
+        setting.applyValue(AppSettings.getSharedPreferences(
+                getApplicationContext()), !setting.value);
+        updateSettingsValueDisplay();
     }
     public void onExclusionTimeDurationClicked(View view){
         ParameterDialogInteger dialog = new ParameterDialogInteger(AppSettings.EXCLUSION_TIME_DURATION);

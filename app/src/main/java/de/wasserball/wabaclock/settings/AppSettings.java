@@ -61,6 +61,10 @@ public class AppSettings {
             "offence_minor_duration", 1, 59, 20,
             "Set minor offence duration in seconds");
 
+    public static final BooleanSetting OFFENCE_TIME_MINOR_DURATION_RESET = new BooleanSetting(
+            "offence_minor_duration_reset", true,
+            "Reset shotclock time to minor duration only if minor duration is larger than shotclock time[s]");
+
     public static final IntegerSetting EXCLUSION_TIME_DURATION = new IntegerSetting(
             "exclusion_time_duration", 0, 59, 20,
             "Set duration of exclusion time, use 0 to disable");
@@ -132,6 +136,7 @@ public class AppSettings {
         TIMEOUT_END_WARNING.readFromSettings(settings);
         OFFENCE_TIME_DURATION.readFromSettings(settings);
         OFFENCE_TIME_MINOR_DURATION.readFromSettings(settings);
+        OFFENCE_TIME_MINOR_DURATION_RESET.readFromSettings(settings);
         EXCLUSION_TIME_DURATION.readFromSettings(settings);
         ENABLE_SOUND.readFromSettings(settings);
         ENABLE_DECIMAL.readFromSettings(settings);

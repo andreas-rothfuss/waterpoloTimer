@@ -24,6 +24,7 @@
     <string name="menu_item_title_time_per_period">Time per period [min]</string>
     <string name="menu_item_title_offence_time_major">Shotclock time duration [s]</string>
     <string name="menu_item_title_offence_time_minor">Shotclock time minor duration [s]</string>
+    <string name="menu_item_title_offence_time_minor_reset">Reset shotclock time to minor duration only if minor duration is larger than shotclock time</string>
     <string name="menu_item_title_exclusion_time">Exclusion time duration [s], use 0 to disable</string>
     <string name="menu_item_title_timeout_time">Time per timeout [s]</string>
     <string name="menu_item_title_half_time">Halftime duration [min]</string>

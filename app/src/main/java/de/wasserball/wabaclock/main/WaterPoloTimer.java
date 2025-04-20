@@ -300,8 +300,15 @@ public class WaterPoloTimer{
         offenceTime = seconds2ms(AppSettings.OFFENCE_TIME_DURATION.value);
     }
     protected void resetOffenceTimeMinor(){
-        offenceTime = seconds2ms(
-                AppSettings.OFFENCE_TIME_MINOR_DURATION.value);
+        boolean offenceTimeMinorReset = AppSettings.OFFENCE_TIME_MINOR_DURATION_RESET.value;
+        long offenceTimeMinorDuration = seconds2ms(AppSettings.OFFENCE_TIME_MINOR_DURATION.value);
+        boolean resetOffenceTime = true;
+        if (offenceTimeMinorReset) {
+            resetOffenceTime = offenceTime < offenceTimeMinorDuration;
+        }
+        if (resetOffenceTime) {
+            offenceTime = offenceTimeMinorDuration;
+        }
     }
 
     protected void resetExclusionTimeHome(int i){
