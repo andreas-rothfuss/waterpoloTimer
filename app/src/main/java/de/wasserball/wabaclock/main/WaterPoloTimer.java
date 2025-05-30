@@ -27,6 +27,7 @@ public class WaterPoloTimer{
     private final WaterpoloClock activity;
 
     private boolean timerRunning = false;
+    private boolean offenceTimerRunning = false;
 
     int period;
     boolean isBreak = false;
@@ -132,7 +133,7 @@ public class WaterPoloTimer{
             long timeDiff = currentTime - lastTimerUpdateTime;
             if (timeout == Long.MIN_VALUE) {
                 mainTime = mainTime - timeDiff;
-                if (!isBreak) {
+                if (offenceTimerRunning && !isBreak) {
                     offenceTime = offenceTime - timeDiff;
 
                     for (int i0 = 0; i0 < exclusionTime.length; i0++) {
@@ -195,12 +196,24 @@ public class WaterPoloTimer{
 
     void start(){
         timerRunning = true;
+        offenceTimerRunning = true;
+    }
+
+    void startOffenceTime(){
+        offenceTimerRunning = true;
     }
 
     void stop(){
         timerRunning = false;
+        offenceTimerRunning = false;
         storeState();
     }
+
+    void stopOffenceTime(){
+        offenceTimerRunning = false;
+        storeState();
+    }
+
     private void storeState() {
         AppSettings.PERIOD.applyValue(getSharedPreferences(), period);
         AppSettings.IS_BREAK.applyValue(getSharedPreferences(), isBreak);
@@ -227,6 +240,20 @@ public class WaterPoloTimer{
         else
             start();
         if (timerRunning) {
+            lastTimerUpdateTime = System.currentTimeMillis();
+        }
+    }
+
+    void startStopOffenceTime(){
+        if (offenceTimerRunning){
+            if ((isBreak || isTimeout()) && !AppSettings.STOP_BREAK_AND_TIMEOUT.value){
+                return;
+            }
+            stopOffenceTime();
+        }
+        else
+            startOffenceTime();
+        if (offenceTimerRunning) {
             lastTimerUpdateTime = System.currentTimeMillis();
         }
     }

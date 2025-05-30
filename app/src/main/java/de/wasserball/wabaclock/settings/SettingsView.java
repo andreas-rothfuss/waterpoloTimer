@@ -2,14 +2,15 @@ package de.wasserball.wabaclock.settings;
 
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
+
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.Switch;
 
 import de.wasserball.wabaclock.R;
 
-public class SettingsView extends AppCompatActivity implements ParameterDialogInteger.DialogListener,
-        ParameterDialogString.DialogListener {
+public class SettingsView extends AppCompatActivity implements DialogListener {
 
     Button btnNbOfPeriodsVal;
     Button btnPeriodVal;
@@ -20,6 +21,7 @@ public class SettingsView extends AppCompatActivity implements ParameterDialogIn
     Button btnOffenceTimeMajorVal;
     Button btnOffenceTimeMinorVal;
     Switch btnOffenceTimeMinorResetVal;
+    Switch btnDecoupleTimersVal;
     Button btnExclusionTimeDuration;
     Switch btnSoundEnabledVal;
     Switch btnDecimalEnabledVal;
@@ -28,6 +30,16 @@ public class SettingsView extends AppCompatActivity implements ParameterDialogIn
     Switch btnPauseDuringBreakVal;
     Switch btnUseAutodiscovery;
     Button btnMasterIPVal;
+
+    LinearLayout generalSettingsLayout;
+    LinearLayout generalSettingsSummaryLayout;
+    LinearLayout generalSettingsDetailLayout;
+    LinearLayout offenceTimeSettingsLayout;
+    LinearLayout offenceTimeSettingsSummaryLayout;
+    LinearLayout offenceTimeSettingsDetailLayout;
+    LinearLayout remoteSettingsLayout;
+    LinearLayout remoteSettingsSummaryLayout;
+    LinearLayout remoteSettingsDetailLayout;
 
 
     @Override
@@ -43,7 +55,8 @@ public class SettingsView extends AppCompatActivity implements ParameterDialogIn
         btnTimeoutWarningVal = findViewById(R.id.textViewTimeoutEndWarningValue);
         btnOffenceTimeMajorVal = findViewById(R.id.textViewOffenceTimeMajorValue);
         btnOffenceTimeMinorVal = findViewById(R.id.textViewOffennceTimeMinorValue);
-        btnOffenceTimeMinorResetVal = findViewById(R.id.textViewOffennceTimeMinorResetSettingValue);
+        btnOffenceTimeMinorResetVal = findViewById(R.id.textViewOffenceTimeMinorResetSettingValue);
+        btnDecoupleTimersVal = findViewById(R.id.textViewDecoupleTimersValue);
         btnExclusionTimeDuration = findViewById(R.id.textViewExclusionTimeValue);
         btnDecimalEnabledVal = findViewById(R.id.btnViewDecimalEnabledValue);
         btnDecimalEnabledDuringLastMinuteVal = findViewById(R.id.btnDecimalEnabledDuringLastMinuteValue);
@@ -52,6 +65,16 @@ public class SettingsView extends AppCompatActivity implements ParameterDialogIn
         btnPauseDuringBreakVal = findViewById(R.id.switchPauseDuringBreakValue);
         btnUseAutodiscovery = findViewById(R.id.switchAutodiscoveryEnabledValue);
         btnMasterIPVal = findViewById(R.id.textViewEditIP);
+
+        generalSettingsLayout = findViewById(R.id.GeneralSettingsLayout);
+        generalSettingsSummaryLayout = findViewById(R.id.GeneralSettingsSummaryLayout);
+        generalSettingsDetailLayout = findViewById(R.id.GeneralSettingsDetailLayout);
+        offenceTimeSettingsLayout = findViewById(R.id.OffenceTimeSettingsLayout);
+        offenceTimeSettingsSummaryLayout = findViewById(R.id.OffenceTimeSettingsSummaryLayout);
+        offenceTimeSettingsDetailLayout = findViewById(R.id.OffenceTimeSettingsDetailLayout);
+        remoteSettingsLayout = findViewById(R.id.RemoteSettingsLayout);
+        remoteSettingsSummaryLayout = findViewById(R.id.RemoteSettingsSummaryLayout);
+        remoteSettingsDetailLayout = findViewById(R.id.RemoteSettingsDetailLayout);
 
         updateSettingsValueDisplay();
     }
@@ -66,6 +89,7 @@ public class SettingsView extends AppCompatActivity implements ParameterDialogIn
         btnOffenceTimeMajorVal.setText(Integer.toString(AppSettings.OFFENCE_TIME_DURATION.value));
         btnOffenceTimeMinorVal.setText(Integer.toString(AppSettings.OFFENCE_TIME_MINOR_DURATION.value));
         btnOffenceTimeMinorResetVal.setChecked(AppSettings.OFFENCE_TIME_MINOR_DURATION_RESET.value);
+        btnDecoupleTimersVal.setChecked(AppSettings.DECOUPLE_TIMERS.value);
         btnExclusionTimeDuration.setText(Integer.toString(AppSettings.EXCLUSION_TIME_DURATION.value));
         btnSoundEnabledVal.setChecked(AppSettings.ENABLE_SOUND.value);
         btnDecimalEnabledVal.setChecked(AppSettings.ENABLE_DECIMAL.value);
@@ -74,6 +98,34 @@ public class SettingsView extends AppCompatActivity implements ParameterDialogIn
         btnPauseDuringBreakVal.setChecked(AppSettings.STOP_BREAK_AND_TIMEOUT.value);
         btnUseAutodiscovery.setChecked(AppSettings.USE_AUTODISCOVERY.value);
         btnMasterIPVal.setText(AppSettings.MASTER_IP.value);
+
+//        generalSettingsLayout.setWeightSum(2);
+//        generalSettingsDetailLayout.setWeightSum(0);
+//        generalSettingsDetailLayout.setVisibility(View.GONE);
+//        offenceTimeSettingsLayout.setWeightSum(2);
+//        offenceTimeSettingsDetailLayout.setWeightSum(0);
+//        offenceTimeSettingsDetailLayout.setVisibility(View.GONE);
+//        remoteSettingsLayout.setWeightSum(2);
+//        remoteSettingsDetailLayout.setWeightSum(0);
+//        remoteSettingsDetailLayout.setVisibility(View.GONE);
+    }
+
+    public void toggleLayoutVisibility(LinearLayout layout){
+        if (layout.getVisibility() == View.VISIBLE){
+            layout.setVisibility(View.GONE);
+        }
+        else {
+            layout.setVisibility(View.VISIBLE);
+        }
+    }
+    public void onGeneralSettingsClicked(View view){
+        toggleLayoutVisibility(generalSettingsDetailLayout);
+    }
+    public void onOffenceTimeSettingsClicked(View view){
+        toggleLayoutVisibility(offenceTimeSettingsDetailLayout);
+    }
+    public void onRemoteSettingsClicked(View view){
+        toggleLayoutVisibility(remoteSettingsDetailLayout);
     }
 
     public void onNbOfPeriodsClicked(View view){
@@ -110,6 +162,12 @@ public class SettingsView extends AppCompatActivity implements ParameterDialogIn
     }
     public void onOffenceTimeMinorDurationResetClicked(View view){
         BooleanSetting setting = AppSettings.OFFENCE_TIME_MINOR_DURATION_RESET;
+        setting.applyValue(AppSettings.getSharedPreferences(
+                getApplicationContext()), !setting.value);
+        updateSettingsValueDisplay();
+    }
+    public void onDecoupleTimersClicked(View view){
+        BooleanSetting setting = AppSettings.DECOUPLE_TIMERS;
         setting.applyValue(AppSettings.getSharedPreferences(
                 getApplicationContext()), !setting.value);
         updateSettingsValueDisplay();
@@ -164,6 +222,13 @@ public class SettingsView extends AppCompatActivity implements ParameterDialogIn
 
     @Override
     public void applyValue(IntegerSetting setting, int value) {
+        setting.applyValue(AppSettings.getSharedPreferences(
+                getApplicationContext()), value);
+        updateSettingsValueDisplay();
+    }
+
+    @Override
+    public void applyValue(ColorSetting setting, int value) {
         setting.applyValue(AppSettings.getSharedPreferences(
                 getApplicationContext()), value);
         updateSettingsValueDisplay();

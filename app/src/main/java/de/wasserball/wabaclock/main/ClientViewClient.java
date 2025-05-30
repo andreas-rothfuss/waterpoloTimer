@@ -38,7 +38,7 @@ public class ClientViewClient extends AutoDiscoveryOpenIGTLinkClient{
         }
         if (message instanceof StringMessage) {
             //Log.info("Message received: " + message.toString());
-            onRxString(message.getDeviceName(), ((StringMessage)message).getMessage());
+            onRxString(message.getDeviceName(), ((StringMessage)message));
         }
     }
 
@@ -84,13 +84,16 @@ public class ClientViewClient extends AutoDiscoveryOpenIGTLinkClient{
         }
     }
 
-    protected void onRxString(String deviceName, String data){
-        if (data != null){
+    protected void onRxString(String deviceName, StringMessage message){
+        if (message != null && message.getMessage() != null){
             if (deviceName.equals(WaterPoloTimer.HOME_TEAM_DEVICE_NAME)) {
-                activity.setHomeTeamName(data);
+                activity.setHomeTeamName(message.getMessage());
+                if (message.getMetaData() != null) {
+                    activity.setHomeTeamColor(message.getMetaData().getValue(AppSettings.HOME_TEAM_COLOR.key));
+                }
             }
             if (deviceName.equals(WaterPoloTimer.GUEST_TEAM_DEVICE_NAME)) {
-                activity.setGuestTeamName(data);
+                activity.setGuestTeamName(message.getMessage());
             }
         }
     }

@@ -13,580 +13,753 @@
         android:orientation="vertical">
 
         <LinearLayout
+            android:id="@+id/GeneralSettingsLayout"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"
-            android:orientation="horizontal">
+            android:layout_weight="7"
+            android:orientation="vertical">
 
-            <Button
-                android:id="@+id/btnShotClock"
-                style="@style/Widget.AppCompat.Button.Borderless"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="4"
-                android:background="@android:color/background_dark"
-                android:onClick="onNbOfPeriodsClicked"
-                android:text="@string/menu_item_title_nbOfPeriods"
-                android:textAlignment="textStart"
-                android:textColor="@color/cyan"
-                app:autoSizeMaxTextSize="40sp"
-                app:autoSizeMinTextSize="12sp"
-                app:autoSizeStepGranularity="2sp"
-                app:autoSizeTextType="uniform" />
-
-            <Button
-                android:id="@+id/textViewNbOfPeriodsValue"
-                style="@style/Widget.AppCompat.Button.Borderless"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:background="@android:color/background_dark"
-                android:contentDescription="@string/set_number_of_periods_content_description"
-                android:onClick="onNbOfPeriodsClicked"
-                android:textColor="@color/cyan"
-                app:autoSizeMaxTextSize="40sp"
-                app:autoSizeMinTextSize="12sp"
-                app:autoSizeStepGranularity="2sp"
-                app:autoSizeTextType="uniform" />
-
-            <Button
-                android:id="@+id/textViewTimePerPeriod"
-                style="@style/Widget.AppCompat.Button.Borderless"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="4"
-                android:background="@android:color/background_dark"
-                android:onClick="onTimePerPeriodClicked"
-                android:text="@string/menu_item_title_time_per_period"
-                android:textAlignment="textStart"
-                android:textColor="@color/cyan"
-                app:autoSizeMaxTextSize="40sp"
-                app:autoSizeMinTextSize="12sp"
-                app:autoSizeStepGranularity="2sp"
-                app:autoSizeTextType="uniform" />
-
-            <Button
-                android:id="@+id/textViewTimePerPeriodValue"
-                style="@style/Widget.AppCompat.Button.Borderless"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:background="@android:color/background_dark"
-                android:contentDescription="@string/minutes_per_period_content_description"
-                android:onClick="onTimePerPeriodClicked"
-                android:textColor="@color/cyan"
-                app:autoSizeMaxTextSize="40sp"
-                app:autoSizeMinTextSize="12sp"
-                app:autoSizeStepGranularity="2sp"
-                app:autoSizeTextType="uniform" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:orientation="horizontal">
-
-            <Button
-                android:id="@+id/textViewHalfTime"
-                style="@style/Widget.AppCompat.Button.Borderless"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="4"
-                android:background="@android:color/background_dark"
-                android:onClick="onHalftimeDurationClicked"
-                android:text="@string/menu_item_title_half_time"
-                android:textAlignment="textStart"
-                android:textColor="@color/cyan"
-                app:autoSizeMaxTextSize="40sp"
-                app:autoSizeMinTextSize="12sp"
-                app:autoSizeStepGranularity="2sp"
-                app:autoSizeTextType="uniform" />
-
-            <Button
-                android:id="@+id/textViewHalfTimeValue"
-                style="@style/Widget.AppCompat.Button.Borderless"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:background="@android:color/background_dark"
-                android:onClick="onHalftimeDurationClicked"
-                android:textColor="@color/cyan"
-                app:autoSizeMaxTextSize="40sp"
-                app:autoSizeMinTextSize="12sp"
-                app:autoSizeStepGranularity="2sp"
-                app:autoSizeTextType="uniform" />
-
-            <Button
-                android:id="@+id/textViewBreakTime"
-                style="@style/Widget.AppCompat.Button.Borderless"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="4"
-                android:background="@android:color/background_dark"
-                android:onClick="onBreakDurationClicked"
-                android:text="@string/menu_item_title_break_time"
-                android:textAlignment="textStart"
-                android:textColor="@color/cyan"
-                app:autoSizeMaxTextSize="40sp"
-                app:autoSizeMinTextSize="12sp"
-                app:autoSizeStepGranularity="2sp"
-                app:autoSizeTextType="uniform" />
-
-            <Button
-                android:id="@+id/textViewBreakTimeValue"
-                style="@style/Widget.AppCompat.Button.Borderless"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:background="@android:color/background_dark"
-                android:onClick="onBreakDurationClicked"
-                android:textColor="@color/cyan"
-                app:autoSizeMaxTextSize="40sp"
-                app:autoSizeMinTextSize="12sp"
-                app:autoSizeStepGranularity="2sp"
-                app:autoSizeTextType="uniform" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:orientation="horizontal">
-
-            <Button
-                android:id="@+id/textViewTimeout"
-                style="@style/Widget.AppCompat.Button.Borderless"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="4"
-                android:background="@android:color/background_dark"
-                android:onClick="onTimeoutDurationClicked"
-                android:text="@string/menu_item_title_timeout_time"
-                android:textAlignment="textStart"
-                android:textColor="@color/cyan"
-                app:autoSizeMaxTextSize="40sp"
-                app:autoSizeMinTextSize="12sp"
-                app:autoSizeStepGranularity="2sp"
-                app:autoSizeTextType="uniform" />
-
-            <Button
-                android:id="@+id/textViewTimeoutValue"
-                style="@style/Widget.AppCompat.Button.Borderless"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:background="@android:color/background_dark"
-                android:onClick="onTimeoutDurationClicked"
-                android:textColor="@color/cyan"
-                app:autoSizeMaxTextSize="40sp"
-                app:autoSizeMinTextSize="12sp"
-                app:autoSizeStepGranularity="2sp"
-                app:autoSizeTextType="uniform" />
-
-            <Button
-                android:id="@+id/textViewTimeoutEndWarning"
-                style="@style/Widget.AppCompat.Button.Borderless"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="4"
-                android:background="@android:color/background_dark"
-                android:onClick="onWarningPriorToTimeoutEndClicked"
-                android:text="@string/menu_item_title_timeout_end_warning"
-                android:textAlignment="textStart"
-                android:textColor="@color/cyan"
-                app:autoSizeMaxTextSize="40sp"
-                app:autoSizeMinTextSize="12sp"
-                app:autoSizeStepGranularity="2sp"
-                app:autoSizeTextType="uniform" />
-
-            <Button
-                android:id="@+id/textViewTimeoutEndWarningValue"
-                style="@style/Widget.AppCompat.Button.Borderless"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:background="@android:color/background_dark"
-                android:onClick="onWarningPriorToTimeoutEndClicked"
-                android:textColor="@color/cyan"
-                app:autoSizeMaxTextSize="40sp"
-                app:autoSizeMinTextSize="12sp"
-                app:autoSizeStepGranularity="2sp"
-                app:autoSizeTextType="uniform" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:orientation="horizontal">
-
-            <Button
-                android:id="@+id/textViewOffenceTimeMajor"
-                style="@style/Widget.AppCompat.Button.Borderless"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="4"
-                android:background="@android:color/background_dark"
-                android:onClick="onOffenceTimeDurationClicked"
-                android:text="@string/menu_item_title_offence_time_major"
-                android:textAlignment="textStart"
-                android:textColor="@color/cyan"
-                app:autoSizeMaxTextSize="40sp"
-                app:autoSizeMinTextSize="12sp"
-                app:autoSizeStepGranularity="2sp"
-                app:autoSizeTextType="uniform" />
-
-            <Button
-                android:id="@+id/textViewOffenceTimeMajorValue"
-                style="@style/Widget.AppCompat.Button.Borderless"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:background="@android:color/background_dark"
-                android:onClick="onOffenceTimeDurationClicked"
-                android:textColor="@color/cyan"
-                app:autoSizeMaxTextSize="40sp"
-                app:autoSizeMinTextSize="12sp"
-                app:autoSizeStepGranularity="2sp"
-                app:autoSizeTextType="uniform" />
-
-            <Button
-                android:id="@+id/textViewOffennceTimeMinor"
-                style="@style/Widget.AppCompat.Button.Borderless"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="4"
-                android:background="@android:color/background_dark"
-                android:onClick="onOffenceTimeMinorDurationClicked"
-                android:text="@string/menu_item_title_offence_time_minor"
-                android:textAlignment="textStart"
-                android:textColor="@color/cyan"
-                app:autoSizeMaxTextSize="40sp"
-                app:autoSizeMinTextSize="12sp"
-                app:autoSizeStepGranularity="2sp"
-                app:autoSizeTextType="uniform" />
-
-            <Button
-                android:id="@+id/textViewOffennceTimeMinorValue"
-                style="@style/Widget.AppCompat.Button.Borderless"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:background="@android:color/background_dark"
-                android:onClick="onOffenceTimeMinorDurationClicked"
-                android:textColor="@color/cyan"
-                app:autoSizeMaxTextSize="40sp"
-                app:autoSizeMinTextSize="12sp"
-                app:autoSizeStepGranularity="2sp"
-                app:autoSizeTextType="uniform" />
-
-        </LinearLayout>
-
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:orientation="horizontal">
-
-            <Button
-                android:id="@+id/textViewOffennceTimeMinorResetSetting"
-                style="@style/Widget.AppCompat.Button.Borderless"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="9"
-                android:background="@android:color/background_dark"
-                android:onClick="onOffenceTimeMinorDurationResetClicked"
-                android:text="@string/menu_item_title_offence_time_minor_reset"
-                android:textAlignment="textStart"
-                android:textColor="@color/cyan"
-                app:autoSizeMaxTextSize="40sp"
-                app:autoSizeMinTextSize="12sp"
-                app:autoSizeStepGranularity="2sp"
-                app:autoSizeTextType="uniform" />
-
-            <Switch
-                android:id="@+id/textViewOffennceTimeMinorResetSettingValue"
-                style="@style/Widget.AppCompat.Button.Borderless"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:background="@android:color/background_dark"
-                android:contentDescription="@string/menu_item_decimal_enabled"
-                android:onClick="onOffenceTimeMinorDurationResetClicked"
-                android:textAlignment="gravity"
-                android:textColor="@color/colorPrimaryDark" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:orientation="horizontal">
-
-            <Button
-                android:id="@+id/textViewExclusionTime"
-                style="@style/Widget.AppCompat.Button.Borderless"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="4"
-                android:background="@android:color/background_dark"
-                android:onClick="onExclusionTimeDurationClicked"
-                android:text="@string/menu_item_title_exclusion_time"
-                android:textAlignment="textStart"
-                android:textColor="@color/cyan"
-                app:autoSizeMaxTextSize="40sp"
-                app:autoSizeMinTextSize="12sp"
-                app:autoSizeStepGranularity="2sp"
-                app:autoSizeTextType="uniform" />
-
-            <Button
-                android:id="@+id/textViewExclusionTimeValue"
-                style="@style/Widget.AppCompat.Button.Borderless"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:background="@android:color/background_dark"
-                android:onClick="onExclusionTimeDurationClicked"
-                android:textColor="@color/cyan"
-                app:autoSizeMaxTextSize="40sp"
-                app:autoSizeMinTextSize="12sp"
-                app:autoSizeStepGranularity="2sp"
-                app:autoSizeTextType="uniform" />
-
-            <Button
-                android:id="@+id/textViewDecimalEnabled"
-                style="@style/Widget.AppCompat.Button.Borderless"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="4"
-                android:background="@android:color/background_dark"
-                android:onClick="onEnableDecimalClicked"
-                android:text="@string/menu_item_decimal_enabled"
-                android:textAlignment="textStart"
-                android:textColor="@color/cyan"
-                app:autoSizeMaxTextSize="40sp"
-                app:autoSizeMinTextSize="12sp"
-                app:autoSizeStepGranularity="2sp"
-                app:autoSizeTextType="uniform" />
-
-            <Switch
-                android:id="@+id/btnViewDecimalEnabledValue"
-                style="@style/Widget.AppCompat.Button.Borderless"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:background="@android:color/background_dark"
-                android:contentDescription="@string/menu_item_decimal_enabled"
-                android:onClick="onEnableDecimalClicked"
-                android:textAlignment="gravity"
-                android:textColor="@color/colorPrimaryDark" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:orientation="horizontal">
-
-            <Button
-                android:id="@+id/textViewSoundEnabled"
-                style="@style/Widget.AppCompat.Button.Borderless"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="4"
-                android:background="@android:color/background_dark"
-                android:onClick="onEnableSounClicked"
-                android:text="@string/menu_item_sound_enabled"
-                android:textAlignment="textStart"
-                android:textColor="@color/cyan"
-                app:autoSizeMaxTextSize="40sp"
-                app:autoSizeMinTextSize="12sp"
-                app:autoSizeStepGranularity="2sp"
-                app:autoSizeTextType="uniform" />
-
-            <Switch
-                android:id="@+id/textViewSoundEnabledValue"
-                style="@style/Widget.AppCompat.Button.Borderless"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:background="@android:color/background_dark"
-                android:contentDescription="@string/menu_item_sound_enabled"
-                android:onClick="onEnableSounClicked"
-                android:textAlignment="gravity"
-                android:textColor="@color/colorPrimaryDark" />
-
-            <Button
-                android:id="@+id/textViewDecimalEnabledDuringLastMinute"
-                style="@style/Widget.AppCompat.Button.Borderless"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="4"
-                android:background="@android:color/background_dark"
-                android:contentDescription="@string/menu_item_decimal_enabled_during_last"
-                android:onClick="onEnableDecimalDuringLastClicked"
-                android:text="@string/menu_item_decimal_enabled_during_last"
-                android:textAlignment="textStart"
-                android:textColor="@color/cyan"
-                app:autoSizeMaxTextSize="40sp"
-                app:autoSizeMinTextSize="12sp"
-                app:autoSizeStepGranularity="2sp"
-                app:autoSizeTextType="uniform" />
-
-            <Switch
-                android:id="@+id/btnDecimalEnabledDuringLastMinuteValue"
-                style="@style/Widget.AppCompat.Button.Borderless"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:background="@android:color/background_dark"
-                android:contentDescription="@string/menu_item_decimal_enabled_during_last"
-                android:onClick="onEnableDecimalDuringLastClicked"
-                android:textAlignment="gravity"
-                android:textColor="@color/colorPrimaryDark" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:orientation="horizontal">
-
-            <Button
-                android:id="@+id/switchShotResetEnabled"
-                style="@style/Widget.AppCompat.Button.Borderless"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="4"
-                android:background="@android:color/background_dark"
-                android:contentDescription="@string/menu_item_shotclock_reset_enabled"
-                android:onClick="onResetShotClockClicked"
-                android:text="@string/menu_item_shotclock_reset_enabled"
-                android:textAlignment="textStart"
-                android:textColor="@color/cyan"
-                app:autoSizeMaxTextSize="40sp"
-                app:autoSizeMinTextSize="12sp"
-                app:autoSizeStepGranularity="2sp"
-                app:autoSizeTextType="uniform" />
-
-            <Switch
-                android:id="@+id/switchShotResetEnabledValue"
-                style="@style/Widget.AppCompat.Button.Borderless"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:background="@android:color/background_dark"
-                android:contentDescription="@string/menu_item_shotclock_reset_enabled"
-                android:onClick="onResetShotClockClicked"
-                android:textAlignment="gravity"
-                android:textColor="@color/colorPrimaryDark" />
-
-            <Button
-                android:id="@+id/switchPauseDuringBreak"
-                style="@style/Widget.AppCompat.Button.Borderless"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="4"
-                android:background="@android:color/background_dark"
-                android:contentDescription="@string/menu_item_pause_during_break"
-                android:onClick="onEnablePauseDuringBreakClicked"
-                android:text="@string/menu_item_pause_during_break"
-                android:textAlignment="textStart"
-                android:textColor="@color/cyan"
-                app:autoSizeMaxTextSize="40sp"
-                app:autoSizeMinTextSize="12sp"
-                app:autoSizeStepGranularity="2sp"
-                app:autoSizeTextType="uniform" />
-
-            <Switch
-                android:id="@+id/switchPauseDuringBreakValue"
-                style="@style/Widget.AppCompat.Button.Borderless"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:background="@android:color/background_dark"
-                android:contentDescription="@string/menu_item_pause_during_break"
-                android:onClick="onEnablePauseDuringBreakClicked"
-                android:textAlignment="gravity"
-                android:textColor="@color/colorPrimaryDark" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:orientation="horizontal">
-
-            <Button
-                android:id="@+id/switchAutodiscoveryEnabled"
-                style="@style/Widget.AppCompat.Button.Borderless"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="4"
-                android:background="@android:color/background_dark"
-                android:contentDescription="@string/menu_item_autodicovery_enabled"
-                android:onClick="onAutodiscoveryClicked"
-                android:text="@string/menu_item_autodicovery_enabled"
-                android:textAlignment="textStart"
-                android:textColor="@color/cyan"
-                app:autoSizeMaxTextSize="40sp"
-                app:autoSizeMinTextSize="12sp"
-                app:autoSizeStepGranularity="2sp"
-                app:autoSizeTextType="uniform" />
-
-            <Switch
-                android:id="@+id/switchAutodiscoveryEnabledValue"
-                style="@style/Widget.AppCompat.Button.Borderless"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:background="@android:color/background_dark"
-                android:contentDescription="@string/menu_item_autodicovery_enabled"
-                android:onClick="onAutodiscoveryClicked"
-                android:textAlignment="gravity"
-                android:textColor="@color/colorPrimaryDark" />
-
-            <Button
-                android:id="@+id/textViewIP"
-                style="@style/Widget.AppCompat.Button.Borderless"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="3"
-                android:background="@android:color/background_dark"
-                android:onClick="onMasterIPClicked"
-                android:text="@string/menu_item_title_ip"
-                android:textAlignment="textStart"
-                android:textColor="@color/cyan"
-                app:autoSizeMaxTextSize="40sp"
-                app:autoSizeMinTextSize="12sp"
-                app:autoSizeStepGranularity="2sp"
-                app:autoSizeTextType="uniform" />
-
-            <Button
-                android:id="@+id/textViewEditIP"
-                style="@style/Widget.AppCompat.Button.Borderless"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
+            <LinearLayout
+                android:id="@+id/GeneralSettingsSummaryLayout"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
                 android:layout_weight="2"
-                android:background="@android:color/background_dark"
-                android:onClick="onMasterIPClicked"
-                android:text="@string/localhost"
-                android:textAlignment="gravity"
-                android:textColor="@color/cyan"
-                app:autoSizeMaxTextSize="40sp"
-                app:autoSizeMinTextSize="12sp"
-                app:autoSizeStepGranularity="2sp"
-                app:autoSizeTextType="uniform" />
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/textViewGeneralSettingsSummary"
+                    style="@style/Widget.AppCompat.Button.Borderless"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="4"
+                    android:background="@android:color/background_dark"
+                    android:onClick="onGeneralSettingsClicked"
+                    android:text="General Settings"
+                    android:textAlignment="textStart"
+                    android:textColor="@color/design_default_color_on_primary"
+                    app:autoSizeMaxTextSize="40sp"
+                    app:autoSizeMinTextSize="16sp"
+                    app:autoSizeStepGranularity="2sp"
+                    app:autoSizeTextType="uniform" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/GeneralSettingsDetailLayout"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="5"
+                android:orientation="vertical"
+                tools:visibility="visible">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:id="@+id/btnShotClock"
+                        style="@style/Widget.AppCompat.Button.Borderless"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="4"
+                        android:background="@android:color/background_dark"
+                        android:onClick="onNbOfPeriodsClicked"
+                        android:text="@string/menu_item_title_nbOfPeriods"
+                        android:textAlignment="textStart"
+                        android:textColor="@color/design_default_color_on_primary"
+                        app:autoSizeMaxTextSize="40sp"
+                        app:autoSizeMinTextSize="12sp"
+                        app:autoSizeStepGranularity="2sp"
+                        app:autoSizeTextType="uniform" />
+
+                    <Button
+                        android:id="@+id/textViewNbOfPeriodsValue"
+                        style="@style/Widget.AppCompat.Button.Borderless"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@android:color/background_dark"
+                        android:contentDescription="@string/set_number_of_periods_content_description"
+                        android:onClick="onNbOfPeriodsClicked"
+                        android:textColor="@color/design_default_color_on_primary"
+                        app:autoSizeMaxTextSize="40sp"
+                        app:autoSizeMinTextSize="12sp"
+                        app:autoSizeStepGranularity="2sp"
+                        app:autoSizeTextType="uniform" />
+
+                    <Button
+                        android:id="@+id/textViewSoundEnabled"
+                        style="@style/Widget.AppCompat.Button.Borderless"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="4"
+                        android:background="@android:color/background_dark"
+                        android:onClick="onEnableSounClicked"
+                        android:text="@string/menu_item_sound_enabled"
+                        android:textAlignment="textStart"
+                        android:textColor="@color/design_default_color_on_primary"
+                        app:autoSizeMaxTextSize="40sp"
+                        app:autoSizeMinTextSize="12sp"
+                        app:autoSizeStepGranularity="2sp"
+                        app:autoSizeTextType="uniform" />
+
+                    <Switch
+                        android:id="@+id/textViewSoundEnabledValue"
+                        style="@style/Widget.AppCompat.Button.Borderless"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@android:color/background_dark"
+                        android:contentDescription="@string/menu_item_decimal_enabled_during_last"
+                        android:onClick="onEnableDecimalDuringLastClicked"
+                        android:textAlignment="gravity"
+                        android:textColor="@color/colorPrimaryDark" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:id="@+id/textViewTimePerPeriod"
+                        style="@style/Widget.AppCompat.Button.Borderless"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="4"
+                        android:background="@android:color/background_dark"
+                        android:onClick="onTimePerPeriodClicked"
+                        android:text="@string/menu_item_title_time_per_period"
+                        android:textAlignment="textStart"
+                        android:textColor="@color/design_default_color_on_primary"
+                        app:autoSizeMaxTextSize="40sp"
+                        app:autoSizeMinTextSize="12sp"
+                        app:autoSizeStepGranularity="2sp"
+                        app:autoSizeTextType="uniform" />
+
+                    <Button
+                        android:id="@+id/textViewTimePerPeriodValue"
+                        style="@style/Widget.AppCompat.Button.Borderless"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@android:color/background_dark"
+                        android:contentDescription="@string/minutes_per_period_content_description"
+                        android:onClick="onTimePerPeriodClicked"
+                        android:textColor="@color/design_default_color_on_primary"
+                        app:autoSizeMaxTextSize="40sp"
+                        app:autoSizeMinTextSize="12sp"
+                        app:autoSizeStepGranularity="2sp"
+                        app:autoSizeTextType="uniform" />
+
+                    <Button
+                        android:id="@+id/textViewTimeout"
+                        style="@style/Widget.AppCompat.Button.Borderless"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="4"
+                        android:background="@android:color/background_dark"
+                        android:onClick="onTimeoutDurationClicked"
+                        android:text="@string/menu_item_title_timeout_time"
+                        android:textAlignment="textStart"
+                        android:textColor="@color/design_default_color_on_primary"
+                        app:autoSizeMaxTextSize="40sp"
+                        app:autoSizeMinTextSize="12sp"
+                        app:autoSizeStepGranularity="2sp"
+                        app:autoSizeTextType="uniform" />
+
+                    <Button
+                        android:id="@+id/textViewTimeoutValue"
+                        style="@style/Widget.AppCompat.Button.Borderless"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@android:color/background_dark"
+                        android:onClick="onTimeoutDurationClicked"
+                        android:textColor="@color/design_default_color_on_primary"
+                        app:autoSizeMaxTextSize="40sp"
+                        app:autoSizeMinTextSize="12sp"
+                        app:autoSizeStepGranularity="2sp"
+                        app:autoSizeTextType="uniform" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:id="@+id/textViewHalfTime"
+                        style="@style/Widget.AppCompat.Button.Borderless"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="4"
+                        android:background="@android:color/background_dark"
+                        android:onClick="onHalftimeDurationClicked"
+                        android:text="@string/menu_item_title_half_time"
+                        android:textAlignment="textStart"
+                        android:textColor="@color/design_default_color_on_primary"
+                        app:autoSizeMaxTextSize="40sp"
+                        app:autoSizeMinTextSize="12sp"
+                        app:autoSizeStepGranularity="2sp"
+                        app:autoSizeTextType="uniform" />
+
+                    <Button
+                        android:id="@+id/textViewHalfTimeValue"
+                        style="@style/Widget.AppCompat.Button.Borderless"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@android:color/background_dark"
+                        android:onClick="onHalftimeDurationClicked"
+                        android:textColor="@color/design_default_color_on_primary"
+                        app:autoSizeMaxTextSize="40sp"
+                        app:autoSizeMinTextSize="12sp"
+                        app:autoSizeStepGranularity="2sp"
+                        app:autoSizeTextType="uniform" />
+
+                    <Button
+                        android:id="@+id/textViewTimeoutEndWarning"
+                        style="@style/Widget.AppCompat.Button.Borderless"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="4"
+                        android:background="@android:color/background_dark"
+                        android:onClick="onWarningPriorToTimeoutEndClicked"
+                        android:text="@string/menu_item_title_timeout_end_warning"
+                        android:textAlignment="textStart"
+                        android:textColor="@color/design_default_color_on_primary"
+                        app:autoSizeMaxTextSize="40sp"
+                        app:autoSizeMinTextSize="12sp"
+                        app:autoSizeStepGranularity="2sp"
+                        app:autoSizeTextType="uniform" />
+
+                    <Button
+                        android:id="@+id/textViewTimeoutEndWarningValue"
+                        style="@style/Widget.AppCompat.Button.Borderless"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@android:color/background_dark"
+                        android:onClick="onWarningPriorToTimeoutEndClicked"
+                        android:textColor="@color/design_default_color_on_primary"
+                        app:autoSizeMaxTextSize="40sp"
+                        app:autoSizeMinTextSize="12sp"
+                        app:autoSizeStepGranularity="2sp"
+                        app:autoSizeTextType="uniform" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:id="@+id/textViewBreakTime"
+                        style="@style/Widget.AppCompat.Button.Borderless"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="4"
+                        android:background="@android:color/background_dark"
+                        android:onClick="onBreakDurationClicked"
+                        android:text="@string/menu_item_title_break_time"
+                        android:textAlignment="textStart"
+                        android:textColor="@color/design_default_color_on_primary"
+                        app:autoSizeMaxTextSize="40sp"
+                        app:autoSizeMinTextSize="12sp"
+                        app:autoSizeStepGranularity="2sp"
+                        app:autoSizeTextType="uniform" />
+
+                    <Button
+                        android:id="@+id/textViewBreakTimeValue"
+                        style="@style/Widget.AppCompat.Button.Borderless"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@android:color/background_dark"
+                        android:onClick="onBreakDurationClicked"
+                        android:textColor="@color/design_default_color_on_primary"
+                        app:autoSizeMaxTextSize="40sp"
+                        app:autoSizeMinTextSize="12sp"
+                        app:autoSizeStepGranularity="2sp"
+                        app:autoSizeTextType="uniform" />
+
+                    <Button
+                        android:id="@+id/textViewDecimalEnabled"
+                        style="@style/Widget.AppCompat.Button.Borderless"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="4"
+                        android:background="@android:color/background_dark"
+                        android:onClick="onEnableDecimalClicked"
+                        android:text="@string/menu_item_decimal_enabled"
+                        android:textAlignment="textStart"
+                        android:textColor="@color/design_default_color_on_primary"
+                        app:autoSizeMaxTextSize="40sp"
+                        app:autoSizeMinTextSize="12sp"
+                        app:autoSizeStepGranularity="2sp"
+                        app:autoSizeTextType="uniform" />
+
+                    <Switch
+                        android:id="@+id/btnViewDecimalEnabledValue"
+                        style="@style/Widget.AppCompat.Button.Borderless"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@android:color/background_dark"
+                        android:contentDescription="@string/menu_item_decimal_enabled"
+                        android:onClick="onEnableDecimalClicked"
+                        android:textAlignment="gravity"
+                        android:textColor="@color/colorPrimaryDark" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
+
+
+                    <Button
+                        android:id="@+id/switchPauseDuringBreak"
+                        style="@style/Widget.AppCompat.Button.Borderless"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="4"
+                        android:background="@android:color/background_dark"
+                        android:contentDescription="@string/menu_item_pause_during_break"
+                        android:onClick="onEnablePauseDuringBreakClicked"
+                        android:text="@string/menu_item_pause_during_break"
+                        android:textAlignment="textStart"
+                        android:textColor="@color/design_default_color_on_primary"
+                        app:autoSizeMaxTextSize="40sp"
+                        app:autoSizeMinTextSize="12sp"
+                        app:autoSizeStepGranularity="2sp"
+                        app:autoSizeTextType="uniform" />
+
+                    <Switch
+                        android:id="@+id/switchPauseDuringBreakValue"
+                        style="@style/Widget.AppCompat.Button.Borderless"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@android:color/background_dark"
+                        android:contentDescription="@string/menu_item_pause_during_break"
+                        android:onClick="onEnablePauseDuringBreakClicked"
+                        android:textAlignment="gravity"
+                        android:textColor="@color/colorPrimaryDark" />
+
+                    <Button
+                        android:id="@+id/textViewDecimalEnabledDuringLastMinute"
+                        style="@style/Widget.AppCompat.Button.Borderless"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="4"
+                        android:background="@android:color/background_dark"
+                        android:contentDescription="@string/menu_item_decimal_enabled_during_last"
+                        android:onClick="onEnableDecimalDuringLastClicked"
+                        android:text="@string/menu_item_decimal_enabled_during_last"
+                        android:textAlignment="textStart"
+                        android:textColor="@color/design_default_color_on_primary"
+                        app:autoSizeMaxTextSize="40sp"
+                        app:autoSizeMinTextSize="12sp"
+                        app:autoSizeStepGranularity="2sp"
+                        app:autoSizeTextType="uniform" />
+
+                    <Switch
+                        android:id="@+id/btnDecimalEnabledDuringLastMinuteValue"
+                        style="@style/Widget.AppCompat.Button.Borderless"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@android:color/background_dark"
+                        android:contentDescription="@string/menu_item_decimal_enabled_during_last"
+                        android:onClick="onEnableDecimalDuringLastClicked"
+                        android:textAlignment="gravity"
+                        android:textColor="@color/colorPrimaryDark" />
+
+                </LinearLayout>
+
+            </LinearLayout>
         </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/OffenceTimeSettingsLayout"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="7"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/OffenceTimeSettingsSummaryLayout"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="2"
+                android:orientation="horizontal">
+
+
+                <Button
+                    android:id="@+id/textViewOffenceTimeSettingsSummary"
+                    style="@style/Widget.AppCompat.Button.Borderless"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="4"
+                    android:background="@android:color/background_dark"
+                    android:onClick="onOffenceTimeSettingsClicked"
+                    android:text="Offence Time Settings"
+                    android:textAlignment="textStart"
+                    android:textColor="@color/design_default_color_on_primary"
+                    app:autoSizeMaxTextSize="40sp"
+                    app:autoSizeMinTextSize="16sp"
+                    app:autoSizeStepGranularity="2sp"
+                    app:autoSizeTextType="uniform" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/OffenceTimeSettingsDetailLayout"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="5"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:id="@+id/textViewOffenceTimeMajor"
+                        style="@style/Widget.AppCompat.Button.Borderless"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="4"
+                        android:background="@android:color/background_dark"
+                        android:onClick="onOffenceTimeDurationClicked"
+                        android:text="@string/menu_item_title_offence_time_major"
+                        android:textAlignment="textStart"
+                        android:textColor="@color/design_default_color_on_primary"
+                        app:autoSizeMaxTextSize="40sp"
+                        app:autoSizeMinTextSize="12sp"
+                        app:autoSizeStepGranularity="2sp"
+                        app:autoSizeTextType="uniform" />
+
+                    <Button
+                        android:id="@+id/textViewOffenceTimeMajorValue"
+                        style="@style/Widget.AppCompat.Button.Borderless"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@android:color/background_dark"
+                        android:onClick="onOffenceTimeDurationClicked"
+                        android:textColor="@color/design_default_color_on_primary"
+                        app:autoSizeMaxTextSize="40sp"
+                        app:autoSizeMinTextSize="12sp"
+                        app:autoSizeStepGranularity="2sp"
+                        app:autoSizeTextType="uniform" />
+
+                    <Button
+                        android:id="@+id/textViewOffennceTimeMinor"
+                        style="@style/Widget.AppCompat.Button.Borderless"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="4"
+                        android:background="@android:color/background_dark"
+                        android:onClick="onOffenceTimeMinorDurationClicked"
+                        android:text="@string/menu_item_title_offence_time_minor"
+                        android:textAlignment="textStart"
+                        android:textColor="@color/design_default_color_on_primary"
+                        app:autoSizeMaxTextSize="40sp"
+                        app:autoSizeMinTextSize="12sp"
+                        app:autoSizeStepGranularity="2sp"
+                        app:autoSizeTextType="uniform" />
+
+                    <Button
+                        android:id="@+id/textViewOffennceTimeMinorValue"
+                        style="@style/Widget.AppCompat.Button.Borderless"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@android:color/background_dark"
+                        android:onClick="onOffenceTimeMinorDurationClicked"
+                        android:textColor="@color/design_default_color_on_primary"
+                        app:autoSizeMaxTextSize="40sp"
+                        app:autoSizeMinTextSize="12sp"
+                        app:autoSizeStepGranularity="2sp"
+                        app:autoSizeTextType="uniform" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:id="@+id/switchShotResetEnabled"
+                        style="@style/Widget.AppCompat.Button.Borderless"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="4"
+                        android:background="@android:color/background_dark"
+                        android:contentDescription="@string/menu_item_shotclock_reset_enabled"
+                        android:onClick="onResetShotClockClicked"
+                        android:text="@string/menu_item_shotclock_reset_enabled"
+                        android:textAlignment="textStart"
+                        android:textColor="@color/design_default_color_on_primary"
+                        app:autoSizeMaxTextSize="40sp"
+                        app:autoSizeMinTextSize="12sp"
+                        app:autoSizeStepGranularity="2sp"
+                        app:autoSizeTextType="uniform" />
+
+                    <Switch
+                        android:id="@+id/switchShotResetEnabledValue"
+                        style="@style/Widget.AppCompat.Button.Borderless"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@android:color/background_dark"
+                        android:contentDescription="@string/menu_item_shotclock_reset_enabled"
+                        android:onClick="onResetShotClockClicked"
+                        android:textAlignment="gravity"
+                        android:textColor="@color/colorPrimaryDark" />
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:id="@+id/textViewOffenceTimeMinorResetSetting"
+                        style="@style/Widget.AppCompat.Button.Borderless"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="9"
+                        android:background="@android:color/background_dark"
+                        android:onClick="onOffenceTimeMinorDurationResetClicked"
+                        android:text="@string/menu_item_title_offence_time_minor_reset"
+                        android:textAlignment="textStart"
+                        android:textColor="@color/design_default_color_on_primary"
+                        app:autoSizeMaxTextSize="40sp"
+                        app:autoSizeMinTextSize="12sp"
+                        app:autoSizeStepGranularity="2sp"
+                        app:autoSizeTextType="uniform" />
+
+                    <Switch
+                        android:id="@+id/textViewOffenceTimeMinorResetSettingValue"
+                        style="@style/Widget.AppCompat.Button.Borderless"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@android:color/background_dark"
+                        android:contentDescription="@string/menu_item_offence_time_minor_reset_enabled"
+                        android:onClick="onOffenceTimeMinorDurationResetClicked"
+                        android:textAlignment="gravity"
+                        android:textColor="@color/colorPrimaryDark" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:id="@+id/textViewDecoupleTimers"
+                        style="@style/Widget.AppCompat.Button.Borderless"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="9"
+                        android:background="@android:color/background_dark"
+                        android:onClick="onOffenceTimeMinorDurationResetClicked"
+                        android:text="@string/menu_item_title_decouple_timers"
+                        android:textAlignment="textStart"
+                        android:textColor="@color/design_default_color_on_primary"
+                        app:autoSizeMaxTextSize="40sp"
+                        app:autoSizeMinTextSize="12sp"
+                        app:autoSizeStepGranularity="2sp"
+                        app:autoSizeTextType="uniform" />
+
+                    <Switch
+                        android:id="@+id/textViewDecoupleTimersValue"
+                        style="@style/Widget.AppCompat.Button.Borderless"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@android:color/background_dark"
+                        android:contentDescription="@string/menu_item_decouple_timers"
+                        android:onClick="onDecoupleTimersClicked"
+                        android:textAlignment="gravity"
+                        android:textColor="@color/colorPrimaryDark" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:id="@+id/textViewExclusionTime"
+                        style="@style/Widget.AppCompat.Button.Borderless"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="4"
+                        android:background="@android:color/background_dark"
+                        android:onClick="onExclusionTimeDurationClicked"
+                        android:text="@string/menu_item_title_exclusion_time"
+                        android:textAlignment="textStart"
+                        android:textColor="@color/design_default_color_on_primary"
+                        app:autoSizeMaxTextSize="40sp"
+                        app:autoSizeMinTextSize="12sp"
+                        app:autoSizeStepGranularity="2sp"
+                        app:autoSizeTextType="uniform" />
+
+                    <Button
+                        android:id="@+id/textViewExclusionTimeValue"
+                        style="@style/Widget.AppCompat.Button.Borderless"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@android:color/background_dark"
+                        android:onClick="onExclusionTimeDurationClicked"
+                        android:textColor="@color/design_default_color_on_primary"
+                        app:autoSizeMaxTextSize="40sp"
+                        app:autoSizeMinTextSize="12sp"
+                        app:autoSizeStepGranularity="2sp"
+                        app:autoSizeTextType="uniform" />
+
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/RemoteSettingsLayout"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="3"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/RemoteSettingsSummaryLayout"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="2"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/textViewRemoteSettingsSummary"
+                    style="@style/Widget.AppCompat.Button.Borderless"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="4"
+                    android:background="@android:color/background_dark"
+                    android:onClick="onRemoteSettingsClicked"
+                    android:text="Remote Settings"
+                    android:textAlignment="textStart"
+                    android:textColor="@color/design_default_color_on_primary"
+                    app:autoSizeMaxTextSize="40sp"
+                    app:autoSizeMinTextSize="16sp"
+                    app:autoSizeStepGranularity="2sp"
+                    app:autoSizeTextType="uniform" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/RemoteSettingsDetailLayout"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="horizontal"
+                    android:visibility="visible">
+
+                    <Button
+                        android:id="@+id/textViewIP"
+                        style="@style/Widget.AppCompat.Button.Borderless"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="3"
+                        android:background="@android:color/background_dark"
+                        android:onClick="onMasterIPClicked"
+                        android:text="@string/menu_item_title_ip"
+                        android:textAlignment="textStart"
+                        android:textColor="@color/design_default_color_on_primary"
+                        app:autoSizeMaxTextSize="40sp"
+                        app:autoSizeMinTextSize="12sp"
+                        app:autoSizeStepGranularity="2sp"
+                        app:autoSizeTextType="uniform" />
+
+                    <Button
+                        android:id="@+id/textViewEditIP"
+                        style="@style/Widget.AppCompat.Button.Borderless"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="2"
+                        android:background="@android:color/background_dark"
+                        android:onClick="onMasterIPClicked"
+                        android:text="@string/localhost"
+                        android:textAlignment="gravity"
+                        android:textColor="@color/design_default_color_on_primary"
+                        app:autoSizeMaxTextSize="40sp"
+                        app:autoSizeMinTextSize="12sp"
+                        app:autoSizeStepGranularity="2sp"
+                        app:autoSizeTextType="uniform" />
+
+                    <Button
+                        android:id="@+id/switchAutodiscoveryEnabled"
+                        style="@style/Widget.AppCompat.Button.Borderless"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="4"
+                        android:background="@android:color/background_dark"
+                        android:contentDescription="@string/menu_item_autodicovery_enabled"
+                        android:onClick="onAutodiscoveryClicked"
+                        android:text="@string/menu_item_autodicovery_enabled"
+                        android:textAlignment="textStart"
+                        android:textColor="@color/design_default_color_on_primary"
+                        app:autoSizeMaxTextSize="40sp"
+                        app:autoSizeMinTextSize="12sp"
+                        app:autoSizeStepGranularity="2sp"
+                        app:autoSizeTextType="uniform" />
+
+                    <Switch
+                        android:id="@+id/switchAutodiscoveryEnabledValue"
+                        style="@style/Widget.AppCompat.Button.Borderless"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@android:color/background_dark"
+                        android:contentDescription="@string/menu_item_autodicovery_enabled"
+                        android:onClick="onAutodiscoveryClicked"
+                        android:textAlignment="gravity"
+                        android:textColor="@color/colorPrimaryDark" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -599,10 +772,10 @@
                 style="@style/Widget.AppCompat.Button.Borderless"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="8"
+                android:layout_weight="2"
                 android:background="@android:color/background_dark"
                 android:contentDescription="@string/spacer_content_description"
-                android:textColor="@color/cyan" />
+                android:textColor="@color/design_default_color_on_primary" />
 
             <Button
                 android:id="@+id/btn"
@@ -614,7 +787,7 @@
                 android:onClick="onDoneClicked"
                 android:text="@string/menu_item_done_title"
                 android:textAlignment="center"
-                android:textColor="@color/cyan"
+                android:textColor="@color/design_default_color_on_primary"
                 app:autoSizeMaxTextSize="40sp"
                 app:autoSizeMinTextSize="12sp"
                 app:autoSizeStepGranularity="2sp"

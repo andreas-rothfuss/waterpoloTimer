@@ -3,14 +3,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/periodDuration"
-        android:title="@string/menu_item_title_time_per_period" />
+        android:id="@+id/menuItemNbOfPeriods"
+        android:title="@string/menu_item_title_nbOfPeriods"/>
+    <item
+        android:id="@+id/menuItemTimePerPeriod"
+        android:title="@string/menu_item_title_time_per_period"/>
     <item
         android:id="@+id/offenceMajorDuration"
         android:title="@string/menu_item_title_offence_time_major" />
     <item
         android:id="@+id/offenceMinorDuration"
-        android:title="@string/menu_item_title_offence_time_minor" />
+        android:title="@string/menu_item_title_offence_time_minor" ></item>
     <item
         android:id="@+id/timeoutDuration"
         android:title="@string/menu_item_title_timeout_time" />

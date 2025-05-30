@@ -1,5 +1,7 @@
 package de.wasserball.wabaclock.main;
 
+import android.graphics.Color;
+
 import java.io.IOException;
 
 import de.wasserball.wabaclock.settings.AppSettings;
@@ -17,6 +19,7 @@ import msg.sensor.Unit;
 import msg.string.GetStringMessage;
 import msg.string.StringMessage;
 import network.stream.OpenIGTLinkStreamingServer;
+import util.MetaData;
 
 public class WaterpoloClockServer extends OpenIGTLinkStreamingServer {
 
@@ -97,10 +100,22 @@ public class WaterpoloClockServer extends OpenIGTLinkStreamingServer {
 
     protected StringMessage onTxString(String deviceName){
         if (deviceName.equals(WaterPoloTimer.HOME_TEAM_DEVICE_NAME)) {
-            return new StringMessage(deviceName, AppSettings.HOME_TEAM_NAME.value);
+            String colorKey = AppSettings.HOME_TEAM_COLOR.key;
+            int teamColor = Color.valueOf(AppSettings.HOME_TEAM_COLOR.value).toArgb();
+            StringMessage stringMessage = new StringMessage(deviceName, AppSettings.HOME_TEAM_NAME.value);
+            MetaData msgMetaData = new MetaData();
+            msgMetaData.addKeyValuePair(colorKey, Integer.toString(teamColor));
+            stringMessage.setMetaData(msgMetaData, 0);
+            return stringMessage;
         }
         if (deviceName.equals(WaterPoloTimer.GUEST_TEAM_DEVICE_NAME)) {
-            return new StringMessage(deviceName, AppSettings.GUEST_TEAM_NAME.value);
+            String colorKey = AppSettings.GUEST_TEAM_COLOR.key;
+            int teamColor = Color.valueOf(AppSettings.GUEST_TEAM_COLOR.value).toArgb();
+            StringMessage stringMessage = new StringMessage(deviceName, AppSettings.GUEST_TEAM_NAME.value);
+            MetaData msgMetaData = new MetaData();
+            msgMetaData.addKeyValuePair(colorKey, Integer.toString(teamColor));
+            stringMessage.setMetaData(msgMetaData, 0);
+            return stringMessage;
         }
         return null;
     }

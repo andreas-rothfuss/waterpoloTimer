@@ -68,11 +68,7 @@ public class ParameterDialogInteger extends AppCompatDialogFragment {
             listener = (DialogListener) context;
         } catch (ClassCastException e) {
             throw new ClassCastException(context.toString() +
-                    "must implement ServerDialogListener");
+                    "must implement DialogListener");
         }
-    }
-
-    public interface DialogListener {
-        void applyValue(IntegerSetting setting, int value);
     }
 }

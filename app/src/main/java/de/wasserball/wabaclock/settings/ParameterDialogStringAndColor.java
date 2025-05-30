@@ -4,12 +4,16 @@ import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatDialogFragment;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
+
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatDialogFragment;
 
 import de.wasserball.wabaclock.R;
 
@@ -18,15 +22,18 @@ import de.wasserball.wabaclock.R;
  */
 
 @SuppressLint("ValidFragment")
-public class ParameterDialogString extends AppCompatDialogFragment {
+public class ParameterDialogStringAndColor extends AppCompatDialogFragment {
 
-    private StringSetting setting;
+    private StringSetting stringSetting;
+    private ColorSetting colorSetting;
     private DialogListener listener;
-    private EditText editText;
+    private EditText stringEdit;
+    private Button buttonTeamColor;
 
     @SuppressLint("ValidFragment")
-    public ParameterDialogString(StringSetting setting) {
-       this.setting = setting;
+    public ParameterDialogStringAndColor(StringSetting setting, ColorSetting colorSetting) {
+        this.stringSetting = setting;
+        this.colorSetting = colorSetting;
     }
 
     @Override
@@ -34,10 +41,10 @@ public class ParameterDialogString extends AppCompatDialogFragment {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
         LayoutInflater inflater = getActivity().getLayoutInflater();
-        View view = inflater.inflate(R.layout.dialog_string_edit, null);
+        View view = inflater.inflate(R.layout.dialog_string_and_color_edit, null);
 
         builder.setView(view)
-                .setTitle(setting.title)
+                .setTitle(stringSetting.title)
                 .setNegativeButton("cancel", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
@@ -47,20 +54,28 @@ public class ParameterDialogString extends AppCompatDialogFragment {
                 .setPositiveButton("ok", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        String value = editText.getText().toString();
-                        listener.applyValue(setting, value);
+                        String value = stringEdit.getText().toString();
+                        listener.applyValue(stringSetting, value);
+                        Drawable buttonBackground = buttonTeamColor.getBackground();
+                        ColorDrawable buttonColor = (ColorDrawable) buttonBackground;
+                        int color = buttonColor.getColor();
+                        listener.applyValue(colorSetting, color);
                     }
                 })
                 .setNeutralButton("reset", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        listener.applyValue(setting, setting.defaultVal);
+                        listener.applyValue(stringSetting, stringSetting.defaultVal);
+                        listener.applyValue(colorSetting, colorSetting.defaultVal);
                     }
                 });
 
-        editText = view.findViewById(R.id.master_ip);
-        editText.setText(setting.value);
+        stringEdit = view.findViewById(R.id.teamName);
+        stringEdit.setText(stringSetting.value);
+        stringEdit.setTextColor(colorSetting.value);
 
+        buttonTeamColor = view.findViewById(R.id.buttonTeamColor);
+        buttonTeamColor.setBackgroundColor(colorSetting.value);
 
         return builder.create();
     }

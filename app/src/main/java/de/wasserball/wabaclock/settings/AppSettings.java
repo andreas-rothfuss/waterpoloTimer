@@ -2,6 +2,7 @@ package de.wasserball.wabaclock.settings;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 
 public class AppSettings {
 
@@ -63,7 +64,11 @@ public class AppSettings {
 
     public static final BooleanSetting OFFENCE_TIME_MINOR_DURATION_RESET = new BooleanSetting(
             "offence_minor_duration_reset", true,
-            "Reset shotclock time to minor duration only if minor duration is larger than shotclock time[s]");
+            "Reset shotclock time to minor duration only if minor duration is larger than shotclock time");
+
+    public static final BooleanSetting DECOUPLE_TIMERS = new BooleanSetting(
+            "decouple_timers", false,
+            "Decouple timers: Stop of offence time does not stop main time");
 
     public static final IntegerSetting EXCLUSION_TIME_DURATION = new IntegerSetting(
             "exclusion_time_duration", 0, 59, 20,
@@ -107,6 +112,13 @@ public class AppSettings {
             "guest_team_name", "Guest",
             "Name of the guest team");
 
+    public static final ColorSetting HOME_TEAM_COLOR = new ColorSetting(
+            "home_team_color", Color.WHITE,
+            "Home team color");
+    public static final ColorSetting GUEST_TEAM_COLOR = new ColorSetting(
+            "guest_team_color", Color.BLUE,
+            "Guest team color");
+
     public static SharedPreferences getSharedPreferences(Context context){
         return context.getSharedPreferences(PREFS_NAME, 0);
     }
@@ -137,6 +149,7 @@ public class AppSettings {
         OFFENCE_TIME_DURATION.readFromSettings(settings);
         OFFENCE_TIME_MINOR_DURATION.readFromSettings(settings);
         OFFENCE_TIME_MINOR_DURATION_RESET.readFromSettings(settings);
+        DECOUPLE_TIMERS.readFromSettings(settings);
         EXCLUSION_TIME_DURATION.readFromSettings(settings);
         ENABLE_SOUND.readFromSettings(settings);
         ENABLE_DECIMAL.readFromSettings(settings);
@@ -147,7 +160,9 @@ public class AppSettings {
         MASTER_IP.readFromSettings(settings);
 
         HOME_TEAM_NAME.readFromSettings(settings);
+        HOME_TEAM_COLOR.readFromSettings(settings);
         GUEST_TEAM_NAME.readFromSettings(settings);
+        GUEST_TEAM_COLOR.readFromSettings(settings);
 
         DISCLAIMER_DISPLAYED.readFromSettings(settings);
     }

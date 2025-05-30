@@ -3,6 +3,9 @@ package de.wasserball.wabaclock.main;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Handler;
@@ -13,6 +16,8 @@ import android.view.MenuInflater;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.Timer;
@@ -20,12 +25,16 @@ import java.util.TimerTask;
 import java.util.concurrent.TimeUnit;
 
 import de.wasserball.wabaclock.R;
+import de.wasserball.wabaclock.settings.ColorSetting;
+import de.wasserball.wabaclock.settings.DialogListener;
+import de.wasserball.wabaclock.settings.IntegerSetting;
 import de.wasserball.wabaclock.settings.ParameterDialogString;
+import de.wasserball.wabaclock.settings.ParameterDialogStringAndColor;
 import de.wasserball.wabaclock.settings.SettingsView;
 import de.wasserball.wabaclock.settings.StringSetting;
 import de.wasserball.wabaclock.settings.AppSettings;
 
-public class WaterpoloClock extends AppCompatActivity implements ParameterDialogString.DialogListener,
+public class WaterpoloClock extends AppCompatActivity implements DialogListener,
         PersonalFouls.OnFragmentInteractionListener {
 
     public static final int GUI_UPDATE_PERIOD = 100;
@@ -49,8 +58,14 @@ public class WaterpoloClock extends AppCompatActivity implements ParameterDialog
     private Button btnPeriodPlus;
     private Button btnPeriodMinus;
 
-    private Button btnTimeoutGuest;
+    private TextView titleTimeoutHome;
     private Button btnTimeoutHome;
+    private Button btnTimeoutHomePlus;
+    private Button btnTimeoutHomeMinus;
+    private TextView titleTimeoutGuest;
+    private Button btnTimeoutGuest;
+    private Button btnTimeoutGuestPlus;
+    private Button btnTimeoutGuestMinus;
 
     private Button btnMainTime;
     private Button btnOffenceTime;
@@ -59,7 +74,11 @@ public class WaterpoloClock extends AppCompatActivity implements ParameterDialog
     private Button btnResetMinor;
 
     private Button btnGoalsHome;
+    private Button btnGoalsHomePlus;
+    private Button btnGoalsHomeMinus;
     private Button btnGoalsGuest;
+    private Button btnGoalsGuestPlus;
+    private Button btnGoalsGuestMinus;
 
     Button btnTeamHome;
     Button btnTeamGuest;
@@ -74,6 +93,7 @@ public class WaterpoloClock extends AppCompatActivity implements ParameterDialog
             "assumes no responsibility for errors or omissions in the contents on the Service.\n" +
             "In no event shall be liable for any special, direct, indirect, consequential, or incidental damages or any damages whatsoever, whether in an action of contract, negligence or other tort, arising out of or in connection with the use of the Service or the contents of the Service. reserves the right to make additions, deletions, or modification to the contents on the Service at any time without prior notice. This Disclaimer has been created with the help of Disclaimer Generator.\n" +
             "does not warrant that the website is free of viruses or other harmful components.";
+
 
 
     @Override
@@ -108,8 +128,14 @@ public class WaterpoloClock extends AppCompatActivity implements ParameterDialog
         btnPeriodPlus = findViewById(R.id.editPeriodPlus);
         btnPeriodMinus = findViewById(R.id.editPeriodMinus);
 
+        titleTimeoutHome =  findViewById(R.id.titelTimeoutHeim);
         btnTimeoutHome =  findViewById(R.id.timeoutHeim);
+        btnTimeoutHomePlus = findViewById(R.id.timeoutHeimPlus);
+        btnTimeoutHomeMinus = findViewById(R.id.timeoutHeimMinus);
+        titleTimeoutGuest =  findViewById(R.id.titelTimeoutGast);
         btnTimeoutGuest =  findViewById(R.id.timeoutGast);
+        btnTimeoutGuestPlus = findViewById(R.id.timeoutGuestPlus);
+        btnTimeoutGuestMinus = findViewById(R.id.timeoutGuestMinus);
 
         btnOffenceTime =  findViewById(R.id.angriffzeit);
         btnMainTime =  findViewById(R.id.mainTime);
@@ -125,7 +151,11 @@ public class WaterpoloClock extends AppCompatActivity implements ParameterDialog
         btnResetMinor = findViewById(R.id.reset20);
 
         btnGoalsHome =  findViewById(R.id.toreHeim);
+        btnGoalsHomePlus = findViewById(R.id.toreHeimPlus);
+        btnGoalsHomeMinus = findViewById(R.id.toreHeimMinus);
         btnGoalsGuest =  findViewById(R.id.toreGast);
+        btnGoalsGuestPlus = findViewById(R.id.toreGastPlus);
+        btnGoalsGuestMinus = findViewById(R.id.toreGastMinus);
 
         layoutTimeoutsHome.setVisibility(View.GONE);
         layoutTimeoutsGuest.setVisibility(View.GONE);
@@ -343,6 +373,15 @@ public class WaterpoloClock extends AppCompatActivity implements ParameterDialog
         waterpoloTimer.startStop();
         hideNavigationBar();
     }
+    public void onClickOffenceTime(View view){
+        if (AppSettings.DECOUPLE_TIMERS.value){
+            waterpoloTimer.startStopOffenceTime();
+        }
+        else {
+            waterpoloTimer.startStop();
+        }
+        hideNavigationBar();
+    }
     public void onClickResetMajor(View view){
         waterpoloTimer.resetOffenceTimeMajor();
         hideNavigationBar();
@@ -369,6 +408,21 @@ public class WaterpoloClock extends AppCompatActivity implements ParameterDialog
                 alertDialogTimeoutGuest();
         }
         hideNavigationBar();
+    }
+
+    public void onClickTeamColor(View view){
+        Button buttonTeamColor = view.findViewById(R.id.buttonTeamColor);
+        int alternativeColor;
+        Drawable buttonBackground = buttonTeamColor.getBackground();
+        ColorDrawable buttonColor = (ColorDrawable) buttonBackground;
+        int color = buttonColor.getColor();
+        if (color == Color.WHITE){
+            alternativeColor = Color.BLUE;
+        }
+        else {
+            alternativeColor = Color.WHITE;
+        }
+        buttonTeamColor.setBackgroundColor(alternativeColor);
     }
 
     public void resetAll(View view){
@@ -406,13 +460,15 @@ public class WaterpoloClock extends AppCompatActivity implements ParameterDialog
 
 
     public void onHomeTeamNameClicked(View view){
-        ParameterDialogString dialog = new ParameterDialogString(AppSettings.HOME_TEAM_NAME);
+        ParameterDialogStringAndColor dialog = new ParameterDialogStringAndColor(
+                AppSettings.HOME_TEAM_NAME, AppSettings.HOME_TEAM_COLOR);
         dialog.show(getSupportFragmentManager(), "");
         hideNavigationBar();
     }
 
     public void onGuestTeamNameClicked(View view){
-        ParameterDialogString dialog = new ParameterDialogString(AppSettings.GUEST_TEAM_NAME);
+        ParameterDialogStringAndColor dialog = new ParameterDialogStringAndColor(
+                AppSettings.GUEST_TEAM_NAME, AppSettings.GUEST_TEAM_COLOR);
         dialog.show(getSupportFragmentManager(), "");
         hideNavigationBar();
     }
@@ -449,9 +505,48 @@ public class WaterpoloClock extends AppCompatActivity implements ParameterDialog
         updateSettingsValueDisplay();
     }
 
+    @Override
+    public void applyValue(ColorSetting setting, int value) {
+        setting.applyValue(AppSettings.getSharedPreferences(
+                getApplicationContext()), value);
+        updateSettingsValueDisplay();
+    }
+
+    @Override
+    public void applyValue(IntegerSetting setting, int value) {
+        setting.applyValue(AppSettings.getSharedPreferences(
+                getApplicationContext()), value);
+        updateSettingsValueDisplay();
+    }
+
     void updateSettingsValueDisplay() {
         btnTeamHome.setText(AppSettings.HOME_TEAM_NAME.value);
+        int homeTeamColor = AppSettings.HOME_TEAM_COLOR.value;
+        btnTeamHome.setTextColor(homeTeamColor);
+        for (int i = 0; i < btnExclusionTime[0].length; i++) {
+            btnExclusionTime[0][i].setTextColor(homeTeamColor);
+        }
+        titleTimeoutHome.setTextColor(homeTeamColor);
+        btnTimeoutHome.setTextColor(homeTeamColor);
+        btnTimeoutHomePlus.setTextColor(homeTeamColor);
+        btnTimeoutHomeMinus.setTextColor(homeTeamColor);
+        btnGoalsHome.setTextColor(homeTeamColor);
+        btnGoalsHomePlus.setTextColor(homeTeamColor);
+        btnGoalsHomeMinus.setTextColor(homeTeamColor);
+
         btnTeamGuest.setText(AppSettings.GUEST_TEAM_NAME.value);
+        int guestTeamColor = AppSettings.GUEST_TEAM_COLOR.value;
+        btnTeamGuest.setTextColor(guestTeamColor);
+        for (int i = 0; i < btnExclusionTime[1].length; i++) {
+            btnExclusionTime[1][i].setTextColor(guestTeamColor);
+        }
+        titleTimeoutGuest.setTextColor(guestTeamColor);
+        btnTimeoutGuest.setTextColor(guestTeamColor);
+        btnTimeoutGuestPlus.setTextColor(guestTeamColor);
+        btnTimeoutGuestMinus.setTextColor(guestTeamColor);
+        btnGoalsGuest.setTextColor(guestTeamColor);
+        btnGoalsGuestPlus.setTextColor(guestTeamColor);
+        btnGoalsGuestMinus.setTextColor(guestTeamColor);
     }
 
     public void editTime(View view){

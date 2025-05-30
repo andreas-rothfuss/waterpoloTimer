@@ -178,7 +178,9 @@ abstract class NetworkBoard extends AppCompatActivity {
     }
 
     void setHomeTeamName(String val){}
+    void setHomeTeamColor(String colorARGBInt){}
     void setGuestTeamName(String val){}
+    void setGuestTeamColor(String colorARGBInt){}
     void setMainTime(long time_ms){}
     void setShotClock(long time_ms){}
     void setScore(int home, int guest){}
