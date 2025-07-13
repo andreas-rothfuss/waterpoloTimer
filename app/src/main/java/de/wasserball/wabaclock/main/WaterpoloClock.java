@@ -10,6 +10,8 @@ import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Handler;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.WindowCompat;
+
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -38,6 +40,8 @@ public class WaterpoloClock extends AppCompatActivity implements DialogListener,
         PersonalFouls.OnFragmentInteractionListener {
 
     public static final int GUI_UPDATE_PERIOD = 100;
+    private static final int WHITE = 0xFFFFFFFF;
+    private static final int BLUE = 0xFF1080FF;
 
     WaterPoloTimer waterpoloTimer;
     private boolean timeIsEditable = false;
@@ -102,10 +106,11 @@ public class WaterpoloClock extends AppCompatActivity implements DialogListener,
 
         setContentView(R.layout.waterpolo_clock);
 
-        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+        //getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
         overlayForNavigationBar = findViewById(R.id.mainLayout);
         hideNavigationBar();
+        WindowCompat.setDecorFitsSystemWindows(getWindow(), true);
 
         AppSettings.updateAllFromSettings(getApplicationContext());
 
@@ -195,10 +200,9 @@ public class WaterpoloClock extends AppCompatActivity implements DialogListener,
     }
 
     private void hideNavigationBar() {
-        /*overlayForNavigationBar.setSystemUiVisibility(View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+        overlayForNavigationBar.setSystemUiVisibility(View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
                 | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
                 | View.SYSTEM_UI_FLAG_FULLSCREEN);
-         */
     }
 
     private void disclaimerDialog() {
@@ -416,11 +420,11 @@ public class WaterpoloClock extends AppCompatActivity implements DialogListener,
         Drawable buttonBackground = buttonTeamColor.getBackground();
         ColorDrawable buttonColor = (ColorDrawable) buttonBackground;
         int color = buttonColor.getColor();
-        if (color == Color.WHITE){
-            alternativeColor = Color.BLUE;
+        if (color == WHITE){
+            alternativeColor = BLUE;
         }
         else {
-            alternativeColor = Color.WHITE;
+            alternativeColor = WHITE;
         }
         buttonTeamColor.setBackgroundColor(alternativeColor);
     }

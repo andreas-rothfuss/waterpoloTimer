@@ -72,7 +72,7 @@
                 android:textAppearance="@style/TextAppearance.AppCompat.Display4"
                 android:textColor="@android:color/background_light"
                 android:textStyle="bold"
-                app:autoSizeMaxTextSize="400sp"
+                app:autoSizeMaxTextSize="3600sp"
                 app:autoSizeMinTextSize="12sp"
                 app:autoSizeStepGranularity="2sp"
                 app:autoSizeTextType="uniform" />
@@ -90,7 +90,7 @@
                 android:textAppearance="@style/TextAppearance.AppCompat.Display4"
                 android:textColor="#4778FF"
                 android:textStyle="bold"
-                app:autoSizeMaxTextSize="400sp"
+                app:autoSizeMaxTextSize="3600sp"
                 app:autoSizeMinTextSize="12sp"
                 app:autoSizeStepGranularity="2sp"
                 app:autoSizeTextType="uniform" />

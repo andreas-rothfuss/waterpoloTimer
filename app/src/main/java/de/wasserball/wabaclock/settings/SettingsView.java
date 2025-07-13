@@ -2,6 +2,7 @@ package de.wasserball.wabaclock.settings;
 
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.WindowCompat;
 
 import android.view.View;
 import android.widget.Button;
@@ -26,6 +27,7 @@ public class SettingsView extends AppCompatActivity implements DialogListener {
     Switch btnSoundEnabledVal;
     Switch btnDecimalEnabledVal;
     Switch btnDecimalEnabledDuringLastMinuteVal;
+    Switch switchAlwaysUseDoubleDigitsForGoals;
     Switch btnShotclockResetEnabledVal;
     Switch btnPauseDuringBreakVal;
     Switch btnUseAutodiscovery;
@@ -41,11 +43,22 @@ public class SettingsView extends AppCompatActivity implements DialogListener {
     LinearLayout remoteSettingsSummaryLayout;
     LinearLayout remoteSettingsDetailLayout;
 
+    Button btnGeneralSettingsSummary;
+    Button btnOffenceTimeSettingsSummary;
+    Button btnRemoteSettingsSummary;
+    private View overlayForNavigationBar;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //WindowCompat.setDecorFitsSystemWindows(getWindow(), true);
         setContentView(R.layout.settings_view);
+
+        overlayForNavigationBar = findViewById(R.id.settingsLayout);
+        overlayForNavigationBar.setSystemUiVisibility(View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
+                | View.SYSTEM_UI_FLAG_FULLSCREEN);
 
         btnNbOfPeriodsVal = findViewById(R.id.textViewNbOfPeriodsValue);
         btnPeriodVal = findViewById(R.id.textViewTimePerPeriodValue);
@@ -60,11 +73,16 @@ public class SettingsView extends AppCompatActivity implements DialogListener {
         btnExclusionTimeDuration = findViewById(R.id.textViewExclusionTimeValue);
         btnDecimalEnabledVal = findViewById(R.id.btnViewDecimalEnabledValue);
         btnDecimalEnabledDuringLastMinuteVal = findViewById(R.id.btnDecimalEnabledDuringLastMinuteValue);
+        switchAlwaysUseDoubleDigitsForGoals = findViewById(R.id.switchAlwaysUseDoubleDigitsForGoalsValue);
         btnSoundEnabledVal = findViewById(R.id.textViewSoundEnabledValue);
         btnShotclockResetEnabledVal = findViewById(R.id.switchShotResetEnabledValue);
         btnPauseDuringBreakVal = findViewById(R.id.switchPauseDuringBreakValue);
         btnUseAutodiscovery = findViewById(R.id.switchAutodiscoveryEnabledValue);
         btnMasterIPVal = findViewById(R.id.textViewEditIP);
+
+        btnGeneralSettingsSummary =findViewById(R.id.textViewGeneralSettingsSummary);
+        btnOffenceTimeSettingsSummary =findViewById(R.id.textViewOffenceTimeSettingsSummary);
+        btnRemoteSettingsSummary =findViewById(R.id.textViewRemoteSettingsSummary);
 
         generalSettingsLayout = findViewById(R.id.GeneralSettingsLayout);
         generalSettingsSummaryLayout = findViewById(R.id.GeneralSettingsSummaryLayout);
@@ -77,6 +95,10 @@ public class SettingsView extends AppCompatActivity implements DialogListener {
         remoteSettingsDetailLayout = findViewById(R.id.RemoteSettingsDetailLayout);
 
         updateSettingsValueDisplay();
+
+        onGeneralSettingsClicked(null);
+        onOffenceTimeSettingsClicked(null);
+        onRemoteSettingsClicked(null);
     }
 
     void updateSettingsValueDisplay() {
@@ -94,6 +116,7 @@ public class SettingsView extends AppCompatActivity implements DialogListener {
         btnSoundEnabledVal.setChecked(AppSettings.ENABLE_SOUND.value);
         btnDecimalEnabledVal.setChecked(AppSettings.ENABLE_DECIMAL.value);
         btnDecimalEnabledDuringLastMinuteVal.setChecked(AppSettings.ENABLE_DECIMAL_DURING_LAST.value);
+        switchAlwaysUseDoubleDigitsForGoals.setChecked(AppSettings.ALWASY_USE_DOUBLE_DIGITS_FOR_GOALS.value);
         btnShotclockResetEnabledVal.setChecked(AppSettings.RESET_SHOTCLOCK_ON_GOAL.value);
         btnPauseDuringBreakVal.setChecked(AppSettings.STOP_BREAK_AND_TIMEOUT.value);
         btnUseAutodiscovery.setChecked(AppSettings.USE_AUTODISCOVERY.value);
@@ -110,22 +133,94 @@ public class SettingsView extends AppCompatActivity implements DialogListener {
 //        remoteSettingsDetailLayout.setVisibility(View.GONE);
     }
 
-    public void toggleLayoutVisibility(LinearLayout layout){
-        if (layout.getVisibility() == View.VISIBLE){
-            layout.setVisibility(View.GONE);
+    public int toggleLayoutVisibility(LinearLayout overallLayout,
+                                       LinearLayout detailsLayout){
+        int viewTargetStatus;
+        if (detailsLayout.getVisibility() == View.VISIBLE){
+            viewTargetStatus = View.GONE;
+            detailsLayout.setVisibility(viewTargetStatus);
+            //overallLayout.setWeightSum(2);
+            LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) overallLayout.getLayoutParams();
+            params.weight = 2.0f;
+            overallLayout.setLayoutParams(params);
         }
         else {
-            layout.setVisibility(View.VISIBLE);
+            viewTargetStatus = View.VISIBLE;
+            LinearLayout.LayoutParams paramsDetails = (LinearLayout.LayoutParams) detailsLayout.getLayoutParams();
+            LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) overallLayout.getLayoutParams();
+            params.weight = 2.0f + paramsDetails.weight;
+            overallLayout.setLayoutParams(params);
+            //overallLayout.setWeightSum(2 + weightSum);
+            detailsLayout.setVisibility(viewTargetStatus);
         }
+        return viewTargetStatus;
     }
     public void onGeneralSettingsClicked(View view){
-        toggleLayoutVisibility(generalSettingsDetailLayout);
+        int viewStatus = toggleLayoutVisibility(generalSettingsLayout,
+                generalSettingsDetailLayout);
+        if (viewStatus == View.VISIBLE){
+            btnGeneralSettingsSummary.setText("");
+        }
+        if (viewStatus == View.GONE){
+            int numberOfPeriods = AppSettings.NUMBER_OF_PERIODS.value;
+            int peridDuration = AppSettings.PERIOD_DURATION.value;
+            int breakMinor = AppSettings.BREAK_TIME_DURATION.value;
+            int breakMayor = AppSettings.HALF_TIME_DURATION.value;
+
+            String summary = "";
+            for (int i = 1; i <= numberOfPeriods; i++){
+                summary += peridDuration + "|";
+                if (i < numberOfPeriods) {
+                    int i1 = i % (numberOfPeriods / 2);
+                    if (i1 == 0) {
+                        summary += breakMayor + "|";
+                    } else {
+                        summary += breakMinor + "|";
+                    }
+                }
+                else {
+                    summary = summary.substring(0, summary.length()-1);
+                }
+            }
+            summary += " Timeout: " + AppSettings.TIMEOUT_DURATION.value;
+            btnGeneralSettingsSummary.setText(summary);
+        }
     }
     public void onOffenceTimeSettingsClicked(View view){
-        toggleLayoutVisibility(offenceTimeSettingsDetailLayout);
+        int viewStatus = toggleLayoutVisibility(offenceTimeSettingsLayout,
+                offenceTimeSettingsDetailLayout);
+        if (viewStatus == View.VISIBLE){
+            btnOffenceTimeSettingsSummary.setText("");
+        }
+        if (viewStatus == View.GONE){
+            int offenceTimeDurationMajor = AppSettings.OFFENCE_TIME_DURATION.value;
+            int offenceTimeDurationMinor = AppSettings.OFFENCE_TIME_MINOR_DURATION.value;
+            int exclusionTimeDuration = AppSettings.EXCLUSION_TIME_DURATION.value;
+
+            String summary = "Offence: " + offenceTimeDurationMajor + "|" +
+                    offenceTimeDurationMinor + " Exclusion: " + exclusionTimeDuration;
+            btnOffenceTimeSettingsSummary.setText(summary);
+        }
     }
     public void onRemoteSettingsClicked(View view){
-        toggleLayoutVisibility(remoteSettingsDetailLayout);
+        int viewStatus =  toggleLayoutVisibility(remoteSettingsLayout,
+                remoteSettingsDetailLayout);
+        if (viewStatus == View.VISIBLE){
+            btnRemoteSettingsSummary.setText("");
+        }
+        if (viewStatus == View.GONE){
+            boolean useAutodiscovery = AppSettings.USE_AUTODISCOVERY.value;
+            String masterIP = AppSettings.MASTER_IP.value;
+
+            String summary = "";
+            if (useAutodiscovery){
+                summary = "Autodiscovery enabled";
+            }
+            else {
+                summary = "Master-IP:" + masterIP;
+            }
+            btnRemoteSettingsSummary.setText(summary);
+        }
     }
 
     public void onNbOfPeriodsClicked(View view){
@@ -208,6 +303,12 @@ public class SettingsView extends AppCompatActivity implements DialogListener {
     }
     public void onEnablePauseDuringBreakClicked(View view){
         BooleanSetting setting = AppSettings.STOP_BREAK_AND_TIMEOUT;
+        setting.applyValue(AppSettings.getSharedPreferences(
+                getApplicationContext()), !setting.value);
+        updateSettingsValueDisplay();
+    }
+    public void onAlwaysUseDoubleDigitsForGoalsClicked(View view){
+        BooleanSetting setting = AppSettings.ALWASY_USE_DOUBLE_DIGITS_FOR_GOALS;
         setting.applyValue(AppSettings.getSharedPreferences(
                 getApplicationContext()), !setting.value);
         updateSettingsValueDisplay();

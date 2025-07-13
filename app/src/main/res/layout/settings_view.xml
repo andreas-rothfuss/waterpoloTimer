@@ -16,7 +16,7 @@
             android:id="@+id/GeneralSettingsLayout"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="7"
+            android:layout_weight="8"
             android:orientation="vertical">
 
             <LinearLayout
@@ -27,7 +27,7 @@
                 android:orientation="horizontal">
 
                 <Button
-                    android:id="@+id/textViewGeneralSettingsSummary"
+                    android:id="@+id/textViewGeneralSettingsTitle"
                     style="@style/Widget.AppCompat.Button.Borderless"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
@@ -41,13 +41,29 @@
                     app:autoSizeMinTextSize="16sp"
                     app:autoSizeStepGranularity="2sp"
                     app:autoSizeTextType="uniform" />
+
+                <Button
+                    android:id="@+id/textViewGeneralSettingsSummary"
+                    style="@style/Widget.AppCompat.Button.Borderless"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="4"
+                    android:background="@android:color/background_dark"
+                    android:onClick="onGeneralSettingsClicked"
+                    android:text=""
+                    android:textAlignment="textEnd"
+                    android:textColor="@color/design_default_color_on_primary"
+                    app:autoSizeMaxTextSize="40sp"
+                    app:autoSizeMinTextSize="16sp"
+                    app:autoSizeStepGranularity="2sp"
+                    app:autoSizeTextType="uniform" />
             </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/GeneralSettingsDetailLayout"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="5"
+                android:layout_weight="6"
                 android:orientation="vertical"
                 tools:visibility="visible">
 
@@ -388,6 +404,62 @@
 
                 </LinearLayout>
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
+
+
+                    <Button
+                        android:id="@+id/switchAlwaysUseDoubleDigitsForGoals"
+                        style="@style/Widget.AppCompat.Button.Borderless"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="4"
+                        android:background="@android:color/background_dark"
+                        android:contentDescription="@string/menu_item_always_use_double_digits_for_goals"
+                        android:onClick="onAlwaysUseDoubleDigitsForGoalsClicked"
+                        android:text="@string/menu_item_always_use_double_digits_for_goals"
+                        android:textAlignment="textStart"
+                        android:textColor="@color/design_default_color_on_primary"
+                        app:autoSizeMaxTextSize="40sp"
+                        app:autoSizeMinTextSize="12sp"
+                        app:autoSizeStepGranularity="2sp"
+                        app:autoSizeTextType="uniform" />
+
+                    <Switch
+                        android:id="@+id/switchAlwaysUseDoubleDigitsForGoalsValue"
+                        style="@style/Widget.AppCompat.Button.Borderless"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@android:color/background_dark"
+                        android:contentDescription="@string/menu_item_pause_during_break"
+                        android:onClick="onAlwaysUseDoubleDigitsForGoalsClicked"
+                        android:textAlignment="gravity"
+                        android:textColor="@color/colorPrimaryDark" />
+
+                    <Button
+                        android:id="@+id/empty1"
+                        style="@style/Widget.AppCompat.Button.Borderless"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="5"
+                        android:background="@android:color/background_dark"
+                        android:contentDescription=""
+                        android:onClick="onEnableDecimalDuringLastClicked"
+                        android:text=""
+                        android:textAlignment="textStart"
+                        android:textColor="@color/design_default_color_on_primary"
+                        app:autoSizeMaxTextSize="40sp"
+                        app:autoSizeMinTextSize="12sp"
+                        app:autoSizeStepGranularity="2sp"
+                        app:autoSizeTextType="uniform" />
+
+                </LinearLayout>
+
+
             </LinearLayout>
         </LinearLayout>
 
@@ -407,7 +479,7 @@
 
 
                 <Button
-                    android:id="@+id/textViewOffenceTimeSettingsSummary"
+                    android:id="@+id/textViewOffenceTimeSettingsTitle"
                     style="@style/Widget.AppCompat.Button.Borderless"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
@@ -416,6 +488,21 @@
                     android:onClick="onOffenceTimeSettingsClicked"
                     android:text="Offence Time Settings"
                     android:textAlignment="textStart"
+                    android:textColor="@color/design_default_color_on_primary"
+                    app:autoSizeMaxTextSize="40sp"
+                    app:autoSizeMinTextSize="16sp"
+                    app:autoSizeStepGranularity="2sp"
+                    app:autoSizeTextType="uniform" />
+                <Button
+                    android:id="@+id/textViewOffenceTimeSettingsSummary"
+                    style="@style/Widget.AppCompat.Button.Borderless"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="4"
+                    android:background="@android:color/background_dark"
+                    android:onClick="onOffenceTimeSettingsClicked"
+                    android:text=""
+                    android:textAlignment="textEnd"
                     android:textColor="@color/design_default_color_on_primary"
                     app:autoSizeMaxTextSize="40sp"
                     app:autoSizeMinTextSize="16sp"
@@ -663,7 +750,7 @@
                 android:orientation="horizontal">
 
                 <Button
-                    android:id="@+id/textViewRemoteSettingsSummary"
+                    android:id="@+id/textViewRemoteSettingsTitle"
                     style="@style/Widget.AppCompat.Button.Borderless"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
@@ -672,6 +759,21 @@
                     android:onClick="onRemoteSettingsClicked"
                     android:text="Remote Settings"
                     android:textAlignment="textStart"
+                    android:textColor="@color/design_default_color_on_primary"
+                    app:autoSizeMaxTextSize="40sp"
+                    app:autoSizeMinTextSize="16sp"
+                    app:autoSizeStepGranularity="2sp"
+                    app:autoSizeTextType="uniform" />
+                <Button
+                    android:id="@+id/textViewRemoteSettingsSummary"
+                    style="@style/Widget.AppCompat.Button.Borderless"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="4"
+                    android:background="@android:color/background_dark"
+                    android:onClick="onRemoteSettingsClicked"
+                    android:text=""
+                    android:textAlignment="textEnd"
                     android:textColor="@color/design_default_color_on_primary"
                     app:autoSizeMaxTextSize="40sp"
                     app:autoSizeMinTextSize="16sp"

@@ -49,7 +49,7 @@
                     app:autoSizeTextType="uniform" />
 
                 <Button
-                    android:id="@+id/exclusionTimerHome1"
+                    android:id="@+id/exclusionTimerHome3"
                     style="@style/Widget.AppCompat.Button.Borderless"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
@@ -58,7 +58,7 @@
                     android:clickable="true"
                     android:focusable="true"
                     android:minHeight="48dp"
-                    android:onClick="onExclusionTimeHome1Clicked"
+                    android:onClick="onExclusionTimeHome3Clicked"
                     android:text="@string/_00"
                     android:textAlignment="center"
                     android:textColor="@color/white"
@@ -87,7 +87,7 @@
                     app:autoSizeTextType="uniform" />
 
                 <Button
-                    android:id="@+id/exclusionTimerHome3"
+                    android:id="@+id/exclusionTimerHome1"
                     style="@style/Widget.AppCompat.Button.Borderless"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
@@ -96,7 +96,7 @@
                     android:clickable="true"
                     android:focusable="true"
                     android:minHeight="48dp"
-                    android:onClick="onExclusionTimeHome3Clicked"
+                    android:onClick="onExclusionTimeHome1Clicked"
                     android:text="@string/_00"
                     android:textAlignment="center"
                     android:textColor="@color/white"
@@ -177,6 +177,7 @@
                     app:autoSizeMinTextSize="12sp"
                     app:autoSizeStepGranularity="2sp"
                     app:autoSizeTextType="uniform" />
+
                 <Button
                     android:id="@+id/exclusionTimerGuest2"
                     style="@style/Widget.AppCompat.Button.Borderless"
@@ -195,6 +196,7 @@
                     app:autoSizeMinTextSize="12sp"
                     app:autoSizeStepGranularity="2sp"
                     app:autoSizeTextType="uniform" />
+
                 <Button
                     android:id="@+id/exclusionTimerGuest3"
                     style="@style/Widget.AppCompat.Button.Borderless"

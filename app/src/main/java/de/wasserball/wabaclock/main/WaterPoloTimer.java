@@ -573,7 +573,10 @@ public class WaterPoloTimer{
     }
     static String getGoalsString(int goals) {
         String text = Integer.toString(goals);
-        text = text.length() > 1 ? text : "0" + text;
+        if (AppSettings.ALWASY_USE_DOUBLE_DIGITS_FOR_GOALS.value &&
+                text.length() == 1) {
+            text = "0" + text;
+        }
         return text;
     }
 

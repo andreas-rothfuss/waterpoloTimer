@@ -86,6 +86,10 @@ public class AppSettings {
             "enable_decimal_during_last", false,
             "Decimal seconds during last minute enabled?");
 
+    public static final BooleanSetting ALWASY_USE_DOUBLE_DIGITS_FOR_GOALS = new BooleanSetting(
+            "always_use_double_digits_for_goals", false,
+            "Always use double digits for goals?");
+
     public static final BooleanSetting RESET_SHOTCLOCK_ON_GOAL = new BooleanSetting(
             "reset_shotclock_on_goal", false,
             "Should the shotclock be reset when a goal is entered?");
@@ -113,10 +117,10 @@ public class AppSettings {
             "Name of the guest team");
 
     public static final ColorSetting HOME_TEAM_COLOR = new ColorSetting(
-            "home_team_color", Color.WHITE,
+            "home_team_color", 0xFFFFFFFF,
             "Home team color");
     public static final ColorSetting GUEST_TEAM_COLOR = new ColorSetting(
-            "guest_team_color", Color.BLUE,
+            "guest_team_color", 0xFF1080FF,
             "Guest team color");
 
     public static SharedPreferences getSharedPreferences(Context context){

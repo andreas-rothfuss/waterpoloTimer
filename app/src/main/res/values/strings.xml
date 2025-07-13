@@ -61,6 +61,7 @@
     <string name="guest_team_default_name">Guest</string>
     <string name="goals_guest_content_description">golas guest</string>
     <string name="menu_item_pause_during_break">Enable pause during break or timeout</string>
+    <string name="menu_item_always_use_double_digits_for_goals">Always use double digits for goals</string>
     <string name="localhost">127.0.0.1</string>
     <string name="spacer_content_description">filler</string>
     <string name="menu_item_done_title">Done</string>
