@@ -72,6 +72,7 @@ public class WaterpoloClock extends AppCompatActivity implements DialogListener,
     private Button[][] btnExclusionTime;
     private Button btnResetMajor;
     private Button btnResetMinor;
+    private Button btnResetExclusion;
 
     private Button btnGoalsHome;
     private Button btnGoalsHomePlus;
@@ -150,6 +151,7 @@ public class WaterpoloClock extends AppCompatActivity implements DialogListener,
 
         btnResetMajor = findViewById(R.id.reset30);
         btnResetMinor = findViewById(R.id.reset20);
+        btnResetExclusion = findViewById(R.id.resetExclusion);
 
         btnGoalsHome =  findViewById(R.id.toreHeim);
         btnGoalsHomePlus = findViewById(R.id.toreHeimPlus);
@@ -388,6 +390,10 @@ public class WaterpoloClock extends AppCompatActivity implements DialogListener,
     }
     public void onClickResetMinor(View view){
         waterpoloTimer.resetOffenceTimeMinor();
+        hideNavigationBar();
+    }
+    public void onClickResetMinorExclusion(View view){
+        waterpoloTimer.resetOffenceTimeMinorExclusion();
         hideNavigationBar();
     }
 

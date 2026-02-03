@@ -338,6 +338,18 @@ public class WaterPoloTimer{
         }
     }
 
+    protected void resetOffenceTimeMinorExclusion(){
+        boolean offenceTimeMinorReset = AppSettings.OFFENCE_TIME_MINOR_DURATION_RESET_EXCLUSION.value;
+        long offenceTimeMinorDuration = seconds2ms(AppSettings.OFFENCE_TIME_MINOR_DURATION.value);
+        boolean resetOffenceTime = true;
+        if (offenceTimeMinorReset) {
+            resetOffenceTime = offenceTime < offenceTimeMinorDuration;
+        }
+        if (resetOffenceTime) {
+            offenceTime = offenceTimeMinorDuration;
+        }
+    }
+
     protected void resetExclusionTimeHome(int i){
         resetExclusionTime(0, i);
     }
@@ -424,16 +436,15 @@ public class WaterPoloTimer{
     static String getMainTimeString(long mainTime){
         SimpleDateFormat formatter;
 
-        long mainTimeRounded = Math.round(new Double(mainTime).doubleValue() / 100) * 100;
+        long mainTimeRounded = Math.round((double) mainTime / 100) * 100;
         if (mainTime < TimeUnit.MINUTES.toMillis(10))
             formatter = new SimpleDateFormat("m:ss.S");
         else
             formatter = new SimpleDateFormat("mm:ss.S");
 
         Date date = new Date(mainTimeRounded);
-        String timeString = formatter.format(date);
 
-        return timeString;
+        return formatter.format(date);
     }
     public static String getMainTimeStringNoDecimal(long mainTime){
         SimpleDateFormat formatter;

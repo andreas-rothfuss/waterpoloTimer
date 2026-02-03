@@ -2,7 +2,6 @@ package de.wasserball.wabaclock.settings;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.graphics.Color;
 
 public class AppSettings {
 
@@ -65,6 +64,10 @@ public class AppSettings {
     public static final BooleanSetting OFFENCE_TIME_MINOR_DURATION_RESET = new BooleanSetting(
             "offence_minor_duration_reset", true,
             "Reset shotclock time to minor duration only if minor duration is larger than shotclock time");
+
+    public static final BooleanSetting OFFENCE_TIME_MINOR_DURATION_RESET_EXCLUSION = new BooleanSetting(
+            "offence_minor_duration_reset", true,
+            "Reset shotclock time to minor duration only if minor duration is larger than shotclock time (For exclusion  only)");
 
     public static final BooleanSetting DECOUPLE_TIMERS = new BooleanSetting(
             "decouple_timers", false,
@@ -153,6 +156,7 @@ public class AppSettings {
         OFFENCE_TIME_DURATION.readFromSettings(settings);
         OFFENCE_TIME_MINOR_DURATION.readFromSettings(settings);
         OFFENCE_TIME_MINOR_DURATION_RESET.readFromSettings(settings);
+        OFFENCE_TIME_MINOR_DURATION_RESET_EXCLUSION.readFromSettings(settings);
         DECOUPLE_TIMERS.readFromSettings(settings);
         EXCLUSION_TIME_DURATION.readFromSettings(settings);
         ENABLE_SOUND.readFromSettings(settings);

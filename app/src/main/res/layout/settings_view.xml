@@ -686,6 +686,43 @@
                     android:orientation="horizontal">
 
                     <Button
+                        android:id="@+id/textViewOffenceTimeMinorResetExclusionSetting"
+                        style="@style/Widget.AppCompat.Button.Borderless"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="9"
+                        android:background="@android:color/background_dark"
+                        android:onClick="onOffenceTimeMinorDurationExclusionResetClicked"
+                        android:text="@string/menu_item_title_offence_time_mino_reset_exclusion"
+                        android:textAlignment="textStart"
+                        android:textAllCaps="false"
+                        android:textColor="@color/design_default_color_on_primary"
+                        app:autoSizeMaxTextSize="40sp"
+                        app:autoSizeMinTextSize="12sp"
+                        app:autoSizeStepGranularity="2sp"
+                        app:autoSizeTextType="uniform" />
+
+                    <Switch
+                        android:id="@+id/textViewOffenceTimeMinorResetExclusionSettingValue"
+                        style="@style/Widget.AppCompat.Button.Borderless"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@android:color/background_dark"
+                        android:contentDescription="@string/menu_item_offence_time_minor_reset_enabled"
+                        android:onClick="onOffenceTimeMinorDurationExclusionResetClicked"
+                        android:textAlignment="gravity"
+                        android:textColor="@color/colorPrimaryDark" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
+
+                    <Button
                         android:id="@+id/textViewDecoupleTimers"
                         style="@style/Widget.AppCompat.Button.Borderless"
                         android:layout_width="0dp"
