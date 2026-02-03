@@ -2,7 +2,6 @@ package de.wasserball.wabaclock.settings;
 
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.view.WindowCompat;
 
 import android.view.View;
 import android.widget.Button;
@@ -46,7 +45,7 @@ public class SettingsView extends AppCompatActivity implements DialogListener {
     Button btnGeneralSettingsSummary;
     Button btnOffenceTimeSettingsSummary;
     Button btnRemoteSettingsSummary;
-    private View overlayForNavigationBar;
+    View overlayForNavigationBar;
 
 
     @Override
@@ -121,16 +120,6 @@ public class SettingsView extends AppCompatActivity implements DialogListener {
         btnPauseDuringBreakVal.setChecked(AppSettings.STOP_BREAK_AND_TIMEOUT.value);
         btnUseAutodiscovery.setChecked(AppSettings.USE_AUTODISCOVERY.value);
         btnMasterIPVal.setText(AppSettings.MASTER_IP.value);
-
-//        generalSettingsLayout.setWeightSum(2);
-//        generalSettingsDetailLayout.setWeightSum(0);
-//        generalSettingsDetailLayout.setVisibility(View.GONE);
-//        offenceTimeSettingsLayout.setWeightSum(2);
-//        offenceTimeSettingsDetailLayout.setWeightSum(0);
-//        offenceTimeSettingsDetailLayout.setVisibility(View.GONE);
-//        remoteSettingsLayout.setWeightSum(2);
-//        remoteSettingsDetailLayout.setWeightSum(0);
-//        remoteSettingsDetailLayout.setVisibility(View.GONE);
     }
 
     public int toggleLayoutVisibility(LinearLayout overallLayout,
@@ -212,7 +201,7 @@ public class SettingsView extends AppCompatActivity implements DialogListener {
             boolean useAutodiscovery = AppSettings.USE_AUTODISCOVERY.value;
             String masterIP = AppSettings.MASTER_IP.value;
 
-            String summary = "";
+            String summary;
             if (useAutodiscovery){
                 summary = "Autodiscovery enabled";
             }

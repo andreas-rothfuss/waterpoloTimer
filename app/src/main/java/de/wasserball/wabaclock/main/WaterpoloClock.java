@@ -3,7 +3,6 @@ package de.wasserball.wabaclock.main;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.media.MediaPlayer;
@@ -16,9 +15,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -30,7 +27,6 @@ import de.wasserball.wabaclock.R;
 import de.wasserball.wabaclock.settings.ColorSetting;
 import de.wasserball.wabaclock.settings.DialogListener;
 import de.wasserball.wabaclock.settings.IntegerSetting;
-import de.wasserball.wabaclock.settings.ParameterDialogString;
 import de.wasserball.wabaclock.settings.ParameterDialogStringAndColor;
 import de.wasserball.wabaclock.settings.SettingsView;
 import de.wasserball.wabaclock.settings.StringSetting;
@@ -91,8 +87,8 @@ public class WaterpoloClock extends AppCompatActivity implements DialogListener,
     MediaPlayer notificationSound;
     String toastText;
 
-    private long disclamerVersion = 1;
-    private String disclaimerText = "Last updated: November 11, 2019\n" +
+    private final long disclamerVersion = 1;
+    private final String disclaimerText = "Last updated: November 11, 2019\n" +
             "The information contained on Waterpolo Timer and Scoreboard mobile app (the \"Service\") is for general information purposes only.\n" +
             "assumes no responsibility for errors or omissions in the contents on the Service.\n" +
             "In no event shall be liable for any special, direct, indirect, consequential, or incidental damages or any damages whatsoever, whether in an action of contract, negligence or other tort, arising out of or in connection with the use of the Service or the contents of the Service. reserves the right to make additions, deletions, or modification to the contents on the Service at any time without prior notice. This Disclaimer has been created with the help of Disclaimer Generator.\n" +
