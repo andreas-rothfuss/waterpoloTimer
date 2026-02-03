@@ -29,7 +29,7 @@
             android:textColor="@android:color/holo_red_dark"
             android:textSize="2000sp"
             android:textStyle="bold"
-            app:autoSizeMaxTextSize="400sp"
+            app:autoSizeMaxTextSize="3600sp"
             app:autoSizeMinTextSize="12sp"
             app:autoSizeStepGranularity="2sp"
             app:autoSizeTextType="uniform" />

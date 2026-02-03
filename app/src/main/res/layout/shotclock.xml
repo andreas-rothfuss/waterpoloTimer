@@ -17,6 +17,7 @@
         android:focusable="true"
         android:text="30"
         android:textAlignment="center"
+        android:textAllCaps="false"
         android:textColor="@android:color/holo_orange_light"
         android:textStyle="bold"
         app:autoSizeMaxTextSize="4000sp"

@@ -20,6 +20,7 @@
             android:layout_weight="1"
             android:background="@android:color/background_dark"
             android:text="@string/shotclock_control_view_title"
+            android:textAllCaps="false"
             android:textColor="@android:color/holo_orange_light" />
 
         <Button
@@ -34,6 +35,7 @@
             android:onClick="startStopShotclock"
             android:text="@string/shotclock_default_val"
             android:textAlignment="center"
+            android:textAllCaps="false"
             android:textColor="@android:color/holo_orange_light"
             android:textStyle="bold"
             app:autoSizeMaxTextSize="4000sp"
@@ -58,6 +60,7 @@
                 android:focusable="true"
                 android:onClick="resetShotclockMajor"
                 android:text="@string/reset_major"
+                android:textAllCaps="false"
                 android:textColor="@android:color/holo_orange_light"
                 android:textStyle="bold"
                 app:autoSizeMaxTextSize="200sp"
@@ -76,6 +79,7 @@
                 android:focusable="true"
                 android:onClick="resetShotclockMinor"
                 android:text="@string/reset_minor"
+                android:textAllCaps="false"
                 android:textColor="@android:color/holo_orange_light"
                 android:textStyle="bold"
                 app:autoSizeMaxTextSize="200sp"

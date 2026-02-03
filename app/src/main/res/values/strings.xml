@@ -12,7 +12,7 @@
     <string name="main_time_default_val">6:00</string>
     <string name="shotclock_default_val">30</string>
     <string name="timeout">Timeout(s)</string>
-    <string name="_00">00</string>
+    <string name="_00">0</string>
     <string name="tesOffenceTime">30</string>
     <string name="reset_placeholder">Reset (%1$d)</string>
     <string name="reset_major">Reset (Major)</string>
@@ -24,9 +24,9 @@
     <string name="menu_item_title_time_per_period">Time per period [min]</string>
     <string name="menu_item_title_offence_time_major">Shotclock time duration [s]</string>
     <string name="menu_item_title_offence_time_minor">Shotclock time minor duration [s]</string>
-    <string name="menu_item_title_offence_time_minor_reset">Reset shotclock time to minor duration only if minor duration is larger than shotclock time</string>
+    <string name="menu_item_title_offence_time_minor_reset">Always prevent shotclock reduction when resetting to minor duration</string>
     <string name="menu_item_offence_time_minor_reset_enabled">Reset shotclock enabled</string>
-    <string name="menu_item_title_decouple_timers">Decouple timers: Stop of offence time does not stop main time (for continously running main time)</string>
+    <string name="menu_item_title_decouple_timers">Decouple timers: Stop of offence time does not stop main time (for continuously running main time)</string>
     <string name="menu_item_decouple_timers">Timer decoupling enabled</string>
     <string name="menu_item_title_exclusion_time">Exclusion time duration [s], use 0 to disable</string>
     <string name="menu_item_title_timeout_time">Time per timeout [s]</string>
@@ -81,4 +81,5 @@
     <string name="appwidget_text">EXAMPLE</string>
     <string name="add_widget">Add widget</string>
     <string name="app_widget_description">This is an app widget description</string>
+    <string name="general_settings">General Settings</string>
 </resources>
