@@ -36,6 +36,7 @@
             android:text="@string/shotclock_default_val"
             android:textAlignment="center"
             android:textAllCaps="false"
+            android:fontFamily="sans-serif-smallcaps"
             android:textColor="@android:color/holo_orange_light"
             android:textStyle="bold"
             app:autoSizeMaxTextSize="4000sp"
