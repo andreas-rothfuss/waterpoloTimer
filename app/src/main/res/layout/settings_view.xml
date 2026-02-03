@@ -640,6 +640,37 @@
                         android:textColor="@color/colorPrimaryDark" />
 
 
+                    <Button
+                        android:id="@+id/switchShotclockResetOnExclusionEnabled"
+                        style="@style/Widget.AppCompat.Button.Borderless"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="4"
+                        android:background="@android:color/background_dark"
+                        android:contentDescription="@string/menu_item_shotclock_reset_on_exclusion_enabled"
+                        android:onClick="onResetShotClockOnExclusionClicked"
+                        android:text="@string/menu_item_shotclock_reset_on_exclusion_enabled"
+                        android:textAlignment="textStart"
+                        android:textAllCaps="false"
+                        android:textColor="@color/design_default_color_on_primary"
+                        app:autoSizeMaxTextSize="40sp"
+                        app:autoSizeMinTextSize="12sp"
+                        app:autoSizeStepGranularity="2sp"
+                        app:autoSizeTextType="uniform" />
+
+                    <Switch
+                        android:id="@+id/switchShotclockResetOnExclusionEnabledValue"
+                        style="@style/Widget.AppCompat.Button.Borderless"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@android:color/background_dark"
+                        android:contentDescription="@string/menu_item_shotclock_reset_on_exclusion_enabled"
+                        android:onClick="onResetShotClockOnExclusionClicked"
+                        android:textAlignment="gravity"
+                        android:textColor="@color/colorPrimaryDark" />
+
+
                 </LinearLayout>
 
                 <LinearLayout
@@ -680,6 +711,7 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/ShotclockExclusionResetSettingsLayout"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="1"

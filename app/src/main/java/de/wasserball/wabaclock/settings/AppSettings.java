@@ -15,7 +15,7 @@ public class AppSettings {
     public static final LongSetting MAIN_TIME = new LongSetting(
             "main_time",0, 600000, 360000, "");
     public static final LongSetting OFFENCE_TIME = new LongSetting(
-            "offence_time",0, 60000, 30000, "");
+            "offence_time",0, 60000, 28000, "");
     public static final LongSetting TIMEOUT = new LongSetting(
             "timeout",Long.MIN_VALUE, 120000, Long.MIN_VALUE, "");
 
@@ -38,7 +38,7 @@ public class AppSettings {
             "Set period duration in seconds");
 
     public static final IntegerSetting HALF_TIME_DURATION = new IntegerSetting(
-            "half_time_duration", 1, 30, 3,
+            "half_time_duration", 1, 30, 5,
             "Set half-time duration in minutes");
 
     public static final IntegerSetting BREAK_TIME_DURATION = new IntegerSetting(
@@ -54,11 +54,11 @@ public class AppSettings {
             "Set time for warning prior to timeout end seconds");
 
     public static final IntegerSetting OFFENCE_TIME_DURATION = new IntegerSetting(
-            "offence_major_duration", 1, 60, 30,
+            "offence_major_duration", 1, 60, 28,
             "Set offence duration in seconds");
 
     public static final IntegerSetting OFFENCE_TIME_MINOR_DURATION = new IntegerSetting(
-            "offence_minor_duration", 1, 59, 20,
+            "offence_minor_duration", 1, 59, 18,
             "Set minor offence duration in seconds");
 
     public static final BooleanSetting OFFENCE_TIME_MINOR_DURATION_RESET = new BooleanSetting(
@@ -74,7 +74,7 @@ public class AppSettings {
             "Decouple timers: Stop of offence time does not stop main time");
 
     public static final IntegerSetting EXCLUSION_TIME_DURATION = new IntegerSetting(
-            "exclusion_time_duration", 0, 59, 20,
+            "exclusion_time_duration", 0, 59, 18,
             "Set duration of exclusion time, use 0 to disable");
 
     public static final BooleanSetting ENABLE_SOUND = new BooleanSetting(
@@ -86,7 +86,7 @@ public class AppSettings {
             "Decimal seconds enabled?");
 
     public static final BooleanSetting ENABLE_DECIMAL_DURING_LAST = new BooleanSetting(
-            "enable_decimal_during_last", false,
+            "enable_decimal_during_last", true,
             "Decimal seconds during last minute enabled?");
 
     public static final BooleanSetting ALWASY_USE_DOUBLE_DIGITS_FOR_GOALS = new BooleanSetting(
@@ -96,6 +96,9 @@ public class AppSettings {
     public static final BooleanSetting RESET_SHOTCLOCK_ON_GOAL = new BooleanSetting(
             "reset_shotclock_on_goal", false,
             "Should the shotclock be reset when a goal is entered?");
+    public static final BooleanSetting RESET_SHOTCLOCK_ON_EXCLUSION = new BooleanSetting(
+            "reset_shotclock_on_exclusion", true,
+            "Should the shotclock be reset when a exclusion timer is started?");
 
     public static final BooleanSetting STOP_BREAK_AND_TIMEOUT = new BooleanSetting(
             "stop_break_and_timeout", false,

@@ -276,6 +276,13 @@ public class WaterpoloClock extends AppCompatActivity implements DialogListener,
 
                 btnResetMajor.setText(String.format(getString(R.string.reset_placeholder), AppSettings.OFFENCE_TIME_DURATION.value));
                 btnResetMinor.setText(String.format(getString(R.string.reset_placeholder), AppSettings.OFFENCE_TIME_MINOR_DURATION.value));
+                boolean offenceTimeMinorReset = AppSettings.OFFENCE_TIME_MINOR_DURATION_RESET.value;
+                if (offenceTimeMinorReset)
+                    btnResetExclusion.setVisibility(View.GONE);
+                else {
+                    boolean offenceTimeMinorResetExclusion = AppSettings.OFFENCE_TIME_MINOR_DURATION_RESET_EXCLUSION.value;
+                    btnResetExclusion.setVisibility(offenceTimeMinorResetExclusion ? View.VISIBLE : View.GONE);
+                }
 
                 if (toastText != null) {
                     Toast.makeText(getApplicationContext(), toastText, Toast.LENGTH_LONG).show();

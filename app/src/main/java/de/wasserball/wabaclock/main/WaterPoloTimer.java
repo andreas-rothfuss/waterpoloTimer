@@ -360,6 +360,8 @@ public class WaterPoloTimer{
     protected void resetExclusionTime(int i0, int i1){
         exclusionTime[i0][i1] = seconds2ms(
                 AppSettings.EXCLUSION_TIME_DURATION.value);
+        if (AppSettings.RESET_SHOTCLOCK_ON_EXCLUSION.value)
+            resetOffenceTimeMinorExclusion();
     }
 
     void periodPlus(){

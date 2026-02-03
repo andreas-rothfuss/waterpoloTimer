@@ -18,7 +18,7 @@
     <string name="reset_major">Reset (Major)</string>
     <string name="reset_minor">Reset (Minor)</string>
     <string name="reset_exclusion">Reset (Exclusion)</string>
-    <string name="reset_all">reset all</string>
+    <string name="reset_all">Reset All</string>
     <string name="settings">"settings "</string>
     <string name="edit_times">edit</string>
     <string name="menu_item_title_nbOfPeriods">Number of periods</string>
@@ -26,7 +26,7 @@
     <string name="menu_item_title_offence_time_major">Shotclock time duration [s]</string>
     <string name="menu_item_title_offence_time_minor">Shotclock time minor duration [s]</string>
     <string name="menu_item_title_offence_time_minor_reset">Always prevent shotclock reduction when resetting to minor duration</string>
-    <string name="menu_item_title_offence_time_mino_reset_exclusion">Prevent shotclock reduction when resetting to minor duration (For exclusion  only)</string>
+    <string name="menu_item_title_offence_time_mino_reset_exclusion">Prevent shotclock reduction for exclusion reset to minor duration</string>
     <string name="menu_item_offence_time_minor_reset_enabled">Reset shotclock enabled</string>
     <string name="menu_item_title_decouple_timers">Decouple timers: Stop of offence time does not stop main time (for continuously running main time)</string>
     <string name="menu_item_decouple_timers">Timer decoupling enabled</string>
@@ -36,6 +36,7 @@
     <string name="menu_item_title_break_time">Break duration [min]</string>
     <string name="menu_item_sound_enabled">Sound enabled</string>
     <string name="menu_item_shotclock_reset_enabled">Reset offence time on goal</string>
+    <string name="menu_item_shotclock_reset_on_exclusion_enabled">Reset offence time on exclusion</string>
     <string name="menu_item_autodicovery_enabled">Master unit autodiscovery</string>
     <string name="menu_item_decimal_enabled">Decimal seconds enabled</string>
     <string name="menu_item_decimal_enabled_during_last">Decimal seconds enabled during last minute</string>
@@ -75,7 +76,7 @@
     <string name="settings_content_description">Settings</string>
     <string name="title_timeouts_guest_content_description">Title timeouts guest</string>
     <string name="timeouts_guest_content_description">timeouts guest</string>
-    <string name="boards_content_description">Boards</string>
+    <string name="boards_content_description">Remote Boards</string>
     <string name="timeouts_home_team_plus">Timeouts home team plus</string>
     <string name="timeouts_home_minus">Timeouts home minus</string>
     <string name="set_number_of_periods_content_description">Set number of periods</string>

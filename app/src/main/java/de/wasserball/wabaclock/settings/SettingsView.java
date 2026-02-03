@@ -39,6 +39,7 @@ public class SettingsView extends AppCompatActivity implements DialogListener {
     LinearLayout offenceTimeSettingsLayout;
     LinearLayout offenceTimeSettingsSummaryLayout;
     LinearLayout offenceTimeSettingsDetailLayout;
+    LinearLayout shotclockExclusionResetSettingsLayout;
     LinearLayout remoteSettingsLayout;
     LinearLayout remoteSettingsSummaryLayout;
     LinearLayout remoteSettingsDetailLayout;
@@ -70,6 +71,7 @@ public class SettingsView extends AppCompatActivity implements DialogListener {
         btnOffenceTimeMinorVal = findViewById(R.id.textViewOffennceTimeMinorValue);
         btnOffenceTimeMinorResetVal = findViewById(R.id.textViewOffenceTimeMinorResetSettingValue);
         btnOffenceTimeMinorResetExclusionVal = findViewById(R.id.textViewOffenceTimeMinorResetExclusionSettingValue);
+        shotclockExclusionResetSettingsLayout = findViewById(R.id.ShotclockExclusionResetSettingsLayout);
         btnDecoupleTimersVal = findViewById(R.id.textViewDecoupleTimersValue);
         btnExclusionTimeDuration = findViewById(R.id.textViewExclusionTimeValue);
         btnDecimalEnabledVal = findViewById(R.id.btnViewDecimalEnabledValue);
@@ -111,8 +113,14 @@ public class SettingsView extends AppCompatActivity implements DialogListener {
         btnTimeoutWarningVal.setText(Integer.toString(AppSettings.TIMEOUT_END_WARNING.value));
         btnOffenceTimeMajorVal.setText(Integer.toString(AppSettings.OFFENCE_TIME_DURATION.value));
         btnOffenceTimeMinorVal.setText(Integer.toString(AppSettings.OFFENCE_TIME_MINOR_DURATION.value));
-        btnOffenceTimeMinorResetVal.setChecked(AppSettings.OFFENCE_TIME_MINOR_DURATION_RESET.value);
+        boolean offenceTimeMinorDurationReset = AppSettings.OFFENCE_TIME_MINOR_DURATION_RESET.value;
+        btnOffenceTimeMinorResetVal.setChecked(offenceTimeMinorDurationReset);
         btnOffenceTimeMinorResetExclusionVal.setChecked(AppSettings.OFFENCE_TIME_MINOR_DURATION_RESET_EXCLUSION.value);
+        if (offenceTimeMinorDurationReset)
+            shotclockExclusionResetSettingsLayout.setVisibility(View.GONE);
+        else
+            shotclockExclusionResetSettingsLayout.setVisibility(View.VISIBLE);
+
         btnDecoupleTimersVal.setChecked(AppSettings.DECOUPLE_TIMERS.value);
         btnExclusionTimeDuration.setText(Integer.toString(AppSettings.EXCLUSION_TIME_DURATION.value));
         btnSoundEnabledVal.setChecked(AppSettings.ENABLE_SOUND.value);
@@ -249,8 +257,14 @@ public class SettingsView extends AppCompatActivity implements DialogListener {
     }
     public void onOffenceTimeMinorDurationResetClicked(View view){
         BooleanSetting setting = AppSettings.OFFENCE_TIME_MINOR_DURATION_RESET;
+        boolean newSetting = !setting.value;
         setting.applyValue(AppSettings.getSharedPreferences(
-                getApplicationContext()), !setting.value);
+                getApplicationContext()), newSetting);
+        if (newSetting){
+            BooleanSetting subSetting = AppSettings.OFFENCE_TIME_MINOR_DURATION_RESET_EXCLUSION;
+            subSetting.applyValue(AppSettings.getSharedPreferences(
+                    getApplicationContext()), true);
+        }
         updateSettingsValueDisplay();
     }
     public void onOffenceTimeMinorDurationExclusionResetClicked(View view){
@@ -289,6 +303,12 @@ public class SettingsView extends AppCompatActivity implements DialogListener {
     }
     public void onResetShotClockClicked(View view){
         BooleanSetting setting = AppSettings.RESET_SHOTCLOCK_ON_GOAL;
+        setting.applyValue(AppSettings.getSharedPreferences(
+                getApplicationContext()), !setting.value);
+        updateSettingsValueDisplay();
+    }
+    public void onResetShotClockOnExclusionClicked(View view){
+        BooleanSetting setting = AppSettings.RESET_SHOTCLOCK_ON_EXCLUSION;
         setting.applyValue(AppSettings.getSharedPreferences(
                 getApplicationContext()), !setting.value);
         updateSettingsValueDisplay();

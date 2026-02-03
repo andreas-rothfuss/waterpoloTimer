@@ -814,37 +814,30 @@
                 android:background="@android:color/background_dark"
                 android:orientation="horizontal">
 
-                <LinearLayout
+                <Button
+                    android:id="@+id/edit2"
+                    style="@style/Widget.AppCompat.Button"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="2"
-                    android:orientation="vertical">
-
-                    <Button
-                        android:id="@+id/edit2"
-                        style="@style/Widget.AppCompat.Button"
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_weight="1"
-                        android:background="@android:color/background_dark"
-                        android:clickable="true"
-                        android:focusable="true"
-                        android:onClick="resetAll"
-                        android:text="@string/reset_all"
-                        android:textAllCaps="false"
-                        android:textColor="@color/cyan"
-                        app:autoSizeMaxTextSize="34sp"
-                        app:autoSizeMinTextSize="12sp"
-                        app:autoSizeStepGranularity="2sp"
-                        app:autoSizeTextType="uniform" />
-                </LinearLayout>
+                    android:background="@android:color/background_dark"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:onClick="resetAll"
+                    android:text="@string/reset_all"
+                    android:textAllCaps="false"
+                    android:textColor="@color/cyan"
+                    app:autoSizeMaxTextSize="34sp"
+                    app:autoSizeMinTextSize="12sp"
+                    app:autoSizeStepGranularity="2sp"
+                    app:autoSizeTextType="uniform" />
 
                 <Button
                     android:id="@+id/reset30"
                     style="@style/Widget.AppCompat.Button.Borderless"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="2"
+                    android:layout_weight="3"
                     android:clickable="true"
                     android:focusable="true"
                     android:onClick="onClickResetMajor"
@@ -862,7 +855,7 @@
                     style="@style/Widget.AppCompat.Button.Borderless"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="2"
+                    android:layout_weight="3"
                     android:clickable="true"
                     android:focusable="true"
                     android:onClick="onClickResetMinor"
@@ -880,7 +873,7 @@
                     style="@style/Widget.AppCompat.Button.Borderless"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="2"
+                    android:layout_weight="3"
                     android:clickable="true"
                     android:focusable="true"
                     android:onClick="onClickResetMinorExclusion"
@@ -893,30 +886,22 @@
                     app:autoSizeStepGranularity="2sp"
                     app:autoSizeTextType="uniform" />
 
-                <LinearLayout
+                <Button
+                    android:id="@+id/btnBoards"
+                    style="@style/Widget.AppCompat.Button.Borderless"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="2"
-                    android:orientation="vertical">
-
-                    <Button
-                        android:id="@+id/btnBoards"
-                        style="@style/Widget.AppCompat.Button.Borderless"
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_weight="1"
-                        android:onClick="openBoards"
-                        android:text="@string/boards_content_description"
-                        android:textAllCaps="false"
-                        android:textColor="@color/cyan"
-                        app:autoSizeMaxTextSize="34sp"
-                        app:autoSizeMinTextSize="12sp"
-                        app:autoSizeStepGranularity="2sp"
-                        app:autoSizeTextType="uniform" />
+                    android:onClick="openBoards"
+                    android:text="@string/boards_content_description"
+                    android:textAllCaps="false"
+                    android:textColor="@color/cyan"
+                    app:autoSizeMaxTextSize="34sp"
+                    app:autoSizeMinTextSize="12sp"
+                    app:autoSizeStepGranularity="2sp"
+                    app:autoSizeTextType="uniform" />
 
                 </LinearLayout>
-
-            </LinearLayout>
         </LinearLayout>
 
     </LinearLayout>
