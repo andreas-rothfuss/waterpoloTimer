@@ -1,5 +1,6 @@
 package de.wasserball.wabaclock.main;
 
+import android.view.View;
 import android.widget.Button;
 
 import de.wasserball.wabaclock.R;
@@ -13,6 +14,7 @@ public class TimeAndScoreBoard extends NetworkBoard {
     String homeTeamColor = "";
     String guestTeam = "guest";
     String guestTeamColor = "";
+    private View teamNamesLayout;
     long time_ms = 0;
     int goalsHome = 0;
     int goalsGuest = 0;
@@ -27,6 +29,7 @@ public class TimeAndScoreBoard extends NetworkBoard {
     protected void defineContentView() {
         setContentView(R.layout.time_and_score_board);
 
+        teamNamesLayout = findViewById(R.id.teamNamesLayout);
         btnTeamHome = findViewById(R.id.btnTeamHome);
         btnTeamGuest = findViewById(R.id.btnTeamGuest);
         mainTime = findViewById(R.id.mainTimeBoard);
@@ -62,10 +65,16 @@ public class TimeAndScoreBoard extends NetworkBoard {
             }
             catch (NumberFormatException e){}
 
-            btnTeamHome.setText(homeTeam);
-            btnTeamHome.setTextColor(homeTeamColor);
-            btnTeamGuest.setText(guestTeam);
-            btnTeamGuest.setTextColor(guestTeamColor);
+            if (AppSettings.DISPLAY_TEAMNAMES.value) {
+                teamNamesLayout.setVisibility(View.VISIBLE);
+
+                btnTeamHome.setText(homeTeam);
+                btnTeamHome.setTextColor(homeTeamColor);
+                btnTeamGuest.setText(guestTeam);
+                btnTeamGuest.setTextColor(guestTeamColor);
+            } else {
+                teamNamesLayout.setVisibility(View.GONE);
+            }
 
             String timeString;
             if (AppSettings.ENABLE_DECIMAL.value)

@@ -38,6 +38,7 @@
     <string name="menu_item_shotclock_reset_enabled">Reset offence time on goal</string>
     <string name="menu_item_shotclock_reset_on_exclusion_enabled">Reset offence time on exclusion</string>
     <string name="menu_item_autodicovery_enabled">Master unit autodiscovery</string>
+    <string name="menu_item_display_teamnames_enabled">Display teamnames on remote boards</string>
     <string name="menu_item_decimal_enabled">Decimal seconds enabled</string>
     <string name="menu_item_decimal_enabled_during_last">Decimal seconds enabled during last minute</string>
     <string name="menu_item_title_ip">Master unit IP</string>

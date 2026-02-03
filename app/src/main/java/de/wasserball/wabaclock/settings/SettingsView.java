@@ -319,6 +319,12 @@ public class SettingsView extends AppCompatActivity implements DialogListener {
                 getApplicationContext()), !setting.value);
         updateSettingsValueDisplay();
     }
+    public void onDisplayTeamnamesClicked(View view){
+        BooleanSetting setting = AppSettings.DISPLAY_TEAMNAMES;
+        setting.applyValue(AppSettings.getSharedPreferences(
+                getApplicationContext()), !setting.value);
+        updateSettingsValueDisplay();
+    }
     public void onEnablePauseDuringBreakClicked(View view){
         BooleanSetting setting = AppSettings.STOP_BREAK_AND_TIMEOUT;
         setting.applyValue(AppSettings.getSharedPreferences(

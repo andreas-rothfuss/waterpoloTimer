@@ -1,5 +1,6 @@
 package de.wasserball.wabaclock.main;
 
+import android.view.View;
 import android.widget.Button;
 
 import de.wasserball.wabaclock.R;
@@ -13,6 +14,7 @@ public class Scoreboard extends NetworkBoard {
     String homeTeamColor = "";
     String guestTeam = "guest";
     String guestTeamColor = "";
+    private View teamNamesLayout;
     private Button btnTeamHome;
     private Button btnTeamGuest;
 
@@ -26,6 +28,7 @@ public class Scoreboard extends NetworkBoard {
     protected void defineContentView() {
         setContentView(R.layout.scoreboard);
 
+        teamNamesLayout = findViewById(R.id.teamNamesLayout);
         btnTeamHome = findViewById(R.id.btnTeamHome);
         btnTeamGuest = findViewById(R.id.btnTeamGuest);
 
@@ -60,11 +63,16 @@ public class Scoreboard extends NetworkBoard {
                 guestTeamColor = Integer.valueOf(this.guestTeamColor).intValue();
             }
             catch (NumberFormatException e){}
+            if (AppSettings.DISPLAY_TEAMNAMES.value) {
+                teamNamesLayout.setVisibility(View.VISIBLE);
 
-            btnTeamHome.setText(homeTeam);
-            btnTeamHome.setTextColor(homeTeamColor);
-            btnTeamGuest.setText(guestTeam);
-            btnTeamGuest.setTextColor(guestTeamColor);
+                btnTeamHome.setText(homeTeam);
+                btnTeamHome.setTextColor(homeTeamColor);
+                btnTeamGuest.setText(guestTeam);
+                btnTeamGuest.setTextColor(guestTeamColor);
+            } else {
+                teamNamesLayout.setVisibility(View.GONE);
+            }
 
             btnGoalsHome.setText(WaterPoloTimer.getGoalsString(goalsHome));
             btnGoalsHome.setTextColor(homeTeamColor);

@@ -104,11 +104,13 @@ public class AppSettings {
             "stop_break_and_timeout", false,
             "Should the user be enable to pause the timer during breaks and timeouts?");
 
-    //TODO: Add an option to have independent main and offence times
-
     public static final BooleanSetting USE_AUTODISCOVERY = new BooleanSetting(
             "use_autodiscovery", false,
             "Use autodiscovery feature?");
+
+    public static final BooleanSetting DISPLAY_TEAMNAMES = new BooleanSetting(
+            "display_teamnames", false,
+            "Display teamnames on remote boards?");
 
     public static final StringSetting MASTER_IP = new StringSetting(
             "master_ip", "127.0.0.1",
@@ -168,6 +170,7 @@ public class AppSettings {
         RESET_SHOTCLOCK_ON_GOAL.readFromSettings(settings);
         STOP_BREAK_AND_TIMEOUT.readFromSettings(settings);
         USE_AUTODISCOVERY.readFromSettings(settings);
+        DISPLAY_TEAMNAMES.readFromSettings(settings);
         MASTER_IP.readFromSettings(settings);
 
         HOME_TEAM_NAME.readFromSettings(settings);

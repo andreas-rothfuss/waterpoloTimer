@@ -956,6 +956,76 @@
 
                 </LinearLayout>
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="horizontal"
+                    android:visibility="visible">
+
+                    <Button
+                        android:id="@+id/textViewPlaceholder"
+                        style="@style/Widget.AppCompat.Button.Borderless"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="3"
+                        android:background="@android:color/background_dark"
+                        android:text=""
+                        android:textAlignment="textStart"
+                        android:textAllCaps="false"
+                        android:textColor="@color/design_default_color_on_primary"
+                        app:autoSizeMaxTextSize="40sp"
+                        app:autoSizeMinTextSize="12sp"
+                        app:autoSizeStepGranularity="2sp"
+                        app:autoSizeTextType="uniform" />
+
+                    <Button
+                        android:id="@+id/textViewEditPlaceholder"
+                        style="@style/Widget.AppCompat.Button.Borderless"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="2"
+                        android:background="@android:color/background_dark"
+                        android:text=""
+                        android:textAlignment="gravity"
+                        android:textColor="@color/design_default_color_on_primary"
+                        app:autoSizeMaxTextSize="40sp"
+                        app:autoSizeMinTextSize="12sp"
+                        app:autoSizeStepGranularity="2sp"
+                        app:autoSizeTextType="uniform" />
+
+                    <Button
+                        android:id="@+id/switchDisplayTeamnamesEnabled"
+                        style="@style/Widget.AppCompat.Button.Borderless"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="4"
+                        android:background="@android:color/background_dark"
+                        android:contentDescription="@string/menu_item_display_teamnames_enabled"
+                        android:onClick="onDisplayTeamnamesClicked"
+                        android:text="@string/menu_item_display_teamnames_enabled"
+                        android:textAlignment="textStart"
+                        android:textAllCaps="false"
+                        android:textColor="@color/design_default_color_on_primary"
+                        app:autoSizeMaxTextSize="40sp"
+                        app:autoSizeMinTextSize="12sp"
+                        app:autoSizeStepGranularity="2sp"
+                        app:autoSizeTextType="uniform" />
+
+                    <Switch
+                        android:id="@+id/switchDisplayTeamnamesEnabledValue"
+                        style="@style/Widget.AppCompat.Button.Borderless"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@android:color/background_dark"
+                        android:contentDescription="@string/menu_item_display_teamnames_enabled"
+                        android:onClick="onDisplayTeamnamesClicked"
+                        android:textAlignment="gravity"
+                        android:textColor="@color/colorPrimaryDark" />
+
+                </LinearLayout>
+
             </LinearLayout>
 
         </LinearLayout>

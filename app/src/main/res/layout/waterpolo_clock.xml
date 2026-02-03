@@ -63,7 +63,7 @@
                     android:text="@string/_00"
                     android:textAlignment="center"
                     android:textAllCaps="false"
-                    android:fontFamily="sans-serif-smallcaps"
+
                     android:textColor="@color/white"
                     app:autoSizeMaxTextSize="200sp"
                     app:autoSizeMinTextSize="12sp"
@@ -84,7 +84,7 @@
                     android:text="@string/_00"
                     android:textAlignment="center"
                     android:textAllCaps="false"
-                    android:fontFamily="sans-serif-smallcaps"
+
                     android:textColor="@color/white"
                     app:autoSizeMaxTextSize="200sp"
                     app:autoSizeMinTextSize="12sp"
@@ -105,7 +105,7 @@
                     android:text="@string/_00"
                     android:textAlignment="center"
                     android:textAllCaps="false"
-                    android:fontFamily="sans-serif-smallcaps"
+
                     android:textColor="@color/white"
                     app:autoSizeMaxTextSize="200sp"
                     app:autoSizeMinTextSize="12sp"
@@ -181,7 +181,7 @@
                     android:text="@string/_00"
                     android:textAlignment="center"
                     android:textAllCaps="false"
-                    android:fontFamily="sans-serif-smallcaps"
+
                     android:textColor="@color/blue"
                     app:autoSizeMaxTextSize="200sp"
                     app:autoSizeMinTextSize="12sp"
@@ -202,7 +202,7 @@
                     android:text="@string/_00"
                     android:textAlignment="center"
                     android:textAllCaps="false"
-                    android:fontFamily="sans-serif-smallcaps"
+
                     android:textColor="@color/blue"
                     app:autoSizeMaxTextSize="200sp"
                     app:autoSizeMinTextSize="12sp"
@@ -223,7 +223,7 @@
                     android:text="@string/_00"
                     android:textAlignment="center"
                     android:textAllCaps="false"
-                    android:fontFamily="sans-serif-smallcaps"
+
                     android:textColor="@color/blue"
                     app:autoSizeMaxTextSize="200sp"
                     app:autoSizeMinTextSize="12sp"
@@ -348,7 +348,7 @@
                             android:onClick="onClickTimeoutHome"
                             android:text="@string/_0"
                             android:textAllCaps="false"
-                            android:fontFamily="sans-serif-smallcaps"
+
                             android:textColor="@color/white"
                             app:autoSizeMaxTextSize="200sp"
                             app:autoSizeMinTextSize="12sp"
@@ -438,7 +438,7 @@
                     android:text="@string/main_time_default_val"
                     android:textAlignment="center"
                     android:textAllCaps="false"
-                    android:fontFamily="sans-serif-smallcaps"
+
                     android:textColor="@android:color/holo_red_dark"
                     android:textSize="200sp"
                     android:textStyle="bold"
@@ -534,7 +534,7 @@
                             android:onClick="onClickTimeoutGuest"
                             android:text="@string/_0"
                             android:textAllCaps="false"
-                            android:fontFamily="sans-serif-smallcaps"
+
                             android:textColor="@color/blue"
                             app:autoSizeMaxTextSize="200sp"
                             app:autoSizeMinTextSize="12sp"
@@ -670,7 +670,7 @@
                     android:text="@string/_00"
                     android:textAlignment="textStart"
                     android:textAllCaps="false"
-                    android:fontFamily="sans-serif-smallcaps"
+
                     android:textColor="@color/white"
                     android:textStyle="bold"
                     app:autoSizeMaxTextSize="200sp"
@@ -699,7 +699,7 @@
                         android:text="@string/tesOffenceTime"
                         android:textAlignment="center"
                         android:textAllCaps="false"
-                        android:fontFamily="sans-serif-smallcaps"
+
                         android:textColor="@android:color/holo_orange_light"
                         android:textStyle="bold"
                         app:autoSizeMaxTextSize="200sp"
@@ -765,7 +765,7 @@
                     android:text="@string/_00"
                     android:textAlignment="textEnd"
                     android:textAllCaps="false"
-                    android:fontFamily="sans-serif-smallcaps"
+
                     android:textColor="@color/blue"
                     android:textStyle="bold"
                     app:autoSizeMaxTextSize="200sp"

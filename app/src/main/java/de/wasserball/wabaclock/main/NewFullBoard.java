@@ -1,5 +1,6 @@
 package de.wasserball.wabaclock.main;
 
+import android.view.View;
 import android.widget.Button;
 
 import de.wasserball.wabaclock.R;
@@ -69,10 +70,18 @@ public class NewFullBoard extends NetworkBoard {
             }
             catch (NumberFormatException e){}
 
-            btnTeamHome.setText(homeTeam);
-            btnTeamHome.setTextColor(homeTeamColor);
-            btnTeamGuest.setText(guestTeam);
-            btnTeamGuest.setTextColor(guestTeamColor);
+            if (AppSettings.DISPLAY_TEAMNAMES.value) {
+                btnTeamHome.setVisibility(View.VISIBLE);
+                btnTeamGuest.setVisibility(View.VISIBLE);
+
+                btnTeamHome.setText(homeTeam);
+                btnTeamHome.setTextColor(homeTeamColor);
+                btnTeamGuest.setText(guestTeam);
+                btnTeamGuest.setTextColor(guestTeamColor);
+            } else {
+                btnTeamHome.setVisibility(View.GONE);
+                btnTeamGuest.setVisibility(View.GONE);
+            }
 
             String timeString;
             if (AppSettings.ENABLE_DECIMAL.value)
