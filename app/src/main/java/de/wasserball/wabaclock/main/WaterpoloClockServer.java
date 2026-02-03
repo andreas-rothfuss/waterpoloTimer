@@ -43,13 +43,18 @@ public class WaterpoloClockServer extends OpenIGTLinkStreamingServer {
                 return;
             }
             if (msg.getCommandId() == 2 && msg.getCommandName().equals("RESET_SHOTCLOCK_MAJOR")){
-                log.debug("Start / Stop of shotclock requested");
+                log.debug("Reset of shotclock (major) requested");
                 timer.resetOffenceTimeMajor();
                 return;
             }
             if (msg.getCommandId() == 3 && msg.getCommandName().equals("RESET_SHOTCLOCK_MINOR")){
-                log.debug("Start / Stop of shotclock requested");
+                log.debug("Reset of shotclock (minor) requested");
                 timer.resetOffenceTimeMinor();
+                return;
+            }
+            if (msg.getCommandId() == 4 && msg.getCommandName().equals("RESET_SHOTCLOCK_MINOR_EXCLUSION")){
+                log.debug("Reset of shotclock (minor for exclusion) requested");
+                timer.resetOffenceTimeMinorExclusion();
                 return;
             }
             log.debug("Unknown COMMAND message received" + msg.toString());

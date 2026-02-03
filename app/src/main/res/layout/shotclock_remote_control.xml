@@ -52,7 +52,7 @@
             <Button
                 android:id="@+id/resetMajorZN2"
                 style="@style/Widget.AppCompat.Button.Borderless"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:background="@android:color/background_dark"
@@ -71,7 +71,7 @@
             <Button
                 android:id="@+id/resetMinorZN2"
                 style="@style/Widget.AppCompat.Button.Borderless"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:background="@android:color/background_dark"
@@ -82,6 +82,25 @@
                 android:textAllCaps="false"
                 android:textColor="@android:color/holo_orange_light"
                 android:textStyle="bold"
+                app:autoSizeMaxTextSize="200sp"
+                app:autoSizeMinTextSize="12sp"
+                app:autoSizeStepGranularity="2sp"
+                app:autoSizeTextType="uniform" />
+
+            <Button
+                android:id="@+id/resetExclusionZN2"
+                style="@style/Widget.AppCompat.Button.Borderless"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@android:color/background_dark"
+                android:clickable="true"
+                android:focusable="true"
+                android:onClick="resetShotclockMinorExclusion"
+                android:text="@string/reset_exclusion"
+                android:textColor="@android:color/holo_orange_light"
+                android:textStyle="bold"
+                android:textAllCaps="false"
                 app:autoSizeMaxTextSize="200sp"
                 app:autoSizeMinTextSize="12sp"
                 app:autoSizeStepGranularity="2sp"

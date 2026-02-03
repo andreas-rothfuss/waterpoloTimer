@@ -15,12 +15,19 @@ public class ShotclockRemoteControl extends NetworkBoard {
     long shotClock = 0;
 
     private Button btnShotclock;
+    private Button btnResetMajor;
+    private Button btnResetMinor;
+    private Button btnResetExclusion;
 
     @Override
     protected void defineContentView() {
         setContentView(R.layout.shotclock_remote_control);
 
         btnShotclock = findViewById(R.id.shotclock_zn2);
+
+        btnResetMajor = findViewById(R.id.resetMajorZN2);
+        btnResetMinor = findViewById(R.id.resetMinorZN2);
+        btnResetExclusion = findViewById(R.id.resetExclusionZN2);
     }
 
     @Override
@@ -41,6 +48,16 @@ public class ShotclockRemoteControl extends NetworkBoard {
                     timeString  = WaterPoloTimer.getOffenceTimeStringNoDecimal(shotClock);
             }
             btnShotclock.setText(timeString);
+        }
+
+        btnResetMajor.setText(String.format(getString(R.string.reset_placeholder), AppSettings.OFFENCE_TIME_DURATION.value));
+        btnResetMinor.setText(String.format(getString(R.string.reset_placeholder), AppSettings.OFFENCE_TIME_MINOR_DURATION.value));
+        boolean offenceTimeMinorReset = AppSettings.OFFENCE_TIME_MINOR_DURATION_RESET.value;
+        if (offenceTimeMinorReset)
+            btnResetExclusion.setVisibility(View.GONE);
+        else {
+            boolean offenceTimeMinorResetExclusion = AppSettings.OFFENCE_TIME_MINOR_DURATION_RESET_EXCLUSION.value;
+            btnResetExclusion.setVisibility(offenceTimeMinorResetExclusion ? View.VISIBLE : View.GONE);
         }
     }
 
@@ -71,6 +88,14 @@ public class ShotclockRemoteControl extends NetworkBoard {
             try{
                 client.sendIfConnected(new CommandMessage("Shotclock", 3,
                         "RESET_SHOTCLOCK_MINOR", ""));
+            }catch (IOException e){}
+        }
+    }
+    public void resetShotclockMinorExclusion(View view){
+        if (client != null){
+            try{
+                client.sendIfConnected(new CommandMessage("Shotclock", 4,
+                        "RESET_SHOTCLOCK_MINOR_EXCLUSION", ""));
             }catch (IOException e){}
         }
     }
